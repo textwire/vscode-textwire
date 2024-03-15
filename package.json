@@ -9,11 +9,12 @@
   "categories": [
     "Programming Languages"
   ],
+  "icon": "logo.png",
   "contributes": {
     "languages": [{
       "id": "go",
       "aliases": ["Textwire", "go"],
-      "extensions": [".tw.html"],
+      "extensions": [".tw.html", ".go"],
       "configuration": "./language-configuration.json"
     }],
     "grammars": [{
