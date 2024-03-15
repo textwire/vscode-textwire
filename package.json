@@ -1,0 +1,25 @@
+{
+  "name": "textwire",
+  "displayName": "Textwire",
+  "description": "Textwire syntax highlight support",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.87.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "go",
+      "aliases": ["Textwire", "go"],
+      "extensions": [".tw.html"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "go",
+      "scopeName": "",
+      "path": "./syntaxes/go.tmLanguage.json"
+    }]
+  }
+}
