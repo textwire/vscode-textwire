@@ -5,19 +5,13 @@
     "fileTypes": [
         "tw.html"
     ],
-    "repository": {
-        "keywords": {
-            "patterns": [
-                {
-                    "name": "keyword.control.exception.php",
-                    "match": "\b(true|false)\b"
-                }
-            ]
-        }
-    },
     "patterns": [
         {
             "include": "text.html.basic"
+        },
+        {
+            "name": "keyword.control.directive.textwire",
+            "match": "@(if|else|elseif|end|use|reserve|insert|for|each|continue|continueIf|break|breakIf|component)"
         }
     ]
 }
