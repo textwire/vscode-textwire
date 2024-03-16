@@ -9,22 +9,15 @@
         "keywords": {
             "patterns": [
                 {
-                    "name": "keyword.control.tw",
-                    "match": "\\b@(use|reserve)\\b"
-                }
-            ]
-        },
-        "strings": {
-            "name": "string.quoted.double.tw",
-            "begin": "\"",
-            "end": "\"",
-            "patterns": [
-                {
-                    "name": "constant.character.escape.tw",
-                    "match": "\\\\."
+                    "name": "keyword.control.exception.php",
+                    "match": "\b(true|false)\b"
                 }
             ]
         }
     },
-    "patterns": []
+    "patterns": [
+        {
+            "include": "text.html.basic"
+        }
+    ]
 }
