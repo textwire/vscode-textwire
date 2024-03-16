@@ -1,26 +1,45 @@
 {
-  "name": "textwire",
-  "displayName": "Textwire",
-  "description": "Textwire syntax highlight support",
-  "version": "0.0.1",
-  "engines": {
-    "vscode": "^1.87.0"
-  },
-  "categories": [
-    "Programming Languages"
-  ],
-  "icon": "logo.png",
-  "contributes": {
-    "languages": [{
-      "id": "go",
-      "aliases": ["Textwire", "go"],
-      "extensions": [".tw.html", ".go"],
-      "configuration": "./language-configuration.json"
-    }],
-    "grammars": [{
-      "language": "go",
-      "scopeName": "",
-      "path": "./syntaxes/go.tmLanguage.json"
-    }]
-  }
+    "name": "textwire",
+    "displayName": "Textwire",
+    "description": "Textwire syntax highlight support",
+    "version": "1.0.0",
+    "engines": {
+        "vscode": "^1.87.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "icon": "images/textwire.png",
+    "contributes": {
+        "languages": [
+            {
+                "id": "textwire",
+                "aliases": [
+                    "Textwire",
+                    "textwire"
+                ],
+                "extensions": [
+                    ".tw.html"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "textwire",
+                "scopeName": "text.html.tw",
+                "path": "./syntaxes/textwire.tmLanguage.json"
+            }
+        ],
+        "views": {
+            "explorer": [
+                {
+                    "id": "textwire.explorer",
+                    "name": "textwire",
+                    "icon": "./images/textwire.svg",
+                    "when": "true"
+                }
+            ]
+        }
+    }
 }
