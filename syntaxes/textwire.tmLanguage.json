@@ -1,53 +1,100 @@
 {
-    "scopeName": "text.html.tw",
-    "name": "Textwire",
-    "fileTypes": [
-        "tw.html"
-    ],
-    "injections": {
-    },
-    "repository": {
-        "keywords": {
-            "patterns": [
-                {
-                    "match": "{{.*((?:true|false|nil|in)).*}}",
-                    "captures": {
-                        "1": {
-                            "name": "constant.language.tw"
-                        }
-                    }
-                },
-                {
-                    "name": "keyword.tw",
-                    "match": "(@(if|else|elseif|end|for|use|each|breakIf|continueIf|insert|reserve|break|continue|component))\\b"
-                }
-            ]
+  "scopeName": "text.html.tw",
+  "name": "Textwire",
+  "fileTypes": [
+    "tw.html"
+  ],
+  "injections": {
+    "text.html.tw": [
+      {
+        "begin": "(?<![\\{]){{",
+        "beginCaptures": {
+          "0": {
+            "name": "support.function.construct.begin.tw"
+          }
         },
-        "strings": {
-            "name": "string.quoted.double.tw",
-            "begin": "\"",
-            "end": "\"",
-            "patterns": [
-                {
-                    "name": "constant.character.escape.tw",
-                    "match": "\\\\."
-                }
-            ]
+        "contentName": "source.tw",
+        "end": "(}})",
+        "endCaptures": {
+          "0": {
+            "name": "support.function.construct.end.tw"
+          },
+          "1": {
+            "name": "source.tw"
+          }
         },
-        "numbers": {
-            "name": "constant.numeric.tw",
-            "match": "\\b(?:\\d+(?:\\.\\d+)?|0x[0-9a-fA-F]+)\\b"
-        },
-        "functions": {
-            "name": "entity.name.function.member.tw",
-            "match": "\\.(len|raw|split|trim|float|int)\\b"
-        }
-    },
-    "patterns": [
-        { "include": "text.html.basic" },
-        { "include": "#functions" },
-        { "include": "#strings" },
-        { "include": "#keywords" },
-        { "include": "#numbers" }
+        "name": "meta.function.echo.tw",
+        "patterns": [
+          {
+            "include": "#language"
+          }
+        ]
+      }
     ]
+  },
+  "repository": {
+    "language": {
+      "patterns": [
+        {
+          "include": "#functions"
+        },
+        {
+          "include": "#strings"
+        },
+        {
+          "include": "#numbers"
+        },
+        {
+          "include": "#keywords"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "match": "\\b((?:true|false|nil|in))\\b",
+          "captures": {
+            "1": {
+              "name": "constant.language.tw"
+            }
+          }
+        }
+      ]
+    },
+    "directives": {
+      "patterns": [
+        {
+          "name": "keyword.tw",
+          "match": "(@(if|else|elseif|end|for|use|each|breakIf|continueIf|insert|reserve|break|continue|component))\\b"
+        }
+      ]
+    },
+    "strings": {
+      "name": "string.quoted.double.tw",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "constant.character.escape.tw",
+          "match": "\\\\."
+        }
+      ]
+    },
+    "numbers": {
+      "name": "constant.numeric.tw",
+      "match": "\\b(?:\\d+(?:\\.\\d+)?|0x[0-9a-fA-F]+)\\b"
+    },
+    "functions": {
+      "name": "entity.name.function.member.tw",
+      "match": "\\.(len|raw|split|trim|float|int)\\b"
+    }
+  },
+  "patterns": [
+    {
+      "include": "text.html.basic"
+    },
+    {
+      "include": "#directives"
+    }
+  ]
 }

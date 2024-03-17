@@ -1,23 +1,14 @@
 {
-    // symbols used as brackets
-    "brackets": [
-        ["[", "]"],
-        ["(", ")"],
-        ["{{", "}}"]
-    ],
-    // symbols that are auto closed when typing
+    "brackets": [],
     "autoClosingPairs": [
         ["[", "]"],
         ["(", ")"],
-        ["{{", "}}"],
         ["\"", "\""],
         ["'", "'"]
     ],
-    // symbols that can be used to surround a selection
     "surroundingPairs": [
         ["[", "]"],
         ["(", ")"],
-        ["{{", "}}"],
         ["\"", "\""],
         ["'", "'"]
     ],
