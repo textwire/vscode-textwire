@@ -10,7 +10,9 @@
         "Programming Languages"
     ],
     "icon": "images/textwire.png",
+    "main": "./extension.js",
     "contributes": {
+        "commands": [],
         "languages": [
             {
                 "id": "textwire",
@@ -30,16 +32,6 @@
                 "scopeName": "text.html.tw",
                 "path": "./syntaxes/textwire.tmLanguage.json"
             }
-        ],
-        "views": {
-            "explorer": [
-                {
-                    "id": "textwire.explorer",
-                    "name": "textwire",
-                    "icon": "./images/textwire.svg",
-                    "when": "true"
-                }
-            ]
-        }
+        ]
     }
 }
