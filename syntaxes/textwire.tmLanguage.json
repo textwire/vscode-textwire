@@ -1,17 +1,53 @@
 {
-    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
     "scopeName": "text.html.tw",
     "name": "Textwire",
     "fileTypes": [
         "tw.html"
     ],
-    "patterns": [
-        {
-            "include": "text.html.basic"
+    "injections": {
+    },
+    "repository": {
+        "keywords": {
+            "patterns": [
+                {
+                    "match": "{{.*((?:true|false|nil|in)).*}}",
+                    "captures": {
+                        "1": {
+                            "name": "constant.language.tw"
+                        }
+                    }
+                },
+                {
+                    "name": "keyword.tw",
+                    "match": "(@(if|else|elseif|end|for|use|each|breakIf|continueIf|insert|reserve|break|continue|component))\\b"
+                }
+            ]
         },
-        {
-            "name": "keyword.control.directive.textwire",
-            "match": "@(if|else|elseif|end|use|reserve|insert|for|each|continue|continueIf|break|breakIf|component)"
+        "strings": {
+            "name": "string.quoted.double.tw",
+            "begin": "\"",
+            "end": "\"",
+            "patterns": [
+                {
+                    "name": "constant.character.escape.tw",
+                    "match": "\\\\."
+                }
+            ]
+        },
+        "numbers": {
+            "name": "constant.numeric.tw",
+            "match": "\\b(?:\\d+(?:\\.\\d+)?|0x[0-9a-fA-F]+)\\b"
+        },
+        "functions": {
+            "name": "entity.name.function.member.tw",
+            "match": "\\.(len|raw|split|trim|float|int)\\b"
         }
+    },
+    "patterns": [
+        { "include": "text.html.basic" },
+        { "include": "#functions" },
+        { "include": "#strings" },
+        { "include": "#keywords" },
+        { "include": "#numbers" }
     ]
 }
