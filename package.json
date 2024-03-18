@@ -12,7 +12,6 @@
     "icon": "images/textwire.png",
     "main": "./extension.js",
     "contributes": {
-        "commands": [],
         "languages": [
             {
                 "id": "textwire",
@@ -23,7 +22,11 @@
                 "extensions": [
                     ".tw.html"
                 ],
-                "configuration": "./language-configuration.json"
+                "configuration": "./language-configuration.json",
+                "icon": {
+                    "light": "images/textwire.png",
+                    "dark": "images/textwire.png"
+                }
             }
         ],
         "grammars": [
