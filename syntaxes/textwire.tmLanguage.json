@@ -4,6 +4,23 @@
     "fileTypes": [
         "tw.html"
     ],
+    "patterns": [
+        {
+            "include": "text.html.basic"
+        },
+        {
+            "include": "#directives"
+        },
+        {
+            "begin": "(?<![\\\\{]){{",
+            "end": "(}})",
+            "patterns": [
+                {
+                    "include": "#language"
+                }
+            ]
+        }
+    ],
     "repository": {
         "language": {
             "patterns": [
@@ -101,22 +118,5 @@
                 }
             ]
         }
-    },
-    "patterns": [
-        {
-            "include": "text.html.basic"
-        },
-        {
-            "include": "#directives"
-        },
-        {
-            "begin": "(?<![\\\\{]){{",
-            "end": "(}})",
-            "patterns": [
-                {
-                    "include": "#language"
-                }
-            ]
-        }
-    ]
+    }
 }
