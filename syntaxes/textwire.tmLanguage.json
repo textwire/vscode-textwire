@@ -36,8 +36,27 @@
         "directives": {
             "patterns": [
                 {
+                    "begin": "(@(if|elseif|for|use|each|breakIf|continueIf|insert|reserve|component)) ?(\\()",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "keyword.tw"
+                        }
+                    },
+                    "end": "\\)",
+                    "endCaptures": {
+                        "0": {
+                            "name": "keyword.tw"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "include": "#language"
+                        }
+                    ]
+                },
+                {
                     "name": "keyword.tw",
-                    "match": "(@(if|else|elseif|end|for|use|each|breakIf|continueIf|insert|reserve|break|continue|component))\\b"
+                    "match": "(@(else|end|break|continue))\\b"
                 }
             ]
         },
