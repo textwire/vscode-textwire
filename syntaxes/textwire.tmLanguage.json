@@ -38,6 +38,12 @@
                 },
                 {
                     "include": "#arrays"
+                },
+                {
+                    "include": "#objects"
+                },
+                {
+                    "include": "#variables"
                 }
             ]
         },
@@ -81,13 +87,28 @@
             ]
         },
         "strings": {
-            "name": "string.quoted.double.tw",
-            "begin": "\"",
-            "end": "\"",
             "patterns": [
                 {
-                    "name": "constant.character.escape.tw",
-                    "match": "\\\\."
+                    "name": "string.quoted.double.tw",
+                    "begin": "\"",
+                    "end": "\"",
+                    "patterns": [
+                        {
+                            "name": "constant.character.escape.tw",
+                            "match": "\\\\."
+                        }
+                    ]
+                },
+                {
+                    "name": "string.quoted.single.tw",
+                    "begin": "'",
+                    "end": "'",
+                    "patterns": [
+                        {
+                            "name": "constant.character.escape.tw",
+                            "match": "\\\\."
+                        }
+                    ]
                 }
             ]
         },
@@ -117,6 +138,29 @@
                     "include": "#language"
                 }
             ]
+        },
+        "objects": {
+            "begin": "\\{",
+            "beginCaptures": {
+                "0": {
+                    "name": "keyword.tw"
+                }
+            },
+            "end": "\\}",
+            "endCaptures": {
+                "0": {
+                    "name": "keyword.tw"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#language"
+                }
+            ]
+        },
+        "variables": {
+            "name": "variable.other.tw",
+            "match": "\\b\\w+\\b"
         }
     }
 }
