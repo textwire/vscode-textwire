@@ -18,6 +18,9 @@
                 },
                 {
                     "include": "#keywords"
+                },
+                {
+                    "include": "#arrays"
                 }
             ]
         },
@@ -78,6 +81,25 @@
         "functions": {
             "name": "entity.name.function.member.tw",
             "match": "\\.(len|raw|split|trim|float|int)\\b"
+        },
+        "arrays": {
+            "begin": "\\[",
+            "beginCaptures": {
+                "0": {
+                    "name": "keyword.tw"
+                }
+            },
+            "end": "\\]",
+            "endCaptures": {
+                "0": {
+                    "name": "keyword.tw"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#language"
+                }
+            ]
         }
     },
     "patterns": [
