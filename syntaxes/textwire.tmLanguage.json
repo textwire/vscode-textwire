@@ -13,7 +13,17 @@
         },
         {
             "begin": "(?<![\\\\{]){{",
+            "beginCaptures": {
+                "0": {
+                    "name": "support.function.construct.begin.tw"
+                }
+            },
             "end": "(}})",
+            "endCaptures": {
+                "0": {
+                    "name": "support.function.construct.begin.tw"
+                }
+            },
             "patterns": [
                 {
                     "include": "#language"
@@ -117,8 +127,23 @@
             "match": "\\b(?:\\d+(?:\\.\\d+)?|0x[0-9a-fA-F]+)\\b"
         },
         "functions": {
-            "name": "entity.name.function.member.tw",
-            "match": "\\.(len|raw|split|trim|float|int)\\b"
+            "begin": "(\\.(len|raw|split|trim|float|int) ?\\()",
+            "beginCaptures": {
+                "0": {
+                    "name": "entity.name.function.member.tw"
+                }
+            },
+            "end": "\\)",
+            "endCaptures": {
+                "0": {
+                    "name": "entity.name.function.member.tw"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#language"
+                }
+            ]
         },
         "arrays": {
             "begin": "\\[",
