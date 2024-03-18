@@ -69,19 +69,8 @@
             "include": "#directives"
         },
         {
-            "begin": "(?<![\\{]){{",
-            "beginCaptures": {
-                "0": {
-                    "name": "support.function.construct.begin.tw"
-                }
-            },
+            "begin": "(?<![\\\\{]){{",
             "end": "(}})",
-            "endCaptures": {
-                "0": {
-                    "name": "support.function.construct.end.tw"
-                }
-            },
-            "name": "meta.function.echo.tw",
             "patterns": [
                 {
                     "include": "#language"
