@@ -3,6 +3,8 @@
     "displayName": "Textwire",
     "description": "Textwire syntax highlight support",
     "version": "1.0.0",
+    "homepage": "https://github.com/textwire/vscode-textwire/blob/main/README.md",
+    "pricing": "Free",
     "engines": {
         "vscode": "^1.87.0"
     },
@@ -10,11 +12,19 @@
         "Programming Languages"
     ],
     "icon": "images/textwire.png",
-    "main": "./extension.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/textwire/vscode-textwire"
+    },
+    "bugs": {
+        "url": "https://github.com/textwire/vscode-textwire/issues",
+        "email": "serhiicho@proton.me"
+    },
+    "publisher": "SerhiiCho",
+    "license": "MIT",
     "contributes": {
         "languages": [
             {
-                "id": "textwire",
                 "aliases": [
                     "Textwire",
                     "textwire"
