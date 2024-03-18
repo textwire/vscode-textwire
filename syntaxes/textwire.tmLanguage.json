@@ -75,13 +75,13 @@
                     "begin": "(@(if|elseif|for|use|each|breakIf|continueIf|insert|reserve|component)) ?(\\()",
                     "beginCaptures": {
                         "0": {
-                            "name": "keyword.tw"
+                            "name": "entity.name.function.member.tw"
                         }
                     },
                     "end": "\\)",
                     "endCaptures": {
                         "0": {
-                            "name": "keyword.tw"
+                            "name": "entity.name.function.member.tw"
                         }
                     },
                     "patterns": [
@@ -91,7 +91,7 @@
                     ]
                 },
                 {
-                    "name": "keyword.tw",
+                    "name": "entity.name.function.member.tw",
                     "match": "(@(else|end|break|continue))\\b"
                 }
             ]
@@ -147,17 +147,7 @@
         },
         "arrays": {
             "begin": "\\[",
-            "beginCaptures": {
-                "0": {
-                    "name": "keyword.tw"
-                }
-            },
             "end": "\\]",
-            "endCaptures": {
-                "0": {
-                    "name": "keyword.tw"
-                }
-            },
             "patterns": [
                 {
                     "include": "#language"
@@ -166,17 +156,7 @@
         },
         "objects": {
             "begin": "\\{",
-            "beginCaptures": {
-                "0": {
-                    "name": "keyword.tw"
-                }
-            },
             "end": "\\}",
-            "endCaptures": {
-                "0": {
-                    "name": "keyword.tw"
-                }
-            },
             "patterns": [
                 {
                     "include": "#language"
