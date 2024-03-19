@@ -6,6 +6,7 @@
 - Remove highlighting for escaped directories. For example, `\@if()`, `\@else` or `\@end`
 - Added highlighting for blade directives inside HTML attributes. For example `<input type="@if(var)text@end">`
 - Added highlighting for Textwire expressions inside HTML attributes. For example `<input type="{{ inpType }}">`
+- Added highlighting for dots in Textwire expressions. For example `{{ obj.prop }}`
 
 ## [1.0.1] - 2024-03-19
 
