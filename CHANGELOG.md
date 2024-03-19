@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.0.2] - 2024-03-19
+## [1.1.0] - 2024-03-19
 
 - Fix highlighting with directives and comments that touch html. For example, `@end<div>` or `@endHere is HTML`
 - Remove highlighting for escaped directories. For example, `\@if()`, `\@else` or `\@end`
