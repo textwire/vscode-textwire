@@ -18,7 +18,7 @@
         "expression": {
             "begin": "(?<![\\\\{]){{",
             "beginCaptures": { "0": { "name": "support.function.construct.begin.tw" } },
-            "end": "(}})",
+            "end": "}}",
             "endCaptures": { "0": { "name": "support.function.construct.begin.tw" } },
             "patterns": [ { "include": "#language" } ]
         },
@@ -95,12 +95,12 @@
         },
         "arrays": {
             "begin": "\\[",
-            "end": "\\]",
+            "end": "]",
             "patterns": [ { "include": "#language" } ]
         },
         "objects": {
-            "begin": "\\{",
-            "end": "\\}",
+            "begin": "{",
+            "end": "}",
             "patterns": [ { "include": "#language" } ]
         },
         "variables": {
