@@ -36,8 +36,8 @@
         "keywords": {
             "patterns": [
                 {
-                    "match": "\\b((?:true|false|nil|in))\\b",
-                    "captures": { "1": { "name": "constant.language.tw" } }
+                    "match": "\\b(?:true|false|nil|in)\\b",
+                    "captures": { "0": { "name": "constant.language.tw" } }
                 }
             ]
         },
