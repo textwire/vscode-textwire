@@ -1,13 +1,11 @@
 {
-    "scopeName": "text.html.tw",
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "scopeName": "text.html.basic.tw",
     "name": "Textwire",
     "fileTypes": [
         "tw.html"
     ],
     "patterns": [
-        {
-            "include": "#expression"
-        },
         {
             "include": "#directives"
         },
@@ -15,6 +13,15 @@
             "include": "text.html.basic"
         }
     ],
+    "injections": {
+        "text.html.basic.tw": {
+            "patterns": [
+                {
+                    "include": "#expression"
+                }
+            ]
+        }
+    },
     "repository": {
         "expression": {
             "begin": "(?<![\\\\{]){{",

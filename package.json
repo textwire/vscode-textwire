@@ -43,8 +43,8 @@
         "grammars": [
             {
                 "language": "textwire",
-                "scopeName": "text.html.tw",
-                "path": "./syntaxes/textwire.tmLanguage.json"
+                "path": "./syntaxes/textwire.tmLanguage.json",
+                "scopeName": "text.html.basic.tw"
             }
         ]
     },
