@@ -3,7 +3,9 @@
 ## [1.0.2] - 2024-03-19
 
 - Fix highlighting with directives and comments that touch html. For example, `@end<div>` or `@endHere is HTML`
-- Remove highlighting for escaped directories. For example, `\@if()`, `\@else` or `\@endif`
+- Remove highlighting for escaped directories. For example, `\@if()`, `\@else` or `\@end`
+- Added highlighting for blade directives inside HTML attributes. For example `<input type="@if(var)text@end">`
+- Added highlighting for Textwire expressions inside HTML attributes. For example `<input type="{{ inpType }}">`
 
 ## [1.0.1] - 2024-03-19
 
