@@ -6,12 +6,17 @@
     ],
     "patterns": [
         {
-            "include": "text.html.basic"
+            "include": "#expression"
         },
         {
             "include": "#directives"
         },
         {
+            "include": "text.html.basic"
+        }
+    ],
+    "repository": {
+        "expression": {
             "begin": "(?<![\\\\{]){{",
             "beginCaptures": {
                 "0": {
@@ -29,9 +34,7 @@
                     "include": "#language"
                 }
             ]
-        }
-    ],
-    "repository": {
+        },
         "language": {
             "patterns": [
                 {
