@@ -72,7 +72,7 @@
         "directives": {
             "patterns": [
                 {
-                    "begin": "(@(if|elseif|for|use|each|breakIf|continueIf|insert|reserve|component)) ?(\\()",
+                    "begin": "(?<![\\\\@])(@(if|elseif|for|use|each|breakIf|continueIf|insert|reserve|component)) ?(\\()",
                     "beginCaptures": {
                         "0": {
                             "name": "entity.name.function.member.tw"

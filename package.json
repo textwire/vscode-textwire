@@ -2,7 +2,7 @@
     "name": "textwire",
     "displayName": "Textwire",
     "description": "Textwire syntax highlight support",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "homepage": "https://github.com/textwire/vscode-textwire/blob/main/README.md",
     "pricing": "Free",
     "engines": {
