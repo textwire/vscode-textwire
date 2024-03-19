@@ -92,7 +92,7 @@
                 },
                 {
                     "name": "entity.name.function.member.tw",
-                    "match": "(@(else|end|break|continue))\\b"
+                    "match": "(?<![\\\\@])(@(else|end|break|continue))"
                 }
             ]
         },
