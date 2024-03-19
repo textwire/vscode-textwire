@@ -2,7 +2,7 @@
     "name": "textwire",
     "displayName": "Textwire",
     "description": "Textwire syntax highlight support",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "homepage": "https://github.com/textwire/vscode-textwire/blob/main/README.md",
     "pricing": "Free",
     "engines": {
@@ -25,6 +25,7 @@
     "contributes": {
         "languages": [
             {
+                "id": "textwire",
                 "aliases": [
                     "Textwire",
                     "textwire"
@@ -49,6 +50,6 @@
     },
     "scripts": {
         "login": "vsce login SerhiiCho",
-        "publish": "vsce publish"
+        "deploy": "vsce publish"
     }
 }
