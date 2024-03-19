@@ -7,9 +7,6 @@
     ],
     "patterns": [
         {
-            "include": "#directives"
-        },
-        {
             "include": "text.html.basic"
         }
     ],
@@ -18,6 +15,9 @@
             "patterns": [
                 {
                     "include": "#expression"
+                },
+                {
+                    "include": "#directives"
                 }
             ]
         }
