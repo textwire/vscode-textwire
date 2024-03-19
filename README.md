@@ -9,3 +9,4 @@ Textwire is an open source VSCode extension that adds language support for the T
 
 - Syntax highlighting
 - Custom icon for Textwire files
+- Auto-closing `{{` braces
