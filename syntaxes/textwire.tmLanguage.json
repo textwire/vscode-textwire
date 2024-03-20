@@ -1,98 +1,58 @@
 {
-    "scopeName": "text.html.tw",
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "scopeName": "text.html.basic.tw",
     "name": "Textwire",
-    "fileTypes": [
-        "tw.html"
-    ],
+    "fileTypes": [ "tw.html" ],
     "patterns": [
-        {
-            "include": "text.html.basic"
-        },
-        {
-            "include": "#directives"
-        },
-        {
-            "begin": "(?<![\\\\{]){{",
-            "beginCaptures": {
-                "0": {
-                    "name": "support.function.construct.begin.tw"
-                }
-            },
-            "end": "(}})",
-            "endCaptures": {
-                "0": {
-                    "name": "support.function.construct.begin.tw"
-                }
-            },
+        { "include": "text.html.basic" }
+    ],
+    "injections": {
+        "text.html.basic.tw": {
             "patterns": [
-                {
-                    "include": "#language"
-                }
+                { "include": "#expression" },
+                { "include": "#directives" }
             ]
         }
-    ],
+    },
     "repository": {
+        "expression": {
+            "begin": "(?<![\\\\{]){{",
+            "beginCaptures": { "0": { "name": "support.function.construct.begin.tw" } },
+            "end": "}}",
+            "endCaptures": { "0": { "name": "support.function.construct.begin.tw" } },
+            "patterns": [ { "include": "#language" } ]
+        },
         "language": {
             "patterns": [
-                {
-                    "include": "#functions"
-                },
-                {
-                    "include": "#strings"
-                },
-                {
-                    "include": "#numbers"
-                },
-                {
-                    "include": "#keywords"
-                },
-                {
-                    "include": "#arrays"
-                },
-                {
-                    "include": "#objects"
-                },
-                {
-                    "include": "#variables"
-                }
+                { "include": "#functions" },
+                { "include": "#strings" },
+                { "include": "#numbers" },
+                { "include": "#keywords" },
+                { "include": "#arrays" },
+                { "include": "#objects" },
+                { "include": "#variables" }
             ]
         },
         "keywords": {
             "patterns": [
                 {
-                    "match": "\\b((?:true|false|nil|in))\\b",
-                    "captures": {
-                        "1": {
-                            "name": "constant.language.tw"
-                        }
-                    }
+                    "match": "\\b(?:true|false|nil|in)\\b",
+                    "captures": { "0": { "name": "constant.language.tw" } }
                 }
             ]
         },
         "directives": {
             "patterns": [
                 {
-                    "begin": "(@(if|elseif|for|use|each|breakIf|continueIf|insert|reserve|component)) ?(\\()",
-                    "beginCaptures": {
-                        "0": {
-                            "name": "entity.name.function.member.tw"
-                        }
-                    },
+                    "begin": "(?<![\\\\@])(@(if|elseif|for|use|each|breakIf|continueIf|insert|reserve|component)) ?(\\()",
+                    "beginCaptures": { "0": { "name": "entity.name.function.member.tw" } },
                     "end": "\\)",
-                    "endCaptures": {
-                        "0": {
-                            "name": "entity.name.function.member.tw"
-                        }
-                    },
-                    "patterns": [
-                        {
-                            "include": "#language"
-                        }
-                    ]
+                    "endCaptures": { "0": { "name": "entity.name.function.member.tw" } },
+                    "patterns": [ { "include": "#language" } ]
                 },
                 {
                     "name": "entity.name.function.member.tw",
-                    "match": "(@(else|end|break|continue))\\b"
+                    "match": "(?<![\\\\@])(@(else|end|break|continue))"
                 }
             ]
         },
@@ -128,40 +88,20 @@
         },
         "functions": {
             "begin": "(\\.(len|raw|split|trim|float|int) ?\\()",
-            "beginCaptures": {
-                "0": {
-                    "name": "entity.name.function.member.tw"
-                }
-            },
+            "beginCaptures": { "0": { "name": "entity.name.function.member.tw" } },
             "end": "\\)",
-            "endCaptures": {
-                "0": {
-                    "name": "entity.name.function.member.tw"
-                }
-            },
-            "patterns": [
-                {
-                    "include": "#language"
-                }
-            ]
+            "endCaptures": { "0": { "name": "entity.name.function.member.tw" } },
+            "patterns": [ { "include": "#language" } ]
         },
         "arrays": {
             "begin": "\\[",
-            "end": "\\]",
-            "patterns": [
-                {
-                    "include": "#language"
-                }
-            ]
+            "end": "]",
+            "patterns": [ { "include": "#language" } ]
         },
         "objects": {
-            "begin": "\\{",
-            "end": "\\}",
-            "patterns": [
-                {
-                    "include": "#language"
-                }
-            ]
+            "begin": "{",
+            "end": "}",
+            "patterns": [ { "include": "#language" } ]
         },
         "variables": {
             "name": "variable.other.tw",

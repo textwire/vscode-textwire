@@ -1,8 +1,8 @@
 {
     "name": "textwire",
     "displayName": "Textwire",
-    "description": "Textwire syntax highlight support",
-    "version": "1.0.1",
+    "description": "Textwire templating language support for VSCode",
+    "version": "1.1.0",
     "homepage": "https://github.com/textwire/vscode-textwire/blob/main/README.md",
     "pricing": "Free",
     "engines": {
@@ -43,8 +43,8 @@
         "grammars": [
             {
                 "language": "textwire",
-                "scopeName": "text.html.tw",
-                "path": "./syntaxes/textwire.tmLanguage.json"
+                "path": "./syntaxes/textwire.tmLanguage.json",
+                "scopeName": "text.html.basic.tw"
             }
         ]
     },
