@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.2.0] - 2024-03-21
+
+- Added syntax highlighting for Textwire comments. For example, `{{-- This is a comment --}}`
+- Added syntax highlighting for Textwire code inside HTML tags. For example, `<div {{ attr.raw() }}></div>`
+
 ## [1.1.0] - 2024-03-19
 
 - Fix highlighting with directives and comments that touch html. For example, `@end<div>` or `@endHere is HTML`
