@@ -7,8 +7,9 @@
         { "include": "text.html.basic" }
     ],
     "injections": {
-        "text.html.basic.tw": {
+        "text.html.basic.tw - (comment.block.tw), L:(text.html.basic.tw - comment.block.tw), L:(source.js.embedded.html - comment.block.tw)": {
             "patterns": [
+                { "include": "#comments" },
                 { "include": "#expression" },
                 { "include": "#directives" }
             ]
@@ -106,6 +107,17 @@
         "variables": {
             "name": "variable.other.tw",
             "match": "\\b\\w+\\b"
+        },
+        "comments": {
+            "begin": "{{--",
+            "beginCaptures": {
+                "0": { "name": "punctuation.definition.comment.begin.tw" }
+            },
+            "end": "--}}",
+            "endCaptures": {
+                "0": { "name": "punctuation.definition.comment.end.tw" }
+            },
+            "name": "comment.block.tw"
         }
     }
 }
