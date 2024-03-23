@@ -17,8 +17,11 @@
     },
     "repository": {
         "expression": {
+            "name": "keyword.tw",
             "begin": "(?<![\\\\{]){{",
-            "beginCaptures": { "0": { "name": "support.function.construct.begin.tw" } },
+            "beginCaptures": {
+                "0": { "name": "support.function.construct.begin.tw" }
+            },
             "end": "}}",
             "endCaptures": { "0": { "name": "support.function.construct.begin.tw" } },
             "patterns": [ { "include": "#language" } ]
@@ -31,6 +34,7 @@
                 { "include": "#keywords" },
                 { "include": "#arrays" },
                 { "include": "#objects" },
+                { "include": "#commas" },
                 { "include": "#variables" }
             ]
         },
@@ -85,10 +89,10 @@
         },
         "numbers": {
             "name": "constant.numeric.tw",
-            "match": "\\b(?:\\d+(?:\\.\\d+)?|0x[0-9a-fA-F]+)\\b"
+            "match": "\\b[\\d.]+\\b"
         },
         "functions": {
-            "begin": "(\\.(len|raw|split|trim|float|int) ?\\()",
+            "begin": "((len|raw|split|trim|float|int) ?\\()",
             "beginCaptures": { "0": { "name": "entity.name.function.member.tw" } },
             "end": "\\)",
             "endCaptures": { "0": { "name": "entity.name.function.member.tw" } },
@@ -106,7 +110,7 @@
         },
         "variables": {
             "name": "variable.other.tw",
-            "match": "\\b\\w+\\b"
+            "match": "\\b\\w+\\.?\\b"
         },
         "comments": {
             "begin": "{{--",
@@ -118,6 +122,10 @@
                 "0": { "name": "punctuation.definition.comment.end.tw" }
             },
             "name": "comment.block.tw"
+        },
+        "commas": {
+            "name": "variable.other.tw",
+            "match": ","
         }
     }
 }

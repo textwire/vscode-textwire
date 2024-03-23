@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.2.1] - 2024-03-23
+
+- Fixed highlighting dots array brackets, object brackets and other elements inside HTML attributes. They used to be highlighted as strings. For example `<input type="{{ obj.prop }}">`
+
 ## [1.2.0] - 2024-03-21
 
 - Added syntax highlighting for Textwire comments. For example, `{{-- This is a comment --}}`
