@@ -2,7 +2,7 @@
     "name": "textwire",
     "displayName": "Textwire",
     "description": "Textwire templating language support for VSCode",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "homepage": "https://github.com/textwire/vscode-textwire/blob/main/README.md",
     "pricing": "Free",
     "engines": {
