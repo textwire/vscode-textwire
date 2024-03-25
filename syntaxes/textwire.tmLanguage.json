@@ -19,9 +19,7 @@
         "expression": {
             "name": "keyword.tw",
             "begin": "(?<![\\\\{]){{",
-            "beginCaptures": {
-                "0": { "name": "support.function.construct.begin.tw" }
-            },
+            "beginCaptures": { "0": { "name": "support.function.construct.begin.tw" } },
             "end": "}}",
             "endCaptures": { "0": { "name": "support.function.construct.begin.tw" } },
             "patterns": [ { "include": "#language" } ]
@@ -114,13 +112,9 @@
         },
         "comments": {
             "begin": "{{--",
-            "beginCaptures": {
-                "0": { "name": "punctuation.definition.comment.begin.tw" }
-            },
+            "beginCaptures": { "0": { "name": "punctuation.definition.comment.begin.tw" } },
             "end": "--}}",
-            "endCaptures": {
-                "0": { "name": "punctuation.definition.comment.end.tw" }
-            },
+            "endCaptures": { "0": { "name": "punctuation.definition.comment.end.tw" } },
             "name": "comment.block.tw"
         },
         "commas": {
