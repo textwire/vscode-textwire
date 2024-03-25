@@ -3,6 +3,7 @@
 ## [1.2.2] - 2024-03-25
 
 - Fixed highlighting for Textwire directives inside HTML tags. For example, `<span @if(true)nice@end></span>`. It used to ignore highlighting for `@end` directive
+- Added more information to README.md file
 
 ## [1.2.1] - 2024-03-23
 
