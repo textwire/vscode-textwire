@@ -47,19 +47,19 @@
         "directives": {
             "patterns": [
                 {
-                    "begin": "(?<![\\\\@])(@(if|elseif|for|use|each|breakIf|continueIf|insert|reserve|component)) ?(\\()",
+                    "begin": "(?<![\\\\@])(@(if|elseif|for|use|each|breakIf|continueIf|insert|reserve|component|slot)) ?(\\()",
                     "beginCaptures": { "0": { "name": "entity.name.function.member.tw" } },
                     "end": "\\)",
                     "endCaptures": { "0": { "name": "entity.name.function.member.tw" } },
                     "patterns": [ { "include": "#language" } ]
                 },
                 {
-                    "match": "\\b\\w*(@(else|end|break|continue))\\b",
+                    "match": "\\b\\w*(@(else|end|break|continue|slot))\\b",
                     "captures": { "1": { "name": "entity.name.function.member.tw" } }
                 },
                 {
                     "name": "entity.name.function.member.tw",
-                    "match": "(?<![\\\\@])(@(else|end|break|continue))"
+                    "match": "(?<![\\\\@])(@(else|end|break|continue|slot))"
                 }
             ]
         },
