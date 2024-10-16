@@ -94,7 +94,7 @@
             "match": "\\b[\\d.]+\\b"
         },
         "functions": {
-            "begin": "((len|raw|split|trim|float|int) ?\\()",
+            "begin": "([A-Za-z_][A-Za-z0-9_]*)\\s*\\(",
             "beginCaptures": { "0": { "name": "entity.name.function.member.tw" } },
             "end": "\\)",
             "endCaptures": { "0": { "name": "entity.name.function.member.tw" } },

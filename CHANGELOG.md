@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.3.1] - 2024-10-16
+- Added highlighting for all the possible function names because from new Textwire versions you can define your own functions. For example, `"string".myFunction()`
+
 ## [1.3.0] - 2024-09-05
 - Added highlighting for `@slot` directives
 
