@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.4.0] - 2025-01-18
+- Added so that syntax highlighting applies not only for `tw.html` files but also for `tw` files
+- Added highlighting for `@dump` directive
+
 ## [1.3.1] - 2024-10-16
 - Added highlighting for all the possible function names because from new Textwire versions you can define your own functions. For example, `"string".myFunction()`
 
