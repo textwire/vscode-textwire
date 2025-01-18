@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.4.0] - 2025-01-12
+## [1.4.0] - 2025-01-18
 - Added so that syntax highlighting applies not only for `tw.html` files but also for `tw` files
 - Added highlighting for `@dump` directive
 
