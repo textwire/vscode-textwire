@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.5.0] - 2025-01-28
+- Added autocomplete for `loop` object inside loops. Now, when you type `loop.` you will see all the available methods for the `loop` object
+
 ## [1.4.0] - 2025-01-18
 - Added so that syntax highlighting applies not only for `tw.html` files but also for `tw` files
 - Added highlighting for `@dump` directive
