@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es2016",
+        "rootDir": "./src",
+        "outDir": "./build",
+        "strict": true,
+        "removeComments": true,
+        "esModuleInterop": true,
+        "types": ["node", "vscode"]
+    },
+    "exclude": ["node_modules", ".vscode-test"]
+}
