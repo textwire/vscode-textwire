@@ -53,7 +53,7 @@
     "scripts": {
         "login": "vsce login SerhiiCho",
         "deploy": "vsce publish",
-        "build": "tsc -p ./"
+        "build": "tsc -p ."
     },
     "devDependencies": {
         "@types/node": "^22.10.10",

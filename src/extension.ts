@@ -1,24 +1,10 @@
-import * as vscode from 'vscode'
+import * as vs from 'vscode'
+import completionItem from './modules/completionItem'
 
-function completionItem(
-    label: string,
-    detail: string,
-    kind: vscode.CompletionItemKind,
-): vscode.CompletionItem {
-    const item = new vscode.CompletionItem(label, vscode.CompletionItemKind.Text)
-    item.detail = detail
-    item.kind = kind
-
-    return item
-}
-
-export function activate(context: vscode.ExtensionContext) {
+export function activate(context: vs.ExtensionContext) {
     const provider = {
-        provideCompletionItems(
-            document: vscode.TextDocument,
-            position: vscode.Position,
-        ) {
-            const range = new vscode.Range(position.with(undefined, 0), position)
+        provideCompletionItems(document: vs.TextDocument, position: vs.Position) {
+            const range = new vs.Range(position.with(undefined, 0), position)
             const textBefore = document.getText(range)
 
             if (!textBefore.endsWith('{{ loop.')) {
@@ -29,28 +15,28 @@ export function activate(context: vscode.ExtensionContext) {
                 completionItem(
                     'index',
                     '[int] The current iteration of the loop. Starts with 0',
-                    vscode.CompletionItemKind.Field,
+                    vs.CompletionItemKind.Field,
                 ),
                 completionItem(
                     'first',
                     '[bool] Returns true if this is the first iteration',
-                    vscode.CompletionItemKind.Field,
+                    vs.CompletionItemKind.Field,
                 ),
                 completionItem(
                     'last',
                     '[bool] Returns true if this is the last iteration',
-                    vscode.CompletionItemKind.Field,
+                    vs.CompletionItemKind.Field,
                 ),
                 completionItem(
                     'iter',
                     '[int] The current iteration of the loop. Starts with 1',
-                    vscode.CompletionItemKind.Field,
+                    vs.CompletionItemKind.Field,
                 ),
             ]
         },
     }
 
-    const disposable = vscode.languages.registerCompletionItemProvider(
+    const disposable = vs.languages.registerCompletionItemProvider(
         { language: 'textwire' },
         provider,
         '{',
