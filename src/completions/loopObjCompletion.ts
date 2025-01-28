@@ -33,13 +33,13 @@ export default vscode.languages.registerCompletionItemProvider(
                 completionItem(
                     'first',
                     '(property) first: bool\n\n' +
-                        'Returns true if this is the first iteration',
+                        'Returns true if this is the first iteration of the loop',
                     vscode.CompletionItemKind.Field,
                 ),
                 completionItem(
                     'last',
                     '(property) last: bool\n\n' +
-                        'Returns true if this is the last iteration',
+                        'Returns true if this is the last iteration of the loop',
                     vscode.CompletionItemKind.Field,
                 ),
                 completionItem(
