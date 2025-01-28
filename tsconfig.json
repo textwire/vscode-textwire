@@ -7,10 +7,8 @@
         "strict": true,
         "removeComments": true,
         "esModuleInterop": true,
-        "types": ["node", "vscode"],
-        "paths": {
-            "@/*": ["./src/*"]
-        }
+        "types": ["node", "vscode"]
     },
+    "include": ["src/**/*"],
     "exclude": ["node_modules", ".vscode-test"]
 }
