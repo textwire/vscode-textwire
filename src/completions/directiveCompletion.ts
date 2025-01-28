@@ -61,6 +61,12 @@ export default vscode.languages.registerCompletionItemProvider(
                     'insert($1)\n    $2\n@end',
                 ),
                 completionItem(
+                    '@reserve',
+                    directivesInfo.reserve,
+                    vscode.CompletionItemKind.Function,
+                    'reserve($1)',
+                ),
+                completionItem(
                     '@each',
                     directivesInfo.each,
                     vscode.CompletionItemKind.Function,

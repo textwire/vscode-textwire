@@ -79,6 +79,15 @@ Inject content into reserved placeholders defined in the layout file by providin
 
 Use this directive to specify content for placeholders in the layout file.`,
 
+    reserve: `(directive)
+Reserve placeholders for dynamic content to be injected by templates using the \`@insert\` directive.
+
+\`\`\`textwire
+@reserve('reservedName')
+\`\`\`
+
+Use this directive to specify a placeholder in the layout file.`,
+
     ifElseif: `(directive)
 Conditionally render content with additional conditions using \`@elseif\`.
 
