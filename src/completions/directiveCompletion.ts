@@ -4,6 +4,101 @@ import completionItem from '../modules/completionItem'
 const DIR_START_REG = /(?<!\\)@(\w*)$/
 const triggerChars = ['@']
 
+const IF_DESC = `(directive)
+Conditionally render content
+
+\`\`\`textwire
+@if(true)
+    content
+@end
+\`\`\``
+
+const IF_ELSE_DESC = `(directive)
+Conditionally render content and provide an alternative that will be rendered when the condition is false
+
+\`\`\`textwire
+@if(false)
+    content
+@else
+    alternative content
+@end
+\`\`\``
+
+const EACH_DESC = `(directive)
+Loop that iterates over arrays
+
+\`\`\`textwire
+@each(item in items)
+    {{ item }}
+@end
+\`\`\``
+
+const DUMP_DESC = `(directive)
+Debugging helper to output the value of variables
+
+\`\`\`textwire
+@dump(variable)
+\`\`\`
+
+Outputs the value of variables, objects, arrays, strings, and other data types to the screen.`
+
+const USE_DESC = `(directive)
+Specify the layout file to be used for rendering the current template
+
+\`\`\`textwire
+@use('layoutName')
+\`\`\`
+
+This directive includes the layout file specified, which defines the overall structure of the page.`
+
+const INSERT_DESC = `(directive)
+Inject content into reserved placeholders defined in the layout file by providing a second argument as content
+
+\`\`\`textwire
+@insert('reservedName', 'content')
+\`\`\`
+
+Use this directive to specify content for placeholders in the layout file.`
+
+const INSERT_END_DESC = `(directive)
+Inject content into reserved placeholders defined in the layout file by providing a block of content
+
+\`\`\`textwire
+@insert('reservedName')
+    content
+@end
+\`\`\`
+
+Use this directive to specify content for placeholders in the layout file.`
+
+const EACH_ELSE_DESC = `(directive)
+Loop that iterates over arrays, with a fallback for empty arrays
+
+\`\`\`textwire
+@each(item in items)
+    {{ item }}
+@else
+    No items available.
+@end
+\`\`\`
+
+Use the @else directive to specify content that will be displayed if the array is empty.`
+
+const IF_ELSEIF_DESC = `(directive)
+Conditionally render content with additional conditions using @elseif
+
+\`\`\`textwire
+@if(condition1)
+    content for condition1
+@elseif(condition2)
+    content for condition2
+@else
+    content when all conditions are false
+@end
+\`\`\`
+
+Use the @elseif directive to handle additional conditional branches. If none of the conditions are met, use @else to provide fallback content.`
+
 export default vscode.languages.registerCompletionItemProvider(
     { language: 'textwire' },
     {
@@ -25,42 +120,55 @@ export default vscode.languages.registerCompletionItemProvider(
             const dirs = [
                 completionItem(
                     '@if',
-                    '(directive) @if\n\nConditionally render content',
+                    IF_DESC,
                     vscode.CompletionItemKind.Function,
                     'if($1)\n\n@end',
                 ),
                 completionItem(
                     '@if @else',
-                    '(directive) @if\n\nConditionally render content. ' +
-                        'The @else directive is used to display content when the condition is false',
+                    IF_ELSE_DESC,
                     vscode.CompletionItemKind.Function,
                     'if($1)\n\n@else\n\n@end',
                 ),
                 completionItem(
                     '@if @elseif',
-                    '(directive) @if\n\nConditionally render content. ' +
-                        'The @elseif directive is used to display content when the condition is false',
+                    IF_ELSEIF_DESC,
                     vscode.CompletionItemKind.Function,
                     'if($1)\n\n@elseif($2)\n\n@end',
                 ),
                 completionItem(
-                    '@each',
-                    '(directive) @each\n\nLoop that iterates over arrays',
+                    '@use',
+                    USE_DESC,
                     vscode.CompletionItemKind.Function,
-                    'each($1 in $2)\n\n@end',
+                    'use($1)',
+                ),
+                completionItem(
+                    '@insert',
+                    INSERT_DESC,
+                    vscode.CompletionItemKind.Function,
+                    'insert($1)',
+                ),
+                completionItem(
+                    '@insert @end',
+                    INSERT_END_DESC,
+                    vscode.CompletionItemKind.Function,
+                    'insert($1)\n    $2\n@end',
+                ),
+                completionItem(
+                    '@each',
+                    EACH_DESC,
+                    vscode.CompletionItemKind.Function,
+                    'each($1 in $2)\n    $2\n@end',
                 ),
                 completionItem(
                     '@each @else',
-                    '(directive) @each\n\nLoop that iterates over arrays. ' +
-                        'The @else directive is used to display content when the array is empty',
+                    EACH_ELSE_DESC,
                     vscode.CompletionItemKind.Function,
-                    'each($1 in $2)\n\n@else\n\n@end',
+                    'each($1 in $2)\n    $2\n@else\n    $2\n@end',
                 ),
                 completionItem(
                     '@dump',
-                    '(directive) @dump\n\n' +
-                        'Debugging helper that outputs the value of variables, ' +
-                        'objects, arrays, strings and other data types to the screen',
+                    DUMP_DESC,
                     vscode.CompletionItemKind.Function,
                     'dump($1)',
                 ),
