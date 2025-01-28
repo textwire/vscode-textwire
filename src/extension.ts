@@ -1,7 +1,7 @@
-import * as vs from 'vscode'
-import loopObjAutocomplete from '@/autocompletes/loopObjAutocomplete'
+import * as vscode from 'vscode'
+import loopObjAutocomplete from './autocompletes/loopObjAutocomplete'
 
-export function activate(context: vs.ExtensionContext) {
+export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(loopObjAutocomplete)
 }
 

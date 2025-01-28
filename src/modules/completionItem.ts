@@ -1,11 +1,11 @@
-import * as vs from 'vscode'
+import * as vscode from 'vscode'
 
 export default function completionItem(
     label: string,
     detail: string,
-    kind: vs.CompletionItemKind,
-): vs.CompletionItem {
-    const item = new vs.CompletionItem(label, vs.CompletionItemKind.Text)
+    kind: vscode.CompletionItemKind,
+): vscode.CompletionItem {
+    const item = new vscode.CompletionItem(label, vscode.CompletionItemKind.Text)
     item.detail = detail
     item.kind = kind
 
