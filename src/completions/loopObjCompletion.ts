@@ -9,17 +9,18 @@ export default vscode.languages.registerCompletionItemProvider(
     { language: 'textwire' },
     {
         provideCompletionItems(
-            document: vscode.TextDocument,
-            position: vscode.Position,
+            doc: vscode.TextDocument,
+            pos: vscode.Position,
         ): vscode.CompletionItem[] {
-            if (!isWithinLoop(document, position)) {
+            if (!isWithinLoop(doc, pos)) {
                 return []
             }
 
-            const range = new vscode.Range(position.with(undefined, 0), position)
-            const textBefore = document.getText(range)
+            const range = new vscode.Range(pos.with(pos.line, 0), pos)
+            const textBefore = doc.getText(range)
+            const match = LOOP_VAR_REG.test(textBefore.trim())
 
-            if (!LOOP_VAR_REG.test(textBefore.trim())) {
+            if (!match) {
                 return []
             }
 
