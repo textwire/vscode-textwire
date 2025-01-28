@@ -26,22 +26,26 @@ export default vscode.languages.registerCompletionItemProvider(
             return [
                 completionItem(
                     'index',
-                    '[int] The current iteration of the loop. Starts with 0',
+                    '(property) index: int\n\n' +
+                        'The current iteration of the loop. Starts with 0',
                     vscode.CompletionItemKind.Field,
                 ),
                 completionItem(
                     'first',
-                    '[bool] Returns true if this is the first iteration',
+                    '(property) first: bool\n\n' +
+                        'Returns true if this is the first iteration',
                     vscode.CompletionItemKind.Field,
                 ),
                 completionItem(
                     'last',
-                    '[bool] Returns true if this is the last iteration',
+                    '(property) last: bool\n\n' +
+                        'Returns true if this is the last iteration',
                     vscode.CompletionItemKind.Field,
                 ),
                 completionItem(
                     'iter',
-                    '[int] The current iteration of the loop. Starts with 1',
+                    '(property) iter: int\n\n' +
+                        'The current iteration of the loop. Starts with 1',
                     vscode.CompletionItemKind.Field,
                 ),
             ]
