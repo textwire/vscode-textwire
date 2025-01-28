@@ -15,7 +15,9 @@ export default function completionItem(
         documentation.replace(/\n/g, '  \n'),
     )
 
-    item.filterText = label.slice(1)
+    if (label.startsWith('@')) {
+        item.filterText = label.slice(1)
+    }
 
     return item
 }
