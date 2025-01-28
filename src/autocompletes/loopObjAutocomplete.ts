@@ -1,5 +1,5 @@
 import * as vs from 'vscode'
-import completionItem from '../modules/completionItem'
+import completionItem from '@/modules/completionItem'
 
 export default vs.languages.registerCompletionItemProvider(
     { language: 'textwire' },
