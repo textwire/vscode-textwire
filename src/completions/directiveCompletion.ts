@@ -1,6 +1,7 @@
 import * as vscode from 'vscode'
 import completionItem from '../modules/completionItem'
-import directivesInfo from '../static/info/directivesInfo'
+import info from '../static/info/directivesInfo'
+import snip from '../static/snippets/directivesSnippets'
 import isBetween from '../modules/isBetween'
 
 const DIR_START_REG = /(?<!\\)@(\w*)$/
@@ -27,98 +28,24 @@ export default vscode.languages.registerCompletionItemProvider(
             }
 
             const partialDir = match[1]
+            const field = vscode.CompletionItemKind.Snippet
 
             const dirs = [
-                completionItem(
-                    '@if',
-                    directivesInfo.if,
-                    vscode.CompletionItemKind.Snippet,
-                    'if($1)\n\n@end',
-                ),
-                completionItem(
-                    '@if @else',
-                    directivesInfo.ifElse,
-                    vscode.CompletionItemKind.Snippet,
-                    'if($1)\n\n@else\n\n@end',
-                ),
-                completionItem(
-                    '@if @elseif',
-                    directivesInfo.ifElseif,
-                    vscode.CompletionItemKind.Snippet,
-                    'if($1)\n\n@elseif($2)\n\n@end',
-                ),
-                completionItem(
-                    '@use',
-                    directivesInfo.use,
-                    vscode.CompletionItemKind.Snippet,
-                    'use($1)',
-                ),
-                completionItem(
-                    '@insert',
-                    directivesInfo.insert,
-                    vscode.CompletionItemKind.Snippet,
-                    'insert($1)',
-                ),
-                completionItem(
-                    '@insert @end',
-                    directivesInfo.insertEnd,
-                    vscode.CompletionItemKind.Snippet,
-                    'insert($1)\n    $2\n@end',
-                ),
-                completionItem(
-                    '@reserve',
-                    directivesInfo.reserve,
-                    vscode.CompletionItemKind.Snippet,
-                    'reserve($1)',
-                ),
-                completionItem(
-                    '@component',
-                    directivesInfo.component,
-                    vscode.CompletionItemKind.Snippet,
-                    'component($1)',
-                ),
-                completionItem(
-                    '@component @slot',
-                    directivesInfo.componentSlot,
-                    vscode.CompletionItemKind.Snippet,
-                    'component($1)\n    @slot\n        $2\n    @end\n@end',
-                ),
-                completionItem(
-                    '@slot',
-                    directivesInfo.slot,
-                    vscode.CompletionItemKind.Snippet,
-                    'slot\n    $1\n@end',
-                ),
-                completionItem(
-                    '@slot(name)',
-                    directivesInfo.slotDefault,
-                    vscode.CompletionItemKind.Snippet,
-                    'slot($1)\n    $2\n@end',
-                ),
-                completionItem(
-                    '@each',
-                    directivesInfo.each,
-                    vscode.CompletionItemKind.Snippet,
-                    'each($1 in $2)\n    $2\n@end',
-                ),
-                completionItem(
-                    '@each @else',
-                    directivesInfo.eachElse,
-                    vscode.CompletionItemKind.Snippet,
-                    'each($1 in $2)\n    $2\n@else\n    $2\n@end',
-                ),
-                completionItem(
-                    '@dump',
-                    directivesInfo.dump,
-                    vscode.CompletionItemKind.Snippet,
-                    'dump($1)',
-                ),
-                completionItem(
-                    '@end',
-                    directivesInfo.end,
-                    vscode.CompletionItemKind.Snippet,
-                    'end',
-                ),
+                completionItem('@if', info.if, field, snip.if),
+                completionItem('@if @else', info.ifElse, field, snip.ifElse),
+                completionItem('@if @elseif', info.ifElseif, field, snip.ifElseif),
+                completionItem('@use', info.use, field, snip.use),
+                completionItem('@insert', info.insert, field, snip.insert),
+                completionItem('@insert @end', info.insertEnd, field, snip.insert),
+                completionItem('@reserve', info.reserve, field, snip.reserve),
+                completionItem('@component', info.comp, field, snip.comp),
+                completionItem('@component @slot', info.compSlot, field, snip.compSlot),
+                completionItem('@slot', info.slot, field, snip.slotDef),
+                completionItem('@slot(name)', info.slotDef, field, snip.slot),
+                completionItem('@each', info.each, field, snip.each),
+                completionItem('@each @else', info.eachElse, field, snip.eachElse),
+                completionItem('@dump', info.dump, field, snip.dump),
+                completionItem('@end', info.end, field, snip.end),
             ]
 
             return dirs.filter(d => d.label.slice(1).startsWith(partialDir))
