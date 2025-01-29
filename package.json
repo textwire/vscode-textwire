@@ -3,7 +3,7 @@
     "displayName": "Textwire",
     "main": "./build/extension.js",
     "description": "Textwire templating language support for VSCode",
-    "version": "1.4.0",
+    "version": "1.5.0",
     "homepage": "https://github.com/textwire/vscode-textwire/blob/main/README.md",
     "pricing": "Free",
     "engines": {
