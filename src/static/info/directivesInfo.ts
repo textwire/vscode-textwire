@@ -88,6 +88,44 @@ Reserve placeholders for dynamic content to be injected by templates using the \
 
 Use this directive to specify a placeholder in the layout file.`,
 
+    component: `(directive)
+Components help organize and structure templates by encapsulating reusable parts of your UI.
+Use this directive to include a component in your template.
+
+\`\`\`textwire
+@component('path/to', { prop })
+\`\`\``,
+
+    componentSlot: `(directive)
+Components help organize and structure templates by encapsulating reusable parts of your UI.
+Use this directive to include a component in your template with slots
+
+\`\`\`textwire
+@component('path/to', { prop })
+    @slot
+        <p>content</p>
+    @end
+@end
+\`\`\``,
+
+    slot: `(directive)
+Define a default slot in a component to provide a placeholder for content.
+
+\`\`\`textwire
+@slot
+    <p>content</p>
+@end
+\`\`\``,
+
+    slotDefault: `(directive)
+Define a named slot in a component to provide a placeholder for content.
+
+\`\`\`textwire
+@slot('name')
+    <p>content</p>
+@end
+\`\`\``,
+
     ifElseif: `(directive)
 Conditionally render content with additional conditions using \`@elseif\`.
 
@@ -102,4 +140,11 @@ Conditionally render content with additional conditions using \`@elseif\`.
 \`\`\`
 
 Use the \`@elseif\` directive to handle additional conditional branches. If none of the conditions are met, use @else to provide fallback content.`,
+
+    end: `(directive)
+End a directive block by using the \`@end\` directive.
+
+\`\`\`textwire
+@end
+\`\`\``,
 }

@@ -67,6 +67,30 @@ export default vscode.languages.registerCompletionItemProvider(
                     'reserve($1)',
                 ),
                 completionItem(
+                    '@component',
+                    directivesInfo.component,
+                    vscode.CompletionItemKind.Function,
+                    'component($1)',
+                ),
+                completionItem(
+                    '@component @slot',
+                    directivesInfo.componentSlot,
+                    vscode.CompletionItemKind.Function,
+                    'component($1)\n    @slot\n        $2\n    @end\n@end',
+                ),
+                completionItem(
+                    '@slot',
+                    directivesInfo.slot,
+                    vscode.CompletionItemKind.Function,
+                    'slot\n    $1\n@end',
+                ),
+                completionItem(
+                    '@slot(name)',
+                    directivesInfo.slotDefault,
+                    vscode.CompletionItemKind.Function,
+                    'slot($1)\n    $2\n@end',
+                ),
+                completionItem(
                     '@each',
                     directivesInfo.each,
                     vscode.CompletionItemKind.Function,
@@ -83,6 +107,12 @@ export default vscode.languages.registerCompletionItemProvider(
                     directivesInfo.dump,
                     vscode.CompletionItemKind.Function,
                     'dump($1)',
+                ),
+                completionItem(
+                    '@end',
+                    directivesInfo.end,
+                    vscode.CompletionItemKind.Function,
+                    'end',
                 ),
             ]
 
