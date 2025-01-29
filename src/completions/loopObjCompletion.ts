@@ -1,8 +1,12 @@
 import * as vscode from 'vscode'
 import completionItem from '../modules/completionItem'
-import isWithinLoop from '../modules/isWithinLoop'
+import isBetween from '../modules/isBetween'
 
-const LOOP_VAR_REG = /{{\s*loop\./
+const IGNORE_REG = /{{--\s*@(each|for)/g
+const START_REG = /@(each|for)/g
+const END_REG = /@end/g
+const LOOP_VAR_REG = /{{\s*loop\./g
+
 const triggerChars = ['{', '.', '}']
 
 export default vscode.languages.registerCompletionItemProvider(
@@ -12,15 +16,11 @@ export default vscode.languages.registerCompletionItemProvider(
             doc: vscode.TextDocument,
             pos: vscode.Position,
         ): vscode.CompletionItem[] {
-            if (!isWithinLoop(doc, pos)) {
-                return []
-            }
-
             const range = new vscode.Range(pos.with(pos.line, 0), pos)
             const textBefore = doc.getText(range)
             const match = LOOP_VAR_REG.test(textBefore.trim())
 
-            if (!match) {
+            if (!match || !isBetween(doc, pos, START_REG, END_REG, IGNORE_REG)) {
                 return []
             }
 
