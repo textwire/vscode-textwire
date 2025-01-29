@@ -25,13 +25,13 @@ export default vscode.languages.registerCompletionItemProvider(
                 return []
             }
 
-            const fieldKind = vscode.CompletionItemKind.Field
+            const field = vscode.CompletionItemKind.Field
 
             return [
-                completionItem('index', loopInfo.index, fieldKind),
-                completionItem('first', loopInfo.first, fieldKind),
-                completionItem('last', loopInfo.last, fieldKind),
-                completionItem('iter', loopInfo.iter, fieldKind),
+                completionItem('index', loopInfo.index, field),
+                completionItem('first', loopInfo.first, field),
+                completionItem('last', loopInfo.last, field),
+                completionItem('iter', loopInfo.iter, field),
             ]
         },
     },
