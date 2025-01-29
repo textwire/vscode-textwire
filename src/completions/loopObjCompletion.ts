@@ -1,6 +1,7 @@
 import * as vscode from 'vscode'
 import completionItem from '../modules/completionItem'
 import isBetween from '../modules/isBetween'
+import loopInfo from '../static/info/loopInfo'
 
 const IGNORE_REG = /{{--\s*@(each|for)/g
 const START_REG = /@(each|for)/g
@@ -24,31 +25,13 @@ export default vscode.languages.registerCompletionItemProvider(
                 return []
             }
 
+            const fieldKind = vscode.CompletionItemKind.Field
+
             return [
-                completionItem(
-                    'index',
-                    '(property) index: int\n\n' +
-                        'The current iteration of the loop. Starts with 0',
-                    vscode.CompletionItemKind.Field,
-                ),
-                completionItem(
-                    'first',
-                    '(property) first: bool\n\n' +
-                        'Returns true if this is the first iteration of the loop',
-                    vscode.CompletionItemKind.Field,
-                ),
-                completionItem(
-                    'last',
-                    '(property) last: bool\n\n' +
-                        'Returns true if this is the last iteration of the loop',
-                    vscode.CompletionItemKind.Field,
-                ),
-                completionItem(
-                    'iter',
-                    '(property) iter: int\n\n' +
-                        'The current iteration of the loop. Starts with 1',
-                    vscode.CompletionItemKind.Field,
-                ),
+                completionItem('index', loopInfo.index, fieldKind),
+                completionItem('first', loopInfo.first, fieldKind),
+                completionItem('last', loopInfo.last, fieldKind),
+                completionItem('iter', loopInfo.iter, fieldKind),
             ]
         },
     },
