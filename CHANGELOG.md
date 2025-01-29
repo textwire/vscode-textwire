@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.5.0] - 2025-01-29
+- Added autocomplete for `loop` object inside loops. Now, when you type `loop.` you will see all the available properties for the `loop` object
+- Updated images in README.md file to better showcase the extension
+- Added autocomplete for directives. For example, when you type `@`, you will see all the available directives with their descriptions
+
 ## [1.4.0] - 2025-01-18
 - Added so that syntax highlighting applies not only for `tw.html` files but also for `tw` files
 - Added highlighting for `@dump` directive

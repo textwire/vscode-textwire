@@ -1,12 +1,13 @@
 {
     "name": "textwire",
     "displayName": "Textwire",
+    "main": "./build/extension.js",
     "description": "Textwire templating language support for VSCode",
     "version": "1.4.0",
     "homepage": "https://github.com/textwire/vscode-textwire/blob/main/README.md",
     "pricing": "Free",
     "engines": {
-        "vscode": "^1.87.0"
+        "vscode": "^1.8.0"
     },
     "categories": [
         "Programming Languages"
@@ -51,6 +52,12 @@
     },
     "scripts": {
         "login": "vsce login SerhiiCho",
-        "deploy": "vsce publish"
+        "deploy": "vsce publish",
+        "build": "tsc -p ."
+    },
+    "devDependencies": {
+        "@types/node": "^22.10.10",
+        "typescript": "^5.7.3",
+        "vscode": "^1.1.37"
     }
 }
