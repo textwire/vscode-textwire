@@ -1,8 +1,13 @@
 import * as vscode from 'vscode'
 import completionItem from '../modules/completionItem'
 import directivesInfo from '../static/info/directivesInfo'
+import isBetween from '../modules/isBetween'
 
 const DIR_START_REG = /(?<!\\)@(\w*)$/
+const IGNORE_REG = /\\\{\{/g
+const START_REG = /\{\{/g
+const END_REG = /\}\}/g
+
 const triggerChars = ['@']
 
 export default vscode.languages.registerCompletionItemProvider(
@@ -17,7 +22,7 @@ export default vscode.languages.registerCompletionItemProvider(
 
             const match = DIR_START_REG.exec(textBefore)
 
-            if (match === null) {
+            if (!match || isBetween(doc, pos, START_REG, END_REG, IGNORE_REG)) {
                 return []
             }
 
