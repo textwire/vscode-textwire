@@ -87,7 +87,7 @@ Reserve placeholders for dynamic content to be injected by templates using the \
 
 Use this directive to specify a placeholder in the layout file.`
 
-const component = `(directive)
+const comp = `(directive)
 Components help organize and structure templates by encapsulating reusable parts of your UI.
 Use this directive to include a component in your template.
 
@@ -95,7 +95,7 @@ Use this directive to include a component in your template.
 @component('path/to', { prop })
 \`\`\``
 
-const componentSlot = `(directive)
+const compSlot = `(directive)
 Components help organize and structure templates by encapsulating reusable parts of your UI.
 Use this directive to include a component in your template with slots
 
@@ -116,7 +116,7 @@ Define a default slot in a component to provide a placeholder for content.
 @end
 \`\`\``
 
-const slotDefault = `(directive)
+const slotDef = `(directive)
 Define a named slot in a component to provide a placeholder for content.
 
 \`\`\`textwire
@@ -133,8 +133,6 @@ Conditionally render content with additional conditions using \`@elseif\`.
     <p>condition1 is true</p>
 @elseif(condition2)
     <p>condition2 is true</p>
-@else
-    <p>when all false</p>
 @end
 \`\`\`
 
@@ -158,9 +156,9 @@ export default {
     insert,
     insertEnd,
     reserve,
-    component,
-    componentSlot,
+    comp,
+    compSlot,
     slot,
-    slotDefault,
+    slotDef,
     end,
 }
