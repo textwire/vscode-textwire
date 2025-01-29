@@ -1,14 +1,13 @@
-export default {
-    if: `(directive)
+const _if = `(directive)
 Conditionally render content.
 
 \`\`\`textwire
 @if(condition)
     <p>content</p>
 @end
-\`\`\``,
+\`\`\``
 
-    ifElse: `(directive)
+const ifElse = `(directive)
 Conditionally render content and provide an alternative that will be rendered when the condition is \`false\`.
 
 \`\`\`textwire
@@ -17,18 +16,18 @@ Conditionally render content and provide an alternative that will be rendered wh
 @else
     <p>alternative content</p>
 @end
-\`\`\``,
+\`\`\``
 
-    each: `(directive)
+const each = `(directive)
 Loop that iterates over arrays.
 
 \`\`\`textwire
 @each(item in items)
     <p>{{ item }}</p>
 @end
-\`\`\``,
+\`\`\``
 
-    eachElse: `(directive)
+const eachElse = `(directive)
 Loop that iterates over arrays, with a fallback for empty arrays.
 
 \`\`\`textwire
@@ -39,36 +38,36 @@ Loop that iterates over arrays, with a fallback for empty arrays.
 @end
 \`\`\`
 
-Use the @else directive to specify content that will be displayed if the array is empty.`,
+Use the @else directive to specify content that will be displayed if the array is empty.`
 
-    dump: `(directive)
+const dump = `(directive)
 Debugging helper to output the value of variables.
 
 \`\`\`textwire
 @dump(variable)
 \`\`\`
 
-Outputs the value of variables, objects, arrays, strings, and other data types to the screen.`,
+Outputs the value of variables, objects, arrays, strings, and other data types to the screen.`
 
-    use: `(directive)
+const use = `(directive)
 Specify the layout file to be used for rendering the current template.
 
 \`\`\`textwire
 @use('layoutName')
 \`\`\`
 
-This directive includes the layout file specified, which defines the overall structure of the page.`,
+This directive includes the layout file specified, which defines the overall structure of the page.`
 
-    insert: `(directive)
+const insert = `(directive)
 Inject content into reserved placeholders defined in the layout file by providing a second argument as content.
 
 \`\`\`textwire
 @insert('reservedName', 'content')
 \`\`\`
 
-Use this directive to specify content for placeholders in the layout file.`,
+Use this directive to specify content for placeholders in the layout file.`
 
-    insertEnd: `(directive)
+const insertEnd = `(directive)
 Inject content into reserved placeholders defined in the layout file by providing a block of content.
 
 \`\`\`textwire
@@ -77,26 +76,26 @@ Inject content into reserved placeholders defined in the layout file by providin
 @end
 \`\`\`
 
-Use this directive to specify content for placeholders in the layout file.`,
+Use this directive to specify content for placeholders in the layout file.`
 
-    reserve: `(directive)
+const reserve = `(directive)
 Reserve placeholders for dynamic content to be injected by templates using the \`@insert\` directive.
 
 \`\`\`textwire
 @reserve('reservedName')
 \`\`\`
 
-Use this directive to specify a placeholder in the layout file.`,
+Use this directive to specify a placeholder in the layout file.`
 
-    component: `(directive)
+const component = `(directive)
 Components help organize and structure templates by encapsulating reusable parts of your UI.
 Use this directive to include a component in your template.
 
 \`\`\`textwire
 @component('path/to', { prop })
-\`\`\``,
+\`\`\``
 
-    componentSlot: `(directive)
+const componentSlot = `(directive)
 Components help organize and structure templates by encapsulating reusable parts of your UI.
 Use this directive to include a component in your template with slots
 
@@ -106,27 +105,27 @@ Use this directive to include a component in your template with slots
         <p>content</p>
     @end
 @end
-\`\`\``,
+\`\`\``
 
-    slot: `(directive)
+const slot = `(directive)
 Define a default slot in a component to provide a placeholder for content.
 
 \`\`\`textwire
 @slot
     <p>content</p>
 @end
-\`\`\``,
+\`\`\``
 
-    slotDefault: `(directive)
+const slotDefault = `(directive)
 Define a named slot in a component to provide a placeholder for content.
 
 \`\`\`textwire
 @slot('name')
     <p>content</p>
 @end
-\`\`\``,
+\`\`\``
 
-    ifElseif: `(directive)
+const ifElseif = `(directive)
 Conditionally render content with additional conditions using \`@elseif\`.
 
 \`\`\`textwire
@@ -139,12 +138,29 @@ Conditionally render content with additional conditions using \`@elseif\`.
 @end
 \`\`\`
 
-Use the \`@elseif\` directive to handle additional conditional branches. If none of the conditions are met, use @else to provide fallback content.`,
+Use the \`@elseif\` directive to handle additional conditional branches. If none of the conditions are met, use @else to provide fallback content.`
 
-    end: `(directive)
+const end = `(directive)
 End a directive block by using the \`@end\` directive.
 
 \`\`\`textwire
 @end
-\`\`\``,
+\`\`\``
+
+export default {
+    if: _if,
+    ifElse,
+    ifElseif,
+    each,
+    eachElse,
+    dump,
+    use,
+    insert,
+    insertEnd,
+    reserve,
+    component,
+    componentSlot,
+    slot,
+    slotDefault,
+    end,
 }
