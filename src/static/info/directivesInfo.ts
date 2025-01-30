@@ -28,7 +28,7 @@ Loop that iterates over arrays.
 \`\`\``
 
 const _for = `(directive)
-For loop that iterates while the condition is true.
+For loop that iterates while the condition is \`true\`.
 
 \`\`\`textwire
 @for(i = 0; i < items.len(); i++)
@@ -37,7 +37,7 @@ For loop that iterates while the condition is true.
 \`\`\``
 
 const forElse = `(directive)
-For loop that iterates while the condition is true, with a fallback for empty arrays.
+For loop that iterates while the condition is true, with a fallback for initially falsy conditions. For example, when the array is empty.
 
 \`\`\`textwire
 @for(i = 0; i < items.len(); i++)
@@ -58,7 +58,7 @@ Loop that iterates over arrays, with a fallback for empty arrays.
 @end
 \`\`\`
 
-Use the @else directive to specify content that will be displayed if the array is empty.`
+Use the \`@else\` directive to specify content that will be displayed if the array is empty.`
 
 const dump = `(directive)
 Debugging helper to output the value of variables.
@@ -85,7 +85,7 @@ Inject content into reserved placeholders defined in the layout file by providin
 @insert('reservedName', 'content')
 \`\`\`
 
-Use this directive to specify content for placeholders in the layout file.`
+Use this directive in to specify content for placeholders in the layout file.`
 
 const insertEnd = `(directive)
 Inject content into reserved placeholders defined in the layout file by providing a block of content.
@@ -105,7 +105,7 @@ Reserve placeholders for dynamic content to be injected by templates using the \
 @reserve('reservedName')
 \`\`\`
 
-Use this directive to specify a placeholder in the layout file.`
+Use this directive to specify a placeholder only in the layout file.`
 
 const comp = `(directive)
 Components help organize and structure templates by encapsulating reusable parts of your UI.
@@ -158,7 +158,7 @@ Conditionally render content with additional conditions using \`@elseif\`.
 @end
 \`\`\`
 
-Use the \`@elseif\` directive to handle additional conditional branches. If none of the conditions are met, use @else to provide fallback content.`
+Use the \`@elseif\` directive to handle additional conditional branches. If none of the conditions are met, use \`@else\` to provide fallback content.`
 
 const end = `(directive)
 End a directive block by using the \`@end\` directive.

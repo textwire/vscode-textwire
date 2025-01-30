@@ -36,7 +36,7 @@ export default vscode.languages.registerCompletionItemProvider(
                 completionItem('@if @elseif', info.ifElseif, field, snip.ifElseif),
                 completionItem('@use', info.use, field, snip.use),
                 completionItem('@insert', info.insert, field, snip.insert),
-                completionItem('@insert @end', info.insertEnd, field, snip.insert),
+                completionItem('@insert @end', info.insertEnd, field, snip.insertEnd),
                 completionItem('@reserve', info.reserve, field, snip.reserve),
                 completionItem('@component', info.comp, field, snip.comp),
                 completionItem('@component @slot', info.compSlot, field, snip.compSlot),

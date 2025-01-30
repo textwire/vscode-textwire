@@ -63,7 +63,7 @@ export default {
     compSlot,
     slot,
     slotDef,
-    insert: 'insert($1)',
+    insert: 'insert($1, $2)',
     insertEnd,
     dump: 'dump($1)',
     use: 'use($1)',
