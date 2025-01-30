@@ -1,7 +1,7 @@
 # Changelog
 
 ## [1.5.1] - 2025-01-30
-- Added missing autocomplete for directives `@for`, `@for @else`
+- Added missing autocomplete for directives `@for`, `@for @else`, `@break`, `@breakIf`, `@continue`, `@continueIf`
 - Improve directive autocomplete descriptions
 
 ## [1.5.0] - 2025-01-29

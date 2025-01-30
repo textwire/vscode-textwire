@@ -48,6 +48,10 @@ export default vscode.languages.registerCompletionItemProvider(
                 completionItem('@for @else', info.forElse, field, snip.forElse),
                 completionItem('@dump', info.dump, field, snip.dump),
                 completionItem('@end', info.end, field, snip.end),
+                completionItem('@break', info.break, field, snip.break),
+                completionItem('@continue', info.continue, field, snip.continue),
+                completionItem('@continueIf', info.continueIf, field, snip.continueIf),
+                completionItem('@breakIf', info.breakIf, field, snip.breakIf),
             ]
 
             return dirs.filter(d => d.label.slice(1).startsWith(partialDir))

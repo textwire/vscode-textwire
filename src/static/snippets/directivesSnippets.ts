@@ -70,4 +70,8 @@ export default {
     reserve: 'reserve($1)',
     comp: 'component($1)',
     end: 'end',
+    break: 'break',
+    continue: 'continue',
+    breakIf: 'breakIf($1)',
+    continueIf: 'continueIf($1)',
 }

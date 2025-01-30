@@ -167,6 +167,34 @@ End a directive block by using the \`@end\` directive.
 @end
 \`\`\``
 
+const _break = `(directive)
+Exits a loop early when used inside a loop block.
+
+\`\`\`textwire
+@break
+\`\`\``
+
+const _continue = `(directive)
+Skips the current iteration of a loop when used inside a loop block.
+
+\`\`\`textwire
+@continue
+\`\`\``
+
+const breakIf = `(directive)
+Exits a loop early when the specified condition is met.
+
+\`\`\`textwire
+@breakIf(condition)
+\`\`\``
+
+const continueIf = `(directive)
+Skips the current iteration of a loop when the specified condition is met.
+
+\`\`\`textwire
+@continueIf(condition)
+\`\`\``
+
 export default {
     if: _if,
     ifElse,
@@ -185,4 +213,8 @@ export default {
     slot,
     slotDef,
     end,
+    break: _break,
+    breakIf,
+    continue: _continue,
+    continueIf,
 }
