@@ -18,7 +18,7 @@ const eachElse = `each($1 in $2)
     $4
 @end`
 
-const insert = `insert($1)
+const insertEnd = `insert($1)
     $2
 @end`
 
@@ -51,10 +51,10 @@ export default {
     compSlot,
     slot,
     slotDef,
-    insert,
+    insert: 'insert($1)',
+    insertEnd,
     dump: 'dump($1)',
     use: 'use($1)',
-    insertEnd: 'insert($1)',
     reserve: 'reserve($1)',
     comp: 'component($1)',
     end: 'end',

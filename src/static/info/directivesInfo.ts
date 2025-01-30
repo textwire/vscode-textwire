@@ -89,15 +89,15 @@ Use this directive to specify a placeholder in the layout file.`
 
 const comp = `(directive)
 Components help organize and structure templates by encapsulating reusable parts of your UI.
-Use this directive to include a component in your template.
 
 \`\`\`textwire
 @component('path/to', { prop })
-\`\`\``
+\`\`\`
+
+Use this directive to include a component in your template.`
 
 const compSlot = `(directive)
 Components help organize and structure templates by encapsulating reusable parts of your UI.
-Use this directive to include a component in your template with slots
 
 \`\`\`textwire
 @component('path/to', { prop })
@@ -105,7 +105,9 @@ Use this directive to include a component in your template with slots
         <p>content</p>
     @end
 @end
-\`\`\``
+\`\`\`
+
+Use this directive to include a component in your template with slots.`
 
 const slot = `(directive)
 Define a default slot in a component to provide a placeholder for content.
