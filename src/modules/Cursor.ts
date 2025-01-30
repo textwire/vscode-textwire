@@ -12,18 +12,15 @@ export default class Cursor {
     }
 
     public isBetween(startReg: RegExp, endReg: RegExp, ignoreReg: RegExp): boolean {
-        const textBeforeCursor = this.doc.getText(
-            new vscode.Range(new vscode.Position(0, 0), this.pos),
-        )
+        const textBefore = this.textBefore()
 
-        // Check for ignore cases
-        if (ignoreReg.test(textBeforeCursor)) {
+        if (ignoreReg.test(textBefore)) {
             return false
         }
 
         // Find all start and end locations
-        const startMatches = Array.from(textBeforeCursor.matchAll(startReg))
-        const endMatches = Array.from(textBeforeCursor.matchAll(endReg))
+        const startMatches = Array.from(textBefore.matchAll(startReg))
+        const endMatches = Array.from(textBefore.matchAll(endReg))
 
         // Determine if the cursor is within
         const lastStart = startMatches.pop() || false
@@ -34,5 +31,9 @@ export default class Cursor {
 
     public notBetween(startReg: RegExp, endReg: RegExp, ignoreReg: RegExp): boolean {
         return !this.isBetween(startReg, endReg, ignoreReg)
+    }
+
+    private textBefore(): string {
+        return this.doc.getText(new vscode.Range(new vscode.Position(0, 0), this.pos))
     }
 }
