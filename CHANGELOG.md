@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.5.3] - 2025-01-30
+- Added tests coverage to test all the necessary features
+
 ## [1.5.2] - 2025-01-30
 - Fixed issue where loop object would only show autocomplete suggestions when it was inside `{{` and `}}` brackets
 - Refactor code to make it more readable and maintainable

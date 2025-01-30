@@ -7,8 +7,8 @@
         "strict": true,
         "removeComments": true,
         "esModuleInterop": true,
-        "types": ["node", "vscode"]
+        "types": ["node", "vscode", "mocha"]
     },
-    "include": ["src/**/*"],
-    "exclude": ["node_modules", ".vscode-test"]
+    "include": ["src/**/*.ts", "src/test/**/*.ts"],
+    "exclude": ["node_modules", "build", ".vscode-test"]
 }
