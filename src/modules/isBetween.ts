@@ -5,12 +5,12 @@ export default function isWithin(
     pos: vscode.Position,
     startReg: RegExp,
     endReg: RegExp,
-    ignoreReg?: RegExp,
+    ignoreReg: RegExp,
 ): boolean {
     const textBeforeCursor = doc.getText(new vscode.Range(new vscode.Position(0, 0), pos))
 
     // Check for ignore cases
-    if (ignoreReg && ignoreReg.test(textBeforeCursor)) {
+    if (ignoreReg.test(textBeforeCursor)) {
         return false
     }
 
