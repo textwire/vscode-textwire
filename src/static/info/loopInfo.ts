@@ -26,9 +26,17 @@ The current iteration of the loop. Starts with 1.
 {{ loop.iter }}
 \`\`\``
 
+const loop = `(variable) loop: object
+The loop object contains information about the current loop iteration.
+
+\`\`\`textwire
+{{ loop.last }}
+\`\`\``
+
 export default {
     index,
     first,
     last,
     iter,
+    loop,
 }

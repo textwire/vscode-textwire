@@ -2,7 +2,7 @@ import * as vscode from 'vscode'
 import completionItem from '../modules/completionItem'
 import info from '../static/info/directivesInfo'
 import snip from '../static/snippets/directivesSnippets'
-import isBetween from '../modules/isBetween'
+import Cursor from '../modules/Cursor'
 
 const DIR_START_REG = /(?<!\\)@(\w*)$/
 const IGNORE_REG = /\\\{\{/g
@@ -22,8 +22,9 @@ export default vscode.languages.registerCompletionItemProvider(
             const textBefore = doc.getText(range)
 
             const match = DIR_START_REG.exec(textBefore)
+            const cursor = new Cursor(pos, doc)
 
-            if (!match || isBetween(doc, pos, START_REG, END_REG, IGNORE_REG)) {
+            if (!match || cursor.isBetween(START_REG, END_REG, IGNORE_REG)) {
                 return []
             }
 
