@@ -6,9 +6,9 @@ import loopInfo from '../static/info/loopInfo'
 const IGNORE_REG = /{{--\s*@(each|for)/g
 const START_REG = /@(each|for)/g
 const END_REG = /@end/g
-const LOOP_VAR_REG = /{{\s*loop\./g
+const LOOP_VAR_REG = /\bloop\./g
 
-const triggerChars = ['{', '.', '}']
+const triggerChars = ['.']
 
 export default vscode.languages.registerCompletionItemProvider(
     { language: 'textwire' },
