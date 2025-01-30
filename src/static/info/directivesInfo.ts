@@ -27,6 +27,26 @@ Loop that iterates over arrays.
 @end
 \`\`\``
 
+const _for = `(directive)
+For loop that iterates while the condition is true.
+
+\`\`\`textwire
+@for(i = 0; i < items.len(); i++)
+    <p>{{ items[i] }}</p>
+@end
+\`\`\``
+
+const forElse = `(directive)
+For loop that iterates while the condition is true, with a fallback for empty arrays.
+
+\`\`\`textwire
+@for(i = 0; i < items.len(); i++)
+    <p>{{ items[i] }}</p>
+@else
+    <p>No items available.</p>
+@end
+\`\`\``
+
 const eachElse = `(directive)
 Loop that iterates over arrays, with a fallback for empty arrays.
 
@@ -153,6 +173,8 @@ export default {
     ifElseif,
     each,
     eachElse,
+    for: _for,
+    forElse,
     dump,
     use,
     insert,

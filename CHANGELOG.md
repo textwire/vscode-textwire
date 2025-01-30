@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.5.1] - 2025-01-30
+- Added missing autocomplete for directives `@for`, `@for else`
+
 ## [1.5.0] - 2025-01-29
 - Added autocomplete for `loop` object inside loops. Now, when you type `loop.` you will see all the available properties for the `loop` object
 - Updated images in README.md file to better showcase the extension

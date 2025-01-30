@@ -18,6 +18,16 @@ const eachElse = `each($1 in $2)
     $4
 @end`
 
+const _for = `for(i = 0; i < $1; i++)
+    $3
+@end`
+
+const forElse = `for(i = 0; i < $1; i++)
+    $3
+@else
+    $4
+@end`
+
 const insertEnd = `insert($1)
     $2
 @end`
@@ -48,6 +58,8 @@ export default {
     ifElseif,
     each,
     eachElse,
+    for: _for,
+    forElse,
     compSlot,
     slot,
     slotDef,

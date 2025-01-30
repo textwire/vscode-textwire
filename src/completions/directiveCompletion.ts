@@ -44,6 +44,8 @@ export default vscode.languages.registerCompletionItemProvider(
                 completionItem('@slot(name)', info.slotDef, field, snip.slot),
                 completionItem('@each', info.each, field, snip.each),
                 completionItem('@each @else', info.eachElse, field, snip.eachElse),
+                completionItem('@for', info.for, field, snip.for),
+                completionItem('@for @else', info.forElse, field, snip.forElse),
                 completionItem('@dump', info.dump, field, snip.dump),
                 completionItem('@end', info.end, field, snip.end),
             ]
