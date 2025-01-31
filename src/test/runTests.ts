@@ -17,7 +17,8 @@ async function main() {
             extensionDevelopmentPath,
             extensionTestsPath,
             version: 'stable',
-            launchArgs: ['--no-sandbox'], // Don't use --disable-gpu, gives error on Mac M1 Pro
+            // Don't use --disable-gpu, gives error on Mac M1 Pro
+            launchArgs: ['--no-sandbox', '--disable-extensions'],
         })
 
         console.log('✅ All tests passed. Exiting process cleanly.')
