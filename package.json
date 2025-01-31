@@ -1,7 +1,7 @@
 {
     "name": "textwire",
     "displayName": "Textwire",
-    "main": "./build/extension.js",
+    "main": "./out/extension.js",
     "description": "Textwire templating language support for VSCode",
     "version": "1.5.3",
     "homepage": "https://github.com/textwire/vscode-textwire/blob/main/README.md",
@@ -59,8 +59,8 @@
     "scripts": {
         "login": "vsce login SerhiiCho",
         "deploy": "vsce publish",
-        "build": "tsc -p .",
-        "test": "npm run build && node ./build/test/runTests.js"
+        "compile": "tsc -p .",
+        "test": "npm run compile && node ./out/test/runTests.js"
     },
     "devDependencies": {
         "@types/mocha": "^10.0.10",
