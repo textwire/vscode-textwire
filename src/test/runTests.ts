@@ -4,6 +4,8 @@ import { runTests } from '@vscode/test-electron'
 
 async function main() {
     try {
+        process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true'
+
         // The folder containing the Extension Manifest package.json
         // Passed to `--extensionDevelopmentPath`
         const extensionDevelopmentPath = path.resolve(__dirname, '../../')
@@ -16,11 +18,14 @@ async function main() {
         await runTests({
             extensionDevelopmentPath,
             extensionTestsPath,
-            launchArgs: ['--disable-gpu', '--no-sandbox', '--disable-extensions'],
+            version: 'stable',
+            launchArgs: [],
         })
+
+        console.log('✅ All tests passed. Exiting process cleanly.')
+        process.exit(0)
     } catch (err) {
-        console.error(err)
-        console.error('Failed to run tests')
+        console.error('❌ Error running tests:', err)
         process.exit(1)
     }
 }

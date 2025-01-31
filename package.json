@@ -60,7 +60,7 @@
         "login": "vsce login SerhiiCho",
         "deploy": "vsce publish",
         "build": "tsc -p .",
-        "test": "npm run build && vscode-test"
+        "test": "npm run build && node ./build/test/runTests.js"
     },
     "devDependencies": {
         "@types/mocha": "^10.0.10",
