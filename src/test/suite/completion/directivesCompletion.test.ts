@@ -4,7 +4,7 @@ import triggerCompletion from '../utils/triggerCompletion'
 import openTextDocument from '../utils/openTextDocument'
 
 suite('Directives Completion', () => {
-    test('Should suggest directives in HTML', async () => {
+    test('suggests directives in HTML', async () => {
         return
     })
 })

@@ -6,7 +6,7 @@ import Cursor from '../modules/Cursor'
 const IGNORE_REG = /{{--\s*@(each|for)/g
 const START_REG = /@(each|for)/g
 const END_REG = /@end/g
-const LOOP_VAR_REG = /\bloop\./g
+const LOOP_VAR_REG = /loop\./
 
 const triggerChars = ['.', 'l']
 
@@ -30,7 +30,7 @@ export default vscode.languages.registerCompletionItemProvider(
 
             const range = new vscode.Range(pos.with(pos.line, 0), pos)
             const textBefore = doc.getText(range)
-            const match = LOOP_VAR_REG.test(textBefore.trim())
+            const match = LOOP_VAR_REG.test(textBefore)
 
             if (!match) {
                 return []

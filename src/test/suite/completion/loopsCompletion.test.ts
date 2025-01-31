@@ -4,52 +4,78 @@ import triggerCompletion from '../utils/triggerCompletion'
 import openTextDocument from '../utils/openTextDocument'
 
 suite('Loops Completion', () => {
-    test('suggests loop properties inside @each', async () => {
-        const content = `@each(item in items){{ loop. }}@end`
-        const doc = await openTextDocument(content)
-        const pos = new vscode.Position(0, 29)
+    const loopTests = [
+        {
+            name: '@each loop',
+            content: `@each(item in items){{ loop. }}@end`,
+            position: new vscode.Position(0, 28),
+            expected: ['index', 'first', 'last', 'iter'],
+        },
+        {
+            name: '@for loop',
+            content: `@for(i = 0; i < 5; i++){{ loop. }}@end`,
+            position: new vscode.Position(0, 31),
+            expected: ['index', 'first', 'last', 'iter'],
+        },
+    ]
 
-        const completions = await triggerCompletion(pos, doc.uri)
+    loopTests.forEach(({ name, content, position, expected }) => {
+        test(`suggests loop properties inside ${name}`, async () => {
+            const doc = await openTextDocument(content)
+            const completions = await triggerCompletion(position, doc.uri)
 
-        if (!completions) {
-            assert.fail('No completions found!')
-        }
+            if (!completions) {
+                assert.fail('No completions found!')
+            }
 
-        const expectedLabels = ['index', 'first', 'last', 'iter']
+            for (const expectedLabel of expected) {
+                assert.ok(
+                    completions.items.some(item => item.label === expectedLabel),
+                    `Expected completion '${expectedLabel}' not found!`,
+                )
 
-        for (const expectedLabel of expectedLabels) {
-            assert.ok(
-                completions.items.some(actualItem => actualItem.label === expectedLabel),
-                `Expected completion '${expectedLabel}' not found!`,
-            )
-        }
+                assert.ok(
+                    completions.items.length === expected.length,
+                    'Unexpected completions found!',
+                )
+            }
+        })
     })
 
-    test('does not suggest loop properties outside @each', async () => {
-        const content = `<div>{{ loop. }}</div>@each(item in items){{ item }}@end`
-        const doc = await openTextDocument(content)
-        const pos = new vscode.Position(0, 12)
+    const outsideLoopTests = [
+        {
+            name: '@each loop',
+            content: `<div>{{ loop. }}</div>@each(item in items){{ item }}@end`,
+            position: new vscode.Position(0, 13),
+        },
+        {
+            name: '@for loop',
+            content: `<div>{{ loop. }}</div>@for(i = 0; i < 3; i++){{ i }}@end`,
+            position: new vscode.Position(0, 13),
+        },
+    ]
 
-        const completions = await triggerCompletion(pos, doc.uri)
+    outsideLoopTests.forEach(({ name, content, position }) => {
+        test(`does not suggest loop properties outside ${name}`, async () => {
+            const doc = await openTextDocument(content)
+            const completions = await triggerCompletion(position, doc.uri)
 
-        if (!completions) {
-            assert.fail('No completions found! Should have HTML native completions')
-        }
+            if (!completions) {
+                assert.fail('No completions found! Should have HTML native completions')
+            }
 
-        // There are still going to be some HTML completions, we are
-        // just making sure that suggestions don't include:
-        const shouldNotHave = ['index', 'first', 'last', 'iter']
+            const shouldNotHave = ['index', 'first', 'last', 'iter']
 
-        for (const expectedLabel of shouldNotHave) {
-            assert.ok(
-                !completions.items.some(actualItem => {
-                    return (
-                        actualItem.label === expectedLabel &&
-                        actualItem.kind === vscode.CompletionItemKind.Field
-                    )
-                }),
-                `Unexpected completion '${expectedLabel}' found!`,
-            )
-        }
+            for (const expectedLabel of shouldNotHave) {
+                assert.ok(
+                    !completions.items.some(
+                        item =>
+                            item.label === expectedLabel &&
+                            item.kind === vscode.CompletionItemKind.Field,
+                    ),
+                    `Unexpected completion '${expectedLabel}' found!`,
+                )
+            }
+        })
     })
 })
