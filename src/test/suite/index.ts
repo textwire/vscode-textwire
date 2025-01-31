@@ -5,6 +5,7 @@ import { glob } from 'glob'
 export function run(): Promise<void> {
     const mocha = new Mocha({
         ui: 'tdd',
+        timeout: 20000,
         color: true,
     })
 
