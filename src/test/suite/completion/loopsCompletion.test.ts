@@ -68,11 +68,7 @@ suite('Loops Completion', () => {
 
             for (const expectedLabel of shouldNotHave) {
                 assert.ok(
-                    !completions.items.some(
-                        item =>
-                            item.label === expectedLabel &&
-                            item.kind === vscode.CompletionItemKind.Field,
-                    ),
+                    !completions.items.some(item => item.label === expectedLabel),
                     `Unexpected completion '${expectedLabel}' found!`,
                 )
             }
