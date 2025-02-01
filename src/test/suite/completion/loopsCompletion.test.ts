@@ -6,13 +6,13 @@ import openTextDocument from '../utils/openTextDocument'
 suite('Loops Completion', () => {
     const loopTests = [
         {
-            name: '@each loop',
+            name: '@each',
             content: `@each(item in items){{ loop. }}@end`,
             position: new vscode.Position(0, 28),
             expected: ['index', 'first', 'last', 'iter'],
         },
         {
-            name: '@for loop',
+            name: '@for',
             content: `@for(i = 0; i < 5; i++){{ loop. }}@end`,
             position: new vscode.Position(0, 31),
             expected: ['index', 'first', 'last', 'iter'],
@@ -20,7 +20,7 @@ suite('Loops Completion', () => {
     ]
 
     loopTests.forEach(({ name, content, position, expected }) => {
-        test(`suggests loop properties inside ${name}`, async () => {
+        test(`suggests loop properties inside ${name} loop`, async () => {
             const doc = await openTextDocument(content)
             const completions = await triggerCompletion(position, doc.uri)
 
@@ -44,19 +44,19 @@ suite('Loops Completion', () => {
 
     const outsideLoopTests = [
         {
-            name: '@each loop',
+            name: '@each',
             content: `<div>{{ loop. }}</div>@each(item in items){{ item }}@end`,
             position: new vscode.Position(0, 13),
         },
         {
-            name: '@for loop',
+            name: '@for',
             content: `<div>{{ loop. }}</div>@for(i = 0; i < 3; i++){{ i }}@end`,
             position: new vscode.Position(0, 13),
         },
     ]
 
     outsideLoopTests.forEach(({ name, content, position }) => {
-        test(`does not suggest loop properties outside ${name}`, async () => {
+        test(`does not suggest loop properties outside ${name} loop`, async () => {
             const doc = await openTextDocument(content)
             const completions = await triggerCompletion(position, doc.uri)
 
