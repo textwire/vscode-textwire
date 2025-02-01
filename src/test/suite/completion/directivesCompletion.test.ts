@@ -1,7 +1,7 @@
 import * as assert from 'assert'
 import * as vscode from 'vscode'
-import triggerCompletion from '../utils/triggerCompletion'
-import openTextDocument from '../utils/openTextDocument'
+import { triggerCompletion } from '../utils/triggerCompletion'
+import { openTextDocument } from '../utils/openTextDocument'
 import { DIRECTIVES } from '../utils/static/directiveNames'
 
 suite('Directives Completion', () => {

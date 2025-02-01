@@ -1,7 +1,7 @@
 import * as vscode from 'vscode'
-import completionItem from '../modules/completionItem'
-import loopInfo from '../static/info/loopInfo'
-import Cursor from '../modules/Cursor'
+import { completionItem } from '../modules/completionItem'
+import { loopInfo as info } from '../static/info/loopInfo'
+import { Cursor } from '../modules/Cursor'
 
 const IGNORE_REG = /{{--\s*@(each|for)/g
 const START_REG = /@(each|for)/g
@@ -24,7 +24,7 @@ export default vscode.languages.registerCompletionItemProvider(
 
             if (cursor.prevCharIs('l')) {
                 const field = vscode.CompletionItemKind.Variable
-                return [completionItem('loop', loopInfo.loop, field)]
+                return [completionItem('loop', info.loop, field)]
             }
 
             const range = new vscode.Range(pos.with(pos.line, 0), pos)
@@ -37,10 +37,10 @@ export default vscode.languages.registerCompletionItemProvider(
             const field = vscode.CompletionItemKind.Field
 
             return [
-                completionItem('index', loopInfo.index, field),
-                completionItem('first', loopInfo.first, field),
-                completionItem('last', loopInfo.last, field),
-                completionItem('iter', loopInfo.iter, field),
+                completionItem('index', info.index, field),
+                completionItem('first', info.first, field),
+                completionItem('last', info.last, field),
+                completionItem('iter', info.iter, field),
             ]
         },
     },

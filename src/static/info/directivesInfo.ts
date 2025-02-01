@@ -195,7 +195,7 @@ Skips the current iteration of a loop when the specified condition is met.
 @continueIf(condition)
 \`\`\``
 
-export default {
+export const directivesInfo = {
     if: _if,
     ifElse,
     ifElseif,

@@ -1,8 +1,8 @@
 import * as vscode from 'vscode'
-import completionItem from '../modules/completionItem'
-import info from '../static/info/directivesInfo'
-import snip from '../static/snippets/directivesSnippets'
-import Cursor from '../modules/Cursor'
+import { completionItem } from '../modules/completionItem'
+import { directivesInfo as info } from '../static/info/directivesInfo'
+import { directivesSnippets as snip } from '../static/snippets/directivesSnippets'
+import { Cursor } from '../modules/Cursor'
 
 const DIR_START_REG = /(?<!\\)@(\w*)$/
 const IGNORE_REG = /\\\{\{/g

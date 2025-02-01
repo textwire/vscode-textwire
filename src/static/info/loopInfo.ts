@@ -33,7 +33,7 @@ The loop object contains information about the current loop iteration.
 {{ loop.last }}
 \`\`\``
 
-export default {
+export const loopInfo = {
     index,
     first,
     last,

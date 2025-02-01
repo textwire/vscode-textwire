@@ -1,6 +1,6 @@
 import * as vscode from 'vscode'
 
-export default function completionItem(
+export function completionItem(
     label: string,
     documentation: string,
     kind: vscode.CompletionItemKind,
@@ -11,9 +11,7 @@ export default function completionItem(
     // Use SnippetString to support newlines
     item.insertText = new vscode.SnippetString(insert || label)
 
-    item.documentation = new vscode.MarkdownString(
-        documentation.replace(/\n/g, '  \n'),
-    )
+    item.documentation = new vscode.MarkdownString(documentation.replace(/\n/g, '  \n'))
 
     if (label.startsWith('@')) {
         item.filterText = label.slice(1)

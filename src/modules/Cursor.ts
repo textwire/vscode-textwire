@@ -1,6 +1,6 @@
 import * as vscode from 'vscode'
 
-export default class Cursor {
+export class Cursor {
     public constructor(private pos: vscode.Position, private doc: vscode.TextDocument) {}
 
     public prevChar(): string {
