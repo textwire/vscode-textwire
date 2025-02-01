@@ -8,21 +8,21 @@ suite('Loops Completion', () => {
         {
             name: '@each',
             content: `@each(item in items){{ loop. }}@end`,
-            position: new vscode.Position(0, 28),
+            pos: new vscode.Position(0, 28),
             expected: ['index', 'first', 'last', 'iter'],
         },
         {
             name: '@for',
             content: `@for(i = 0; i < 5; i++){{ loop. }}@end`,
-            position: new vscode.Position(0, 31),
+            pos: new vscode.Position(0, 31),
             expected: ['index', 'first', 'last', 'iter'],
         },
     ]
 
-    loopTests.forEach(({ name, content, position, expected }) => {
+    loopTests.forEach(({ name, content, pos, expected }) => {
         test(`suggests loop properties inside ${name} loop`, async () => {
             const doc = await openTextDocument(content)
-            const completions = await triggerCompletion(position, doc.uri)
+            const completions = await triggerCompletion(pos, doc.uri)
 
             if (!completions) {
                 assert.fail('No completions found!')
@@ -46,19 +46,19 @@ suite('Loops Completion', () => {
         {
             name: '@each',
             content: `<div>{{ loop. }}</div>@each(item in items){{ item }}@end`,
-            position: new vscode.Position(0, 13),
+            pos: new vscode.Position(0, 13),
         },
         {
             name: '@for',
             content: `<div>{{ loop. }}</div>@for(i = 0; i < 3; i++){{ i }}@end`,
-            position: new vscode.Position(0, 13),
+            pos: new vscode.Position(0, 13),
         },
     ]
 
-    outsideLoopTests.forEach(({ name, content, position }) => {
+    outsideLoopTests.forEach(({ name, content, pos }) => {
         test(`does not suggest loop properties outside ${name} loop`, async () => {
             const doc = await openTextDocument(content)
-            const completions = await triggerCompletion(position, doc.uri)
+            const completions = await triggerCompletion(pos, doc.uri)
 
             if (!completions) {
                 assert.fail('No completions found! Should have HTML native completions')
