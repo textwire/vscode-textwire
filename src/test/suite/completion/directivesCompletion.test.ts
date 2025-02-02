@@ -2,8 +2,11 @@ import * as assert from 'assert'
 import * as vscode from 'vscode'
 import { triggerCompletion } from '../utils/triggerCompletion'
 import { openTextDocument } from '../utils/openTextDocument'
-import { DIRECTIVES, INSIDE_LOOP_DIRECTIVES } from '../utils/static/directiveNames'
-import { assertHasItems } from '../utils/assert/assertHasItems'
+import {
+    DIRECTIVES,
+    INSIDE_LOOP_DIRECTIVES,
+    INSIDE_COMP_DIRECTIVES,
+} from '../utils/static/directiveNames'
 import { assertLength } from '../utils/assert/assertLength'
 
 suite('Directives Completion', () => {
@@ -11,17 +14,16 @@ suite('Directives Completion', () => {
         const content = `<h2>@</h2>`
         const doc = await openTextDocument(content)
         const pos = new vscode.Position(0, 5)
-        const completions = await triggerCompletion(pos, doc.uri)
+        const items = await triggerCompletion(pos, doc.uri)
 
-        if (!completions) {
+        if (!items) {
             assert.fail('No completions found!')
         }
 
-        assertHasItems(completions)
-        assertLength(DIRECTIVES.length, completions.items.length)
+        assertLength(DIRECTIVES.length, items.length)
 
-        assertHasDirectives(DIRECTIVES, completions.items, 'HTML')
-        assertMissingDirectives(INSIDE_LOOP_DIRECTIVES, completions.items, 'HTML')
+        assertHasDirectives(DIRECTIVES, items, 'HTML')
+        assertMissingDirectives(INSIDE_LOOP_DIRECTIVES, items, 'HTML')
     })
 
     const loopTests = [
@@ -40,20 +42,18 @@ suite('Directives Completion', () => {
     loopTests.forEach(({ name, content, pos }) => {
         test(`suggests loop directives inside ${name} loop`, async () => {
             const doc = await openTextDocument(content)
-            const completions = await triggerCompletion(pos, doc.uri)
+            const items = await triggerCompletion(pos, doc.uri)
 
-            if (!completions) {
+            if (items.length === 0) {
                 assert.fail('No completions found!')
             }
 
-            assertHasItems(completions)
-
             const lengthMustBe = INSIDE_LOOP_DIRECTIVES.length + DIRECTIVES.length
 
-            assertLength(lengthMustBe, completions.items.length)
+            assertLength(lengthMustBe, items.length)
 
-            assertHasDirectives(INSIDE_LOOP_DIRECTIVES, completions.items, name)
-            assertHasDirectives(DIRECTIVES, completions.items, name)
+            assertHasDirectives(INSIDE_LOOP_DIRECTIVES, items, name)
+            assertHasDirectives(DIRECTIVES, items, name)
         })
     })
 })

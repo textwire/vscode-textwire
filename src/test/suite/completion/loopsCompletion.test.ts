@@ -2,7 +2,6 @@ import * as assert from 'assert'
 import * as vscode from 'vscode'
 import { triggerCompletion } from '../utils/triggerCompletion'
 import { openTextDocument } from '../utils/openTextDocument'
-import { assertHasItems } from '../utils/assert/assertHasItems'
 import { assertLength } from '../utils/assert/assertLength'
 
 suite('Loops Completion', () => {
@@ -24,23 +23,22 @@ suite('Loops Completion', () => {
     loopTests.forEach(({ name, content, pos, expected }) => {
         test(`suggests loop properties inside ${name} loop`, async () => {
             const doc = await openTextDocument(content)
-            const completions = await triggerCompletion(pos, doc.uri)
+            const items = await triggerCompletion(pos, doc.uri)
 
-            if (!completions) {
+            if (!items) {
                 assert.fail('No completions found!')
             }
 
-            assertHasItems(completions)
-            assertLength(expected.length, completions.items.length)
+            assertLength(expected.length, items.length)
 
             for (const expectedLabel of expected) {
                 assert.ok(
-                    completions.items.some(item => item.label === expectedLabel),
+                    items.some(item => item.label === expectedLabel),
                     `Expected completion '${expectedLabel}' not found!`,
                 )
 
                 assert.ok(
-                    completions.items.length === expected.length,
+                    items.length === expected.length,
                     'Unexpected completions found!',
                 )
             }
@@ -63,19 +61,17 @@ suite('Loops Completion', () => {
     outsideLoopTests.forEach(({ name, content, pos }) => {
         test(`does not suggest loop properties outside ${name} loop`, async () => {
             const doc = await openTextDocument(content)
-            const completions = await triggerCompletion(pos, doc.uri)
+            const items = await triggerCompletion(pos, doc.uri)
 
-            if (!completions) {
+            if (!items) {
                 assert.fail('No completions found! Should have HTML native completions')
             }
-
-            assertHasItems(completions)
 
             const shouldNotHave = ['index', 'first', 'last', 'iter']
 
             for (const expectedLabel of shouldNotHave) {
                 assert.ok(
-                    !completions.items.some(item => item.label === expectedLabel),
+                    !items.some(item => item.label === expectedLabel),
                     `Unexpected completion '${expectedLabel}' found!`,
                 )
             }
