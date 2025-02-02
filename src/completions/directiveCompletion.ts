@@ -5,9 +5,6 @@ import { directivesSnippets as snip } from '../static/snippets/directivesSnippet
 import { Cursor } from '../modules/Cursor'
 
 const DIR_START_REG = /(?<!\\)@(\w*)$/
-const IGNORE_REG = /\\\{\{/g
-const START_REG = /\{\{/g
-const END_REG = /\}\}/g
 
 const triggerChars = ['@']
 
@@ -24,7 +21,7 @@ export default vscode.languages.registerCompletionItemProvider(
             const match = DIR_START_REG.exec(textBefore)
             const cursor = new Cursor(pos, doc)
 
-            if (!match || cursor.isBetween(START_REG, END_REG, IGNORE_REG)) {
+            if (!match || cursor.isInsideBraces()) {
                 return []
             }
 

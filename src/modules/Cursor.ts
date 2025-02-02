@@ -29,8 +29,20 @@ export class Cursor {
         return lastStart && (!lastEnd || lastStart.index > lastEnd.index)
     }
 
-    public notBetween(startReg: RegExp, endReg: RegExp, ignoreReg: RegExp): boolean {
-        return !this.isBetween(startReg, endReg, ignoreReg)
+    public isInsideBraces(): boolean {
+        const IGNORE = /\\\{\{/g
+        const START = /\{\{/g
+        const END = /\}\}/g
+
+        return this.isBetween(START, END, IGNORE)
+    }
+
+    public isInsideLoop(): boolean {
+        const IGNORE = /{{--\s*@(each|for)/g
+        const START = /@(each|for)/g
+        const END = /@end/g
+
+        return this.isBetween(START, END, IGNORE)
     }
 
     private textBefore(): string {

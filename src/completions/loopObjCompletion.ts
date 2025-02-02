@@ -3,10 +3,6 @@ import { completionItem } from '../modules/completionItem'
 import { loopInfo as info } from '../static/info/loopInfo'
 import { Cursor } from '../modules/Cursor'
 
-const IGNORE_REG = /{{--\s*@(each|for)/g
-const START_REG = /@(each|for)/g
-const END_REG = /@end/g
-
 const triggerChars = ['.', 'l']
 
 export default vscode.languages.registerCompletionItemProvider(
@@ -18,7 +14,7 @@ export default vscode.languages.registerCompletionItemProvider(
         ): vscode.CompletionItem[] {
             const cursor = new Cursor(pos, doc)
 
-            if (cursor.notBetween(START_REG, END_REG, IGNORE_REG)) {
+            if (!cursor.isInsideLoop()) {
                 return []
             }
 
