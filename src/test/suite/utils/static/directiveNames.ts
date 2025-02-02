@@ -16,8 +16,6 @@ export const DIRECTIVE_NAMES = [
     '@for @else',
     '@dump',
     '@end',
-    '@break',
-    '@continue',
-    '@continueIf',
-    '@breakIf',
 ]
+
+export const INSIDE_LOOP_DIRECTIVES = ['@break', '@continue', '@continueIf', '@breakIf']

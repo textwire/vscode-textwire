@@ -28,32 +28,51 @@ export default vscode.languages.registerCompletionItemProvider(
             const partialDir = match[1]
             const field = vscode.CompletionItemKind.Snippet
 
-            const dirs = [
-                completionItem('@if', info.if, field, snip.if),
-                completionItem('@if @else', info.ifElse, field, snip.ifElse),
-                completionItem('@if @elseif', info.ifElseif, field, snip.ifElseif),
-                completionItem('@use', info.use, field, snip.use),
-                completionItem('@insert', info.insert, field, snip.insert),
-                completionItem('@insert @end', info.insertEnd, field, snip.insertEnd),
-                completionItem('@reserve', info.reserve, field, snip.reserve),
-                completionItem('@component', info.comp, field, snip.comp),
-                completionItem('@component @slot', info.compSlot, field, snip.compSlot),
-                completionItem('@slot', info.slot, field, snip.slotDef),
-                completionItem('@slot(name)', info.slotDef, field, snip.slot),
-                completionItem('@each', info.each, field, snip.each),
-                completionItem('@each @else', info.eachElse, field, snip.eachElse),
-                completionItem('@for', info.for, field, snip.for),
-                completionItem('@for @else', info.forElse, field, snip.forElse),
-                completionItem('@dump', info.dump, field, snip.dump),
-                completionItem('@end', info.end, field, snip.end),
-                completionItem('@break', info.break, field, snip.break),
-                completionItem('@continue', info.continue, field, snip.continue),
-                completionItem('@continueIf', info.continueIf, field, snip.continueIf),
-                completionItem('@breakIf', info.breakIf, field, snip.breakIf),
-            ]
+            const dirs = cursor.isInsideLoop()
+                ? loopDirectories(field)
+                : otherDirectories(field)
 
-            return dirs.filter(d => d.label.slice(1).startsWith(partialDir))
+            return dirs.filter(d => {
+                // remove the @ from the label
+                const label = d.label.slice(1)
+                return label.startsWith(partialDir)
+            })
         },
     },
     ...triggerChars,
 )
+
+function loopDirectories(
+    field: vscode.CompletionItemKind.Snippet,
+): vscode.CompletionItem[] {
+    return [
+        completionItem('@break', info.break, field, snip.break),
+        completionItem('@continue', info.continue, field, snip.continue),
+        completionItem('@continueIf', info.continueIf, field, snip.continueIf),
+        completionItem('@breakIf', info.breakIf, field, snip.breakIf),
+    ]
+}
+
+function otherDirectories(
+    field: vscode.CompletionItemKind.Snippet,
+): vscode.CompletionItem[] {
+    return [
+        completionItem('@if', info.if, field, snip.if),
+        completionItem('@if @else', info.ifElse, field, snip.ifElse),
+        completionItem('@if @elseif', info.ifElseif, field, snip.ifElseif),
+        completionItem('@use', info.use, field, snip.use),
+        completionItem('@insert', info.insert, field, snip.insert),
+        completionItem('@insert @end', info.insertEnd, field, snip.insertEnd),
+        completionItem('@reserve', info.reserve, field, snip.reserve),
+        completionItem('@component', info.comp, field, snip.comp),
+        completionItem('@component @slot', info.compSlot, field, snip.compSlot),
+        completionItem('@slot', info.slot, field, snip.slotDef),
+        completionItem('@slot(name)', info.slotDef, field, snip.slot),
+        completionItem('@each', info.each, field, snip.each),
+        completionItem('@each @else', info.eachElse, field, snip.eachElse),
+        completionItem('@for', info.for, field, snip.for),
+        completionItem('@for @else', info.forElse, field, snip.forElse),
+        completionItem('@dump', info.dump, field, snip.dump),
+        completionItem('@end', info.end, field, snip.end),
+    ]
+}
