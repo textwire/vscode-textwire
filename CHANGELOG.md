@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.5.3] - 2025-01-30
+## [1.5.3] - 2025-02-02
 - Added tests coverage to test all the necessary features
 - Change so that you can only see `@break`, `@breakIf`, `@continue`, `@continueIf` directives when you are inside a loop
 - Change so that you can only see `@slot` and `@slot(name)` directives when you are inside a component
