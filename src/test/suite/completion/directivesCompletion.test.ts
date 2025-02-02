@@ -4,6 +4,7 @@ import { triggerCompletion } from '../utils/triggerCompletion'
 import { openTextDocument } from '../utils/openTextDocument'
 import { DIRECTIVES, INSIDE_LOOP_DIRECTIVES } from '../utils/static/directiveNames'
 import { assertHasItems } from '../utils/assert/assertHasItems'
+import { assertLength } from '../utils/assert/assertLength'
 
 suite('Directives Completion', () => {
     test('suggests directives in HTML', async () => {
@@ -17,12 +18,7 @@ suite('Directives Completion', () => {
         }
 
         assertHasItems(completions)
-
-        assert.strictEqual(
-            completions.items.length,
-            DIRECTIVES.length,
-            `Expected ${DIRECTIVES.length} completions, but got ${completions.items.length}`,
-        )
+        assertLength(DIRECTIVES.length, completions.items.length)
 
         assertHasDirectives(DIRECTIVES, completions.items, 'HTML')
         assertMissingDirectives(INSIDE_LOOP_DIRECTIVES, completions.items, 'HTML')
@@ -54,11 +50,7 @@ suite('Directives Completion', () => {
 
             const lengthMustBe = INSIDE_LOOP_DIRECTIVES.length + DIRECTIVES.length
 
-            assert.strictEqual(
-                completions.items.length,
-                lengthMustBe,
-                `Expected ${lengthMustBe} completions, but got ${completions.items.length}`,
-            )
+            assertLength(lengthMustBe, completions.items.length)
 
             assertHasDirectives(INSIDE_LOOP_DIRECTIVES, completions.items, name)
             assertHasDirectives(DIRECTIVES, completions.items, name)

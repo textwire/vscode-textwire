@@ -3,6 +3,7 @@ import * as vscode from 'vscode'
 import { triggerCompletion } from '../utils/triggerCompletion'
 import { openTextDocument } from '../utils/openTextDocument'
 import { assertHasItems } from '../utils/assert/assertHasItems'
+import { assertLength } from '../utils/assert/assertLength'
 
 suite('Loops Completion', () => {
     const loopTests = [
@@ -30,6 +31,7 @@ suite('Loops Completion', () => {
             }
 
             assertHasItems(completions)
+            assertLength(expected.length, completions.items.length)
 
             for (const expectedLabel of expected) {
                 assert.ok(
