@@ -2,7 +2,7 @@ import * as assert from 'assert'
 import * as vscode from 'vscode'
 import { triggerCompletion } from '../utils/triggerCompletion'
 import { openTextDocument } from '../utils/openTextDocument'
-import { DIRECTIVES } from '../utils/static/directiveNames'
+import { DIRECTIVE_NAMES } from '../utils/static/directiveNames'
 
 suite('Directives Completion', () => {
     test('suggests directives in HTML', async () => {
@@ -19,13 +19,13 @@ suite('Directives Completion', () => {
 
         assert.strictEqual(
             completions.items.length,
-            DIRECTIVES.length,
-            `Expected ${DIRECTIVES.length} completions, but got ${completions.items.length}`,
+            DIRECTIVE_NAMES.length,
+            `Expected ${DIRECTIVE_NAMES.length} completions, but got ${completions.items.length}`,
         )
 
         for (const item of completions.items) {
             assert.ok(
-                DIRECTIVES.includes(item.label),
+                DIRECTIVE_NAMES.includes(item.label),
                 `Unexpected completion found: ${item.label}`,
             )
         }

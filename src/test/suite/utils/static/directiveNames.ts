@@ -1,4 +1,4 @@
-export const DIRECTIVES = [
+export const DIRECTIVE_NAMES = [
     '@if',
     '@if @else',
     '@if @elseif',
