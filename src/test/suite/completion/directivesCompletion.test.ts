@@ -2,10 +2,8 @@ import * as assert from 'assert'
 import * as vscode from 'vscode'
 import { triggerCompletion } from '../utils/triggerCompletion'
 import { openTextDocument } from '../utils/openTextDocument'
-import {
-    DIRECTIVE_NAMES,
-    INSIDE_LOOP_DIRECTIVES as INSIDE_LOOP_DIRECTIVE_NAMES,
-} from '../utils/static/directiveNames'
+import { DIRECTIVES, INSIDE_LOOP_DIRECTIVES } from '../utils/static/directiveNames'
+import { assertHasItems } from '../utils/assert/assertHasItems'
 
 suite('Directives Completion', () => {
     test('suggests directives in HTML', async () => {
@@ -18,25 +16,16 @@ suite('Directives Completion', () => {
             assert.fail('No completions found!')
         }
 
-        assert.ok(completions.hasOwnProperty('items'), 'Property "items" not found!')
+        assertHasItems(completions)
 
         assert.strictEqual(
             completions.items.length,
-            DIRECTIVE_NAMES.length,
-            `Expected ${DIRECTIVE_NAMES.length} completions, but got ${completions.items.length}`,
+            DIRECTIVES.length,
+            `Expected ${DIRECTIVES.length} completions, but got ${completions.items.length}`,
         )
 
-        for (const item of completions.items) {
-            assert.ok(
-                DIRECTIVE_NAMES.includes(item.label),
-                `Directive ${item.label} not found in HTML`,
-            )
-
-            assert.ok(
-                !INSIDE_LOOP_DIRECTIVE_NAMES.includes(item.label),
-                `Directive ${item.label} should not be suggested outside of a loop`,
-            )
-        }
+        assertHasDirectives(DIRECTIVES, completions.items, 'HTML')
+        assertMissingDirectives(INSIDE_LOOP_DIRECTIVES, completions.items, 'HTML')
     })
 
     const loopTests = [
@@ -61,25 +50,44 @@ suite('Directives Completion', () => {
                 assert.fail('No completions found!')
             }
 
-            assert.ok(completions.hasOwnProperty('items'), 'Property "items" not found!')
+            assertHasItems(completions)
+
+            const lengthMustBe = INSIDE_LOOP_DIRECTIVES.length + DIRECTIVES.length
 
             assert.strictEqual(
                 completions.items.length,
-                INSIDE_LOOP_DIRECTIVE_NAMES.length,
-                `Expected ${INSIDE_LOOP_DIRECTIVE_NAMES.length} completions, but got ${completions.items.length}`,
+                lengthMustBe,
+                `Expected ${lengthMustBe} completions, but got ${completions.items.length}`,
             )
 
-            for (const item of completions.items) {
-                assert.ok(
-                    INSIDE_LOOP_DIRECTIVE_NAMES.includes(item.label),
-                    `Directive ${item.label} not found inside a loop`,
-                )
-
-                assert.ok(
-                    !DIRECTIVE_NAMES.includes(item.label),
-                    `Directive ${item.label} should not be suggested inside of a loop`,
-                )
-            }
+            assertHasDirectives(INSIDE_LOOP_DIRECTIVES, completions.items, name)
+            assertHasDirectives(DIRECTIVES, completions.items, name)
         })
     })
 })
+
+function assertHasDirectives(
+    dirNames: string[],
+    items: vscode.CompletionItem[],
+    blockName: string,
+) {
+    for (const dirName of dirNames) {
+        assert.ok(
+            items.some(item => item.label === dirName),
+            `Directive ${dirName} must be suggested inside ${blockName}`,
+        )
+    }
+}
+
+function assertMissingDirectives(
+    dirNames: string[],
+    items: vscode.CompletionItem[],
+    blockName: string,
+) {
+    for (const dirName of dirNames) {
+        assert.ok(
+            !items.some(item => item.label === dirName),
+            `Directive ${dirName} must not be suggested inside ${blockName}`,
+        )
+    }
+}

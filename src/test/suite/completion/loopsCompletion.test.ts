@@ -2,6 +2,7 @@ import * as assert from 'assert'
 import * as vscode from 'vscode'
 import { triggerCompletion } from '../utils/triggerCompletion'
 import { openTextDocument } from '../utils/openTextDocument'
+import { assertHasItems } from '../utils/assert/assertHasItems'
 
 suite('Loops Completion', () => {
     const loopTests = [
@@ -27,6 +28,8 @@ suite('Loops Completion', () => {
             if (!completions) {
                 assert.fail('No completions found!')
             }
+
+            assertHasItems(completions)
 
             for (const expectedLabel of expected) {
                 assert.ok(
@@ -63,6 +66,8 @@ suite('Loops Completion', () => {
             if (!completions) {
                 assert.fail('No completions found! Should have HTML native completions')
             }
+
+            assertHasItems(completions)
 
             const shouldNotHave = ['index', 'first', 'last', 'iter']
 

@@ -28,9 +28,11 @@ export default vscode.languages.registerCompletionItemProvider(
             const partialDir = match[1]
             const field = vscode.CompletionItemKind.Snippet
 
-            const dirs = cursor.isInsideLoop()
-                ? loopDirectories(field)
-                : otherDirectories(field)
+            const dirs = otherDirectories(field)
+
+            if (cursor.isInsideLoop()) {
+                dirs.push(...loopDirectories(field))
+            }
 
             return dirs.filter(d => {
                 // remove the @ from the label
