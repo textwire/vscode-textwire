@@ -45,6 +45,14 @@ export class Cursor {
         return this.isBetween(START, END, IGNORE)
     }
 
+    public isInsideComponent(): boolean {
+        const IGNORE = /{{--\s*@component/g
+        const START = /@component/g
+        const END = /@end/g
+
+        return this.isBetween(START, END, IGNORE)
+    }
+
     private textBefore(): string {
         return this.doc.getText(new vscode.Range(new vscode.Position(0, 0), this.pos))
     }

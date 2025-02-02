@@ -2,7 +2,8 @@
 
 ## [1.5.3] - 2025-01-30
 - Added tests coverage to test all the necessary features
-- Change so that you can only see @break, @breakIf, @continue, @continueIf directives when you are inside a loop. This is to avoid showing them when they are not needed
+- Change so that you can only see `@break`, `@breakIf`, `@continue`, `@continueIf` directives when you are inside a loop
+- Change so that you can only see `@slot` and `@slot(name)` directives when you are inside a component
 
 ## [1.5.2] - 2025-01-30
 - Fixed issue where loop object would only show autocomplete suggestions when it was inside `{{` and `}}` brackets

@@ -34,6 +34,10 @@ export default vscode.languages.registerCompletionItemProvider(
                 dirs.push(...loopDirectories(field))
             }
 
+            if (cursor.isInsideComponent()) {
+                dirs.push(...compDirectories(field))
+            }
+
             return dirs.filter(d => {
                 // remove the @ from the label
                 const label = d.label.slice(1)
@@ -68,13 +72,20 @@ function otherDirectories(
         completionItem('@reserve', info.reserve, field, snip.reserve),
         completionItem('@component', info.comp, field, snip.comp),
         completionItem('@component @slot', info.compSlot, field, snip.compSlot),
-        completionItem('@slot', info.slot, field, snip.slotDef),
-        completionItem('@slot(name)', info.slotDef, field, snip.slot),
         completionItem('@each', info.each, field, snip.each),
         completionItem('@each @else', info.eachElse, field, snip.eachElse),
         completionItem('@for', info.for, field, snip.for),
         completionItem('@for @else', info.forElse, field, snip.forElse),
         completionItem('@dump', info.dump, field, snip.dump),
         completionItem('@end', info.end, field, snip.end),
+    ]
+}
+
+function compDirectories(
+    field: vscode.CompletionItemKind.Snippet,
+): vscode.CompletionItem[] {
+    return [
+        completionItem('@slot', info.slot, field, snip.slotDef),
+        completionItem('@slot(name)', info.slotDef, field, snip.slot),
     ]
 }
