@@ -1,9 +1,9 @@
 {
     "name": "textwire",
     "displayName": "Textwire",
-    "main": "./build/extension.js",
+    "main": "./out/extension.js",
     "description": "Textwire templating language support for VSCode",
-    "version": "1.5.2",
+    "version": "1.5.3",
     "homepage": "https://github.com/textwire/vscode-textwire/blob/main/README.md",
     "pricing": "Free",
     "engines": {
@@ -27,6 +27,9 @@
     "publisher": "SerhiiCho",
     "license": "MIT",
     "contributes": {
+        "testing": {
+            "testController": "vscode-test"
+        },
         "languages": [
             {
                 "id": "textwire",
@@ -56,10 +59,15 @@
     "scripts": {
         "login": "vsce login SerhiiCho",
         "deploy": "vsce publish",
-        "build": "tsc -p ."
+        "compile": "tsc -p .",
+        "test": "npm run compile && FORCE_COLOR=1 node ./out/test/runTests.js"
     },
     "devDependencies": {
-        "@types/node": "^22.10.10",
+        "@types/mocha": "^10.0.10",
+        "@types/node": "^22.12.0",
+        "@vscode/test-cli": "^0.0.10",
+        "@vscode/test-electron": "^2.4.1",
+        "glob": "^11.0.1",
         "typescript": "^5.7.3",
         "vscode": "^1.1.37"
     }

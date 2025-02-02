@@ -52,7 +52,7 @@ const ifElseif = `if($1)
     $3
 @end`
 
-export default {
+export const directivesSnippets = {
     if: _if,
     ifElse,
     ifElseif,

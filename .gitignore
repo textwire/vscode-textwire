@@ -1,5 +1,4 @@
 node_modules
 *.vsix
-yarn.lock
-package-lock.json
-build
+out
+.vscode-test
