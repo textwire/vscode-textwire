@@ -56,6 +56,25 @@ suite('Directives Completion', () => {
             assertHasDirectives(DIRECTIVES, items, name)
         })
     })
+
+    test('suggests component directives in component', async () => {
+        const content = `@component('name') @ @end`
+        const doc = await openTextDocument(content)
+        const pos = new vscode.Position(0, 20)
+        const items = await triggerCompletion(pos, doc.uri)
+
+        if (!items) {
+            assert.fail('No completions found!')
+        }
+
+        const lengthMustBe = INSIDE_COMP_DIRECTIVES.length + DIRECTIVES.length
+
+        assertLength(lengthMustBe, items.length)
+
+        assertHasDirectives(INSIDE_COMP_DIRECTIVES, items, 'component')
+        assertHasDirectives(DIRECTIVES, items, 'component')
+        assertMissingDirectives(INSIDE_LOOP_DIRECTIVES, items, 'component')
+    })
 })
 
 function assertHasDirectives(
