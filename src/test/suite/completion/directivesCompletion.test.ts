@@ -8,9 +8,11 @@ import {
     INSIDE_COMP_DIRECTIVES,
 } from '../utils/static/directiveNames'
 import { assertLength } from '../utils/assert/assertLength'
+import { assertHasDirectives } from '../utils/assert/assertHasDirectives'
+import { assertMissingDirectives } from '../utils/assert/assertMissingDirectives'
 
 suite('Directives Completion', () => {
-    test('suggests directives in HTML', async () => {
+    test('suggests proper directives in HTML', async () => {
         const content = `<h2>@</h2>`
         const doc = await openTextDocument(content)
         const pos = new vscode.Position(0, 5)
@@ -40,7 +42,7 @@ suite('Directives Completion', () => {
     ]
 
     loopTests.forEach(({ name, content, pos }) => {
-        test(`suggests loop directives inside ${name} loop`, async () => {
+        test(`suggests proper directives inside of ${name} loop`, async () => {
             const doc = await openTextDocument(content)
             const items = await triggerCompletion(pos, doc.uri)
 
@@ -57,7 +59,7 @@ suite('Directives Completion', () => {
         })
     })
 
-    test('suggests component directives in component', async () => {
+    test('suggests proper directives inside of component', async () => {
         const content = `@component('name') @ @end`
         const doc = await openTextDocument(content)
         const pos = new vscode.Position(0, 20)
@@ -71,34 +73,30 @@ suite('Directives Completion', () => {
 
         assertLength(lengthMustBe, items.length)
 
-        assertHasDirectives(INSIDE_COMP_DIRECTIVES, items, 'component')
-        assertHasDirectives(DIRECTIVES, items, 'component')
-        assertMissingDirectives(INSIDE_LOOP_DIRECTIVES, items, 'component')
+        assertHasDirectives(INSIDE_COMP_DIRECTIVES, items, '@component')
+        assertHasDirectives(DIRECTIVES, items, '@component')
+        assertMissingDirectives(INSIDE_LOOP_DIRECTIVES, items, '@component')
+    })
+
+    test('suggests proper directives inside of a @each loop within a component', async () => {
+        const content = `@component('name')@each(item in items) @ @end@end`
+        const doc = await openTextDocument(content)
+        const pos = new vscode.Position(0, 40)
+        const items = await triggerCompletion(pos, doc.uri)
+
+        if (!items) {
+            assert.fail('No completions found!')
+        }
+
+        const lengthMustBe =
+            INSIDE_COMP_DIRECTIVES.length +
+            DIRECTIVES.length +
+            INSIDE_LOOP_DIRECTIVES.length
+
+        assertLength(lengthMustBe, items.length)
+
+        assertHasDirectives(INSIDE_COMP_DIRECTIVES, items, '@component @each')
+        assertHasDirectives(INSIDE_LOOP_DIRECTIVES, items, '@component @each')
+        assertHasDirectives(DIRECTIVES, items, '@component @each')
     })
 })
-
-function assertHasDirectives(
-    dirNames: string[],
-    items: vscode.CompletionItem[],
-    blockName: string,
-) {
-    for (const dirName of dirNames) {
-        assert.ok(
-            items.some(item => item.label === dirName),
-            `Directive ${dirName} must be suggested inside ${blockName}`,
-        )
-    }
-}
-
-function assertMissingDirectives(
-    dirNames: string[],
-    items: vscode.CompletionItem[],
-    blockName: string,
-) {
-    for (const dirName of dirNames) {
-        assert.ok(
-            !items.some(item => item.label === dirName),
-            `Directive ${dirName} must not be suggested inside ${blockName}`,
-        )
-    }
-}
