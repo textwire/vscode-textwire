@@ -60,7 +60,7 @@
         "login": "vsce login SerhiiCho",
         "deploy": "vsce publish",
         "compile": "tsc -p .",
-        "test": "rm -r ./out && npm run compile && FORCE_COLOR=1 node ./out/test/runTests.js"
+        "test": "npm run compile && FORCE_COLOR=1 node ./out/test/runTests.js"
     },
     "devDependencies": {
         "@types/mocha": "^10.0.10",
