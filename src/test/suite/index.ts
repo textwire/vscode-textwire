@@ -46,7 +46,7 @@ async function activateExtension(): Promise<void> {
         throw new Error('Textwire extension not found.')
     }
 
-    console.log('Activating Textwire extension...')
+    console.log('⏳ Activating Textwire extension...')
     await extension.activate()
-    console.log('Textwire extension activated successfully.')
+    console.log('👍 Textwire extension activated successfully.')
 }
