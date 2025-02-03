@@ -2,14 +2,14 @@ import * as assert from 'assert'
 import * as vscode from 'vscode'
 import { triggerCompletion } from '../utils/triggerCompletion'
 import { openTextDocument } from '../utils/openTextDocument'
+import { assertLength } from '../utils/assert/assertLength'
+import { assertHasDirectives } from '../utils/assert/assertHasDirectives'
+import { assertMissingDirectives } from '../utils/assert/assertMissingDirectives'
 import {
     DIRECTIVES,
     INSIDE_LOOP_DIRECTIVES,
     INSIDE_COMP_DIRECTIVES,
 } from '../utils/static/directiveNames'
-import { assertLength } from '../utils/assert/assertLength'
-import { assertHasDirectives } from '../utils/assert/assertHasDirectives'
-import { assertMissingDirectives } from '../utils/assert/assertMissingDirectives'
 
 suite('Directives Completion', () => {
     test('suggests proper directives in HTML', async () => {
@@ -24,8 +24,8 @@ suite('Directives Completion', () => {
 
         assertLength(DIRECTIVES.length, items.length)
 
-        assertHasDirectives(DIRECTIVES, items, 'HTML')
-        assertMissingDirectives(INSIDE_LOOP_DIRECTIVES, items, 'HTML')
+        assertHasDirectives(DIRECTIVES, items, content)
+        assertMissingDirectives(INSIDE_LOOP_DIRECTIVES, items, content)
     })
 
     const loopTests = [
@@ -42,7 +42,7 @@ suite('Directives Completion', () => {
     ]
 
     loopTests.forEach(({ name, content, pos }) => {
-        test(`suggests proper directives inside of ${name} loop`, async () => {
+        test(`suggests proper directives inside ${name} loop`, async () => {
             const doc = await openTextDocument(content)
             const items = await triggerCompletion(pos, doc.uri)
 
@@ -54,12 +54,12 @@ suite('Directives Completion', () => {
 
             assertLength(lengthMustBe, items.length)
 
-            assertHasDirectives(INSIDE_LOOP_DIRECTIVES, items, name)
-            assertHasDirectives(DIRECTIVES, items, name)
+            assertHasDirectives(INSIDE_LOOP_DIRECTIVES, items, content)
+            assertHasDirectives(DIRECTIVES, items, content)
         })
     })
 
-    test('suggests proper directives inside of component', async () => {
+    test('suggests proper directives inside @component', async () => {
         const content = `@component('name') @ @end`
         const doc = await openTextDocument(content)
         const pos = new vscode.Position(0, 20)
@@ -73,12 +73,12 @@ suite('Directives Completion', () => {
 
         assertLength(lengthMustBe, items.length)
 
-        assertHasDirectives(INSIDE_COMP_DIRECTIVES, items, '@component')
-        assertHasDirectives(DIRECTIVES, items, '@component')
-        assertMissingDirectives(INSIDE_LOOP_DIRECTIVES, items, '@component')
+        assertHasDirectives(INSIDE_COMP_DIRECTIVES, items, content)
+        assertHasDirectives(DIRECTIVES, items, content)
+        assertMissingDirectives(INSIDE_LOOP_DIRECTIVES, items, content)
     })
 
-    test('suggests proper directives inside of a @each loop within a component', async () => {
+    test('suggests proper directives inside @each loop within @component', async () => {
         const content = `@component('name')@each(item in items) @ @end@end`
         const doc = await openTextDocument(content)
         const pos = new vscode.Position(0, 40)
@@ -95,8 +95,8 @@ suite('Directives Completion', () => {
 
         assertLength(lengthMustBe, items.length)
 
-        assertHasDirectives(INSIDE_COMP_DIRECTIVES, items, '@component @each')
-        assertHasDirectives(INSIDE_LOOP_DIRECTIVES, items, '@component @each')
-        assertHasDirectives(DIRECTIVES, items, '@component @each')
+        assertHasDirectives(INSIDE_COMP_DIRECTIVES, items, content)
+        assertHasDirectives(INSIDE_LOOP_DIRECTIVES, items, content)
+        assertHasDirectives(DIRECTIVES, items, content)
     })
 })

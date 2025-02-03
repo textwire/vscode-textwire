@@ -9,7 +9,7 @@ export function assertMissingDirectives(
     for (const dirName of dirNames) {
         assert.ok(
             !items.some(item => item.label === dirName),
-            `Directive ${dirName} must not be suggested inside ${blockName}`,
+            `Directive ${dirName} must not be suggested for content: ${blockName}`,
         )
     }
 }
