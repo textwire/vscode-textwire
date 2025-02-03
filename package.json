@@ -14,7 +14,7 @@
     ],
     "icon": "images/textwire.png",
     "activationEvents": [
-        "onStartupFinished"
+        "onLanguage:textwire"
     ],
     "repository": {
         "type": "git",

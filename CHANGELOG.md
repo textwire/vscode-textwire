@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.5.4] - 2025-02-02
+- Changed the activation events for the extension so that it only activates when you open a `.tw` file. This should improve the performance of the extension
+
 ## [1.5.3] - 2025-02-02
 - Added tests coverage to test all the necessary features
 - Change so that you can only see `@break`, `@breakIf`, `@continue`, `@continueIf` directives when you are inside a loop
