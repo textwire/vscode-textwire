@@ -5,22 +5,21 @@ import { openTextDocument } from '../utils/openTextDocument'
 import { assertLength } from '../utils/assert/assertLength'
 
 suite('Loops Completion', () => {
+    const expectedLabels = ['index', 'first', 'last', 'iter']
     const loopTests = [
         {
             name: '@each',
             content: `@each(item in items){{ loop. }}@end`,
             pos: new vscode.Position(0, 28),
-            expected: ['index', 'first', 'last', 'iter'],
         },
         {
             name: '@for',
             content: `@for(i = 0; i < 5; i++){{ loop. }}@end`,
             pos: new vscode.Position(0, 31),
-            expected: ['index', 'first', 'last', 'iter'],
         },
     ]
 
-    loopTests.forEach(({ name, content, pos, expected }) => {
+    loopTests.forEach(({ name, content, pos }) => {
         test(`suggests loop properties inside ${name} loop`, async () => {
             const doc = await openTextDocument(content)
             const items = await triggerCompletion(pos, doc.uri)
@@ -29,16 +28,16 @@ suite('Loops Completion', () => {
                 assert.fail('No completions found!')
             }
 
-            assertLength(expected.length, items.length)
+            assertLength(expectedLabels.length, items.length)
 
-            for (const expectedLabel of expected) {
+            for (const expectedLabel of expectedLabels) {
                 assert.ok(
                     items.some(item => item.label === expectedLabel),
                     `Expected completion '${expectedLabel}' not found!`,
                 )
 
                 assert.ok(
-                    items.length === expected.length,
+                    items.length === expectedLabels.length,
                     'Unexpected completions found!',
                 )
             }

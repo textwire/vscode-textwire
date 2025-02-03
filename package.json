@@ -10,11 +10,13 @@
         "vscode": "^1.8.0"
     },
     "categories": [
-        "Programming Languages"
+        "Programming Languages",
+        "Other"
     ],
     "icon": "images/textwire.png",
     "activationEvents": [
-        "onLanguage:textwire"
+        "onLanguage:textwire",
+        "onCommand:textwire.runTest"
     ],
     "repository": {
         "type": "git",
