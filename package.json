@@ -62,6 +62,7 @@
         "login": "vsce login SerhiiCho",
         "deploy": "vsce publish",
         "compile": "tsc -p .",
+        "watch": "tsc -w -p .",
         "test": "npm run compile && FORCE_COLOR=1 node ./out/test/runTests.js"
     },
     "devDependencies": {

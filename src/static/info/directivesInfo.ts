@@ -114,7 +114,7 @@ Components help organize and structure templates by encapsulating reusable parts
 @component('path/to', { prop })
 \`\`\`
 
-Use this directive to include a component in your template.`
+Use this directive to include a component into your template.`
 
 const compSlot = `(directive)
 Components help organize and structure templates by encapsulating reusable parts of your UI.

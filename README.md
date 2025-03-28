@@ -47,4 +47,4 @@ The extension also provides autocompletion for `loop` objects that are available
 Have suggestions or questions? Feel free to open an issue on the [GitHub repository](https://github.com/textwire/vscode-textwire) or reach out to us directly.
 
 ## License
-This project is licensed under the [MIT License](https://github.com/textwire/vscode-textwire/blob/main/LICENSE).
+This project is licensed under the [MIT License](https://github.com/textwire/vscode-textwire/blob/master/LICENSE).
