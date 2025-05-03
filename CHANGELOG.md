@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.6.0] - 2025-05-04
+- Modified the LICENSE file to include my internet nickname
+
 ## [1.5.4] - 2025-02-02
 - Changed the activation events for the extension so that it only activates when you open a `.tw` file. This should improve the performance of the extension
 
