@@ -2,5 +2,8 @@
     "typescript.tsdk": "node_modules/typescript/lib",
     "files.watcherExclude": {
         "**/build/win-unpacked/**": true
-    }
+    },
+    "cSpell.words": [
+        "Textwire"
+    ]
 }
