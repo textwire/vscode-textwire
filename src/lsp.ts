@@ -1,8 +1,9 @@
-import type { Release, ErrorResponse } from './types/github'
+import type { Release } from './types/github'
 import * as vscode from 'vscode'
 import { getExtension } from './modules/extension'
 import { logger } from './modules/logger'
-import axios from 'axios'
+import http from 'http'
+import fs from 'fs'
 
 export async function updateLSP(ctx: vscode.ExtensionContext): Promise<void> {
     const ext = getExtension()
@@ -19,16 +20,49 @@ export async function updateLSP(ctx: vscode.ExtensionContext): Promise<void> {
 }
 
 async function handleUpdate(version: string): Promise<void> {
-    const url = `https://api.github.com/repos/textwire/lsp/releases/tags/v${version}`
-    const resp = await axios.get<Release | ErrorResponse>(url)
+    const arch = getArch()
+    const platform = getPlatformName()
+    const fileName = `lsp_${version}_${platform}_${arch}.tar.gz`
+    const url = `https://github.com/textwire/lsp/releases/download/v${version}/${fileName}`
 
-    if (resp.status !== 200) {
-        logger.error(
-            'Failed to fetch the latest LSP release. Response status:',
-            resp.status,
-        )
-        return
+    const file = fs.createWriteStream(fileName)
+
+    const request = http.get(url, resp => {
+        resp.pipe(file)
+        file.on('finish', file.close)
+    })
+
+    request.on('error', err => {
+        logger.error(`Error downloading LSP: ${err.message}`)
+
+        fs.unlink(fileName, () => {
+            logger.error(`Failed to delete incomplete file: ${fileName}`)
+        })
+    })
+}
+
+function getPlatformName(): string {
+    switch (process.platform) {
+        case 'darwin':
+            return `darwin`
+        case 'linux':
+            return `linux`
+        case 'win32':
+            return `windows`
     }
 
-    const latestRelease = resp.data
+    throw new Error(`Unsupported platform: ${process.platform}`)
+}
+
+function getArch(): string {
+    switch (process.arch) {
+        case 'x64':
+            return 'amd64'
+        case 'ia32':
+            return '386'
+        case 'arm64':
+            return 'arm64'
+    }
+
+    throw new Error(`Unsupported architecture: ${process.arch}`)
 }
