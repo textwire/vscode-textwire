@@ -32,39 +32,57 @@ async function handleUpdate(
     const fileName = `lsp_${version}_${platform}_${arch}.tar.gz`
     const url = `https://github.com/textwire/lsp/releases/download/v${version}/${fileName}`
 
+    const dest = ctx.globalStoragePath
+    const archivePath = path.join(dest, fileName)
+
+    // Create the directory if it doesn't exist
+    fs.existsSync(dest)
+        ? fs.chmodSync(dest, 0o755)
+        : fs.mkdirSync(dest, { recursive: true, mode: 0o755 })
+
+    try {
+        await downloadArchive(url, archivePath)
+        await extractArchiveTo(dest, archivePath)
+    } catch (err) {
+        logger.error('Failed to download LSP:', err)
+    }
+
+    fs.unlink(archivePath, failedDeleteFileError)
+}
+
+function failedDeleteFileError(): void {
+    logger.error(`Failed to delete incomplete file`)
+}
+
+async function downloadArchive(url: string, filePath: string): Promise<void> {
+    const writer = fs.createWriteStream(filePath)
     const resp = await axios.get(url, { responseType: 'stream' })
 
     if (resp.status !== 200) {
         throw new Error(`Failed to download LSP: ${resp.statusText}`)
     }
 
-    const dest = ctx.globalStoragePath
+    return new Promise((resolve, reject) => {
+        resp.data.pipe(writer)
 
-    // Create the directory if it doesn't exist
-    if (!fs.existsSync(dest)) {
-        fs.mkdirSync(dest, { recursive: true, mode: 0o755 })
-    } else {
-        fs.chmodSync(dest, 0o755)
-    }
+        let error: Error | null = null
 
-    const filePath = path.join(dest, fileName)
-    const file = fs.createWriteStream(filePath)
-    resp.data.pipe(file)
+        writer.on('error', err => {
+            error = err
+            writer.close()
+            reject(err)
+        })
 
-    // TODO: wrap this in a promise 😢
-
-    file.on('finish', () => {
-        file.close()
-    })
-
-    file.on('error', err => {
-        logger.error(`File stream error: ${err.message}`)
-        fs.unlink(fileName, () => {
-            logger.error(`Failed to delete incomplete file: ${fileName}`)
+        writer.on('close', () => {
+            if (!error) {
+                resolve()
+            }
         })
     })
+}
 
-    // todo: delete archive after extracting
+async function extractArchiveTo(dest: string, archivePath: string): Promise<void> {
+    // TODO: implement
 }
 
 function getPlatformName(): string {
