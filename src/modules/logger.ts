@@ -6,7 +6,7 @@ export const logger = {
         console.warn('[Textwire] WARN:', ...messages)
     },
     info: (...messages: any[]) => {
-        console.info('[Textwire] INFO:', ...messages)
+        console.log('[Textwire] INFO:', ...messages)
     },
     debug: (...messages: any[]) => {
         console.debug('[Textwire] DEBUG:', ...messages)
