@@ -6,47 +6,39 @@ import { Cursor } from '../modules/Cursor'
 
 const DIR_START_REG = /(?<!\\)@(\w*)$/
 
-const triggerChars = ['@']
+export function directivesCompletions(
+    doc: vscode.TextDocument,
+    pos: vscode.Position,
+): vscode.CompletionItem[] {
+    const range = new vscode.Range(pos.with(pos.line, 0), pos)
+    const textBefore = doc.getText(range)
 
-export default vscode.languages.registerCompletionItemProvider(
-    { language: 'textwire' },
-    {
-        provideCompletionItems(
-            doc: vscode.TextDocument,
-            pos: vscode.Position,
-        ): vscode.CompletionItem[] {
-            const range = new vscode.Range(pos.with(pos.line, 0), pos)
-            const textBefore = doc.getText(range)
+    const match = DIR_START_REG.exec(textBefore)
+    const cursor = new Cursor(pos, doc)
 
-            const match = DIR_START_REG.exec(textBefore)
-            const cursor = new Cursor(pos, doc)
+    if (!match || cursor.isInsideBraces()) {
+        return []
+    }
 
-            if (!match || cursor.isInsideBraces()) {
-                return []
-            }
+    const partialDir = match[1]
+    const field = vscode.CompletionItemKind.Snippet
 
-            const partialDir = match[1]
-            const field = vscode.CompletionItemKind.Snippet
+    const dirs = otherDirectories(field)
 
-            const dirs = otherDirectories(field)
+    if (cursor.isInsideLoop()) {
+        dirs.push(...loopDirectories(field))
+    }
 
-            if (cursor.isInsideLoop()) {
-                dirs.push(...loopDirectories(field))
-            }
+    if (cursor.isInsideComponent()) {
+        dirs.push(...compDirectories(field))
+    }
 
-            if (cursor.isInsideComponent()) {
-                dirs.push(...compDirectories(field))
-            }
-
-            return dirs.filter(d => {
-                // remove the @ from the label
-                const label = d.label.slice(1)
-                return label.startsWith(partialDir)
-            })
-        },
-    },
-    ...triggerChars,
-)
+    return dirs.filter(d => {
+        // remove the @ from the label
+        const label = d.label.slice(1)
+        return label.startsWith(partialDir)
+    })
+}
 
 function loopDirectories(
     field: vscode.CompletionItemKind.Snippet,
