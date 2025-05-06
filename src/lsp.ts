@@ -28,7 +28,7 @@ export async function updateLSP(ctx: vscode.ExtensionContext): Promise<void> {
 
 // Returns the path to the LSP binary executable file
 export function getLSPBinPath(ctx: vscode.ExtensionContext): string {
-    return path.join(ctx.globalStoragePath, 'serhiicho.textwire', 'lsp')
+    return path.join(ctx.globalStoragePath, 'lsp')
 }
 
 async function handleUpdate(
