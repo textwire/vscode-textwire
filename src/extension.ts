@@ -8,4 +8,4 @@ export function activate(ctx: vscode.ExtensionContext) {
     ctx.subscriptions.push(loopObjCompletion, directiveCompletion)
 }
 
-export function deactivate() { }
+export function deactivate() {}

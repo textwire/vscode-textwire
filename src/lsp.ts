@@ -1,4 +1,5 @@
 import * as vscode from 'vscode'
+import * as tar from 'tar'
 import { getExtension } from './modules/extension'
 import { logger } from './modules/logger'
 import axios from 'axios'
@@ -10,14 +11,16 @@ export async function updateLSP(ctx: vscode.ExtensionContext): Promise<void> {
     const version = ext.packageJSON.lspVersion
     const currentVersion = ctx.globalState.get<string>('lspVersion')
 
-    // TODO: temporarily commented
-    // if (version === currentVersion) {
-    //     return
-    // }
+    if (version === currentVersion) {
+        logger.info('LSP is already up to date:', version)
+        return
+    }
 
     try {
+        logger.info('Updating LSP to version:', version)
         await handleUpdate(ctx, version)
         await ctx.globalState.update('lspVersion', version)
+        logger.info('LSP updated successfully to version:', version)
     } catch (err) {
         logger.error(err)
     }
@@ -42,19 +45,20 @@ async function handleUpdate(
 
     try {
         await downloadArchive(url, archivePath)
-        await extractArchiveTo(dest, archivePath)
+        await extractArchiveTo(archivePath, dest)
     } catch (err) {
         logger.error('Failed to download LSP:', err)
     }
 
-    fs.unlink(archivePath, failedDeleteFileError)
-}
-
-function failedDeleteFileError(): void {
-    logger.error(`Failed to delete incomplete file`)
+    // Clean up the archive file
+    if (fs.existsSync(archivePath)) {
+        logger.info('Remove the archive file:', archivePath)
+        fs.unlinkSync(archivePath)
+    }
 }
 
 async function downloadArchive(url: string, filePath: string): Promise<void> {
+    logger.info('Downloading LSP from:', url)
     const writer = fs.createWriteStream(filePath)
     const resp = await axios.get(url, { responseType: 'stream' })
 
@@ -81,8 +85,14 @@ async function downloadArchive(url: string, filePath: string): Promise<void> {
     })
 }
 
-async function extractArchiveTo(dest: string, archivePath: string): Promise<void> {
-    // TODO: implement
+async function extractArchiveTo(archivePath: string, extractDir: string): Promise<void> {
+    logger.info('Extracting LSP to:', extractDir)
+
+    await tar.x({
+        file: archivePath,
+        cwd: extractDir,
+        preserveOwner: false,
+    })
 }
 
 function getPlatformName(): string {
