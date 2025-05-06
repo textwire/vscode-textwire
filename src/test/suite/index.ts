@@ -1,5 +1,4 @@
 import * as path from 'path'
-import * as vscode from 'vscode'
 import Mocha from 'mocha'
 import { glob } from 'glob'
 import { getExtension } from '../../modules/extension'
