@@ -5,6 +5,7 @@ import { logger } from './modules/logger'
 import axios from 'axios'
 import fs from 'fs'
 import path from 'path'
+import { LanguageClient, ServerOptions, TransportKind } from 'vscode-languageclient/node'
 
 export async function updateLSP(ctx: vscode.ExtensionContext): Promise<void> {
     const ext = getExtension()
@@ -26,9 +27,27 @@ export async function updateLSP(ctx: vscode.ExtensionContext): Promise<void> {
     }
 }
 
-// Returns the path to the LSP binary executable file
-export function getLSPBinPath(ctx: vscode.ExtensionContext): string {
-    return path.join(ctx.globalStoragePath, 'lsp')
+export async function startLSP(ctx: vscode.ExtensionContext): Promise<LanguageClient> {
+    const serverOptions: ServerOptions = {
+        command: path.join(ctx.globalStoragePath, 'lsp'),
+        transport: TransportKind.stdio,
+    }
+
+    const clientOptions = {
+        documentSelector: [{ scheme: 'file', language: 'textwire' }],
+        synchronize: {},
+    }
+
+    const client = new LanguageClient(
+        'textwire',
+        'Textwire Language Server',
+        serverOptions,
+        clientOptions,
+    )
+
+    await client.start()
+
+    return client
 }
 
 async function handleUpdate(
