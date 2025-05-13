@@ -2,10 +2,11 @@ import * as vscode from 'vscode'
 import * as tar from 'tar'
 import { getExtension } from './modules/extension'
 import { logger } from './modules/logger'
+import { execFile } from 'child_process'
+import { LanguageClient, ServerOptions, TransportKind } from 'vscode-languageclient/node'
 import axios from 'axios'
 import fs from 'fs'
 import path from 'path'
-import { LanguageClient, ServerOptions, TransportKind } from 'vscode-languageclient/node'
 
 export async function updateLSP(ctx: vscode.ExtensionContext): Promise<void> {
     const ext = getExtension()
@@ -57,9 +58,9 @@ async function handleUpdate(
     const arch = getArch()
     const platform = getPlatformName()
     const fileName = `lsp_${version}_${platform}_${arch}.tar.gz`
+    const dest = ctx.globalStoragePath
     const url = `https://github.com/textwire/lsp/releases/download/v${version}/${fileName}`
 
-    const dest = ctx.globalStoragePath
     const archivePath = path.join(dest, fileName)
 
     // Create the directory if it doesn't exist
@@ -70,15 +71,29 @@ async function handleUpdate(
     try {
         await downloadArchive(url, archivePath)
         await extractArchiveTo(archivePath, dest)
+        await makeBinExecutable(path.join(dest, 'lsp'))
     } catch (err) {
-        logger.error('Failed to download LSP:', err)
+        logger.error('Failed to install LSP:', err)
     }
 
-    // Clean up the archive file
-    if (fs.existsSync(archivePath)) {
-        logger.info('Remove the archive file:', archivePath)
-        fs.unlinkSync(archivePath)
+    cleanupUnusedFiles(dest, archivePath)
+}
+
+function cleanupUnusedFiles(dest: string, archivePath: string): void {
+    const files = [
+        archivePath,
+        path.join(dest, 'README.md'),
+        path.join(dest, 'LICENSE'),
+        path.join(dest, 'CHANGELOG.md'),
+    ]
+
+    for (const file of files) {
+        if (fs.existsSync(file)) {
+            fs.unlinkSync(file)
+        }
     }
+
+    logger.info('Unused files have been removed from', dest)
 }
 
 async function downloadArchive(url: string, filePath: string): Promise<void> {
@@ -116,6 +131,32 @@ async function extractArchiveTo(archivePath: string, extractDir: string): Promis
         file: archivePath,
         cwd: extractDir,
         preserveOwner: false,
+    })
+}
+
+async function makeBinExecutable(binPath: string): Promise<void> {
+    if (process.platform !== 'darwin') {
+        return
+    }
+
+    return new Promise((resolve, reject) => {
+        const child = execFile(
+            'xattr',
+            ['-rd', 'com.apple.quarantine', binPath],
+            (err, _, stderr) => {
+                if (err) {
+                    const msg = `Failed to remove Apple quarantine for LSP binary "${binPath}": ${
+                        stderr || err.message
+                    }`
+                    return reject(new Error(msg))
+                }
+
+                logger.info(`Apple quarantine for LSP binary removed successfully`)
+                resolve()
+            },
+        )
+
+        child.stderr?.on('data', data => logger.error(`stderr: ${data}`))
     })
 }
 
