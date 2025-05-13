@@ -4,6 +4,7 @@
         "**/build/win-unpacked/**": true
     },
     "cSpell.words": [
-        "Textwire"
+        "Textwire",
+        "xattr"
     ]
 }
