@@ -18,8 +18,7 @@ if (lspVersion === latestLspVersion) {
     process.exit(0)
 }
 
-packageJson.lspVersion = latestLspVersion
+console.log(`⚠️ New LSP version ${latestLspVersion} available!`)
+console.log('Run npm run lsp-latest to update to the latest version!')
 
-fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 4))
-
-console.log(`✅ LSP version is updated from ${lspVersion} to ${latestLspVersion}`)
+process.exit(1)

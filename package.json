@@ -67,10 +67,11 @@
     },
     "scripts": {
         "login": "vsce login SerhiiCho",
-        "deploy": "vsce publish",
+        "deploy": "npm run lsp-check && vsce publish",
         "compile": "tsc -p .",
         "watch": "tsc -w -p .",
         "lsp-latest": "node ./cmd/lsp-latest.js",
+        "lsp-check": "node ./cmd/lsp-check.js",
         "test": "npm run compile && FORCE_COLOR=1 node ./out/test/runTests.js"
     },
     "devDependencies": {
