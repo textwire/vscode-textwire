@@ -3,7 +3,7 @@ import * as path from 'path'
 import * as process from 'process'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 import { fileURLToPath } from 'url'
-import { fetchLatestLspRelease } from './modules/fetchLatestLspRelease.js'
+import { fetchLatestLspRelease } from './modules/fetchLatestLspRelease.mjs'
 
 const packageJsonPath = path.resolve(__dirname, '../package.json')
 const raw = fs.readFileSync(packageJsonPath, 'utf8')
@@ -18,7 +18,8 @@ if (lspVersion === latestLspVersion) {
     process.exit(0)
 }
 
-console.log(`⚠️ New LSP version ${latestLspVersion} available!`)
-console.log('Run npm run lsp-latest to update to the latest version!')
+packageJson.lspVersion = latestLspVersion
 
-process.exit(1)
+fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 4))
+
+console.log(`✅ LSP version is updated from ${lspVersion} to ${latestLspVersion}`)
