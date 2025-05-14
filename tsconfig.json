@@ -1,7 +1,8 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "target": "es2016",
+        "target": "es2020",
+        "moduleResolution": "node",
         "rootDir": "./src",
         "outDir": "out",
         "strict": true,
