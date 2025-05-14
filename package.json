@@ -1,5 +1,6 @@
 {
     "name": "textwire",
+    "type": "module",
     "displayName": "Textwire",
     "main": "./out/extension.js",
     "description": "Textwire templating language support for VSCode",
@@ -56,6 +57,12 @@
                 "path": "./syntaxes/textwire.tmLanguage.json",
                 "scopeName": "text.html.basic.tw"
             }
+        ],
+        "commands": [
+            {
+                "command": "textwire.checkForLSPUpdate",
+                "title": "Check for LSP Update"
+            }
         ]
     },
     "scripts": {
@@ -63,6 +70,7 @@
         "deploy": "vsce publish",
         "compile": "tsc -p .",
         "watch": "tsc -w -p .",
+        "lsp-latest": "node ./cmd/lsp-latest.js",
         "test": "npm run compile && FORCE_COLOR=1 node ./out/test/runTests.js"
     },
     "devDependencies": {
