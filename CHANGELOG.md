@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.6.0] - 2025-05-14
+## [1.6.0] - 2025-05-15
 - Modified the LICENSE file to include my internet nickname
 - Added automatic LSP server installation. The new LSP will ship with each new extension version
 
