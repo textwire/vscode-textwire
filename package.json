@@ -1,6 +1,6 @@
 {
     "lspVersion": "0.1.1",
-    "version": "1.5.4",
+    "version": "1.6.0",
     "name": "textwire",
     "displayName": "Textwire",
     "main": "./out/extension.js",
@@ -59,8 +59,8 @@
         ],
         "commands": [
             {
-                "command": "textwire.checkForLSPUpdate",
-                "title": "Check for LSP Update"
+                "command": "textwire.updateLSPToLatest",
+                "title": "Textwire: Update LSP to the latest version"
             }
         ]
     },
@@ -84,6 +84,7 @@
     },
     "dependencies": {
         "axios": "^1.9.0",
+        "compare-versions": "^6.1.1",
         "tar": "^7.4.3",
         "vscode-languageclient": "^9.0.1"
     }
