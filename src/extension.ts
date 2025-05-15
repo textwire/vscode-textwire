@@ -1,6 +1,5 @@
 import { ExtensionContext } from 'vscode'
 import { startLSP, updateLSP } from './lsp'
-import { registerCompletionProvider } from './completions'
 import { updateLSPToLatest } from './commands/updateLSPToLatest'
 import { getExtension } from './modules/extension'
 import { LanguageClient } from 'vscode-languageclient/node'
@@ -12,7 +11,6 @@ export async function activate(ctx: ExtensionContext) {
 
     client = await startLSP(ctx)
 
-    registerCompletionProvider(ctx)
     updateLSPToLatest(ctx)
 }
 

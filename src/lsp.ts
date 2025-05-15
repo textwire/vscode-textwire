@@ -44,7 +44,6 @@ export async function startLSP(ctx: ExtensionContext): Promise<LanguageClient> {
 
     const clientOptions = {
         documentSelector: [{ scheme: 'file', language: 'textwire' }],
-        synchronize: {},
     }
 
     const client = new LanguageClient(

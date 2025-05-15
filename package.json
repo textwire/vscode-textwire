@@ -35,10 +35,7 @@
         "languages": [
             {
                 "id": "textwire",
-                "aliases": [
-                    "Textwire",
-                    "textwire"
-                ],
+                "aliases": ["Textwire"],
                 "extensions": [
                     ".tw.html",
                     ".tw"
