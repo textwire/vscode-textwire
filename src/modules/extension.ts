@@ -1,7 +1,7 @@
-import * as vscode from 'vscode'
+import { Extension, extensions } from 'vscode'
 
-export function getExtension(): vscode.Extension<any> {
-    const ext = vscode.extensions.getExtension('SerhiiCho.textwire')
+export function getExtension(): Extension<any> {
+    const ext = extensions.getExtension('SerhiiCho.textwire')
 
     if (!ext) {
         throw new Error('Textwire extension not found')

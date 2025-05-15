@@ -1,5 +1,5 @@
 import type { ToastProgress } from './types'
-import * as vscode from 'vscode'
+import { ExtensionContext } from 'vscode'
 import * as tar from 'tar'
 import { logger } from './modules/logger'
 import { execFile } from 'child_process'
@@ -11,7 +11,7 @@ import fs from 'fs'
 import path from 'path'
 
 export async function updateLSP(
-    ctx: vscode.ExtensionContext,
+    ctx: ExtensionContext,
     latestVersion: string,
 ): Promise<'up-to-date' | null> {
     const cachedVersion = ctx.globalState.get<string>('lspVersion') || '0.0.0'
@@ -36,7 +36,7 @@ export async function updateLSP(
     return null
 }
 
-export async function startLSP(ctx: vscode.ExtensionContext): Promise<LanguageClient> {
+export async function startLSP(ctx: ExtensionContext): Promise<LanguageClient> {
     const serverOptions: ServerOptions = {
         command: path.join(ctx.globalStoragePath, 'lsp'),
         transport: TransportKind.stdio,
@@ -56,11 +56,13 @@ export async function startLSP(ctx: vscode.ExtensionContext): Promise<LanguageCl
 
     await client.start()
 
+    ctx.subscriptions.push(client)
+
     return client
 }
 
 async function handleLSPUpdate(
-    ctx: vscode.ExtensionContext,
+    ctx: ExtensionContext,
     version: string,
     progress: ToastProgress,
 ): Promise<void> {

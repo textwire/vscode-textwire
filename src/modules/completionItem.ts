@@ -1,17 +1,17 @@
-import * as vscode from 'vscode'
+import { CompletionItemKind, CompletionItem, SnippetString, MarkdownString } from 'vscode'
 
 export function completionItem(
     label: string,
     documentation: string,
-    kind: vscode.CompletionItemKind,
+    kind: CompletionItemKind,
     insert?: string,
-): vscode.CompletionItem {
-    const item = new vscode.CompletionItem(label, kind)
+): CompletionItem {
+    const item = new CompletionItem(label, kind)
 
     // Use SnippetString to support newlines
-    item.insertText = new vscode.SnippetString(insert || label)
+    item.insertText = new SnippetString(insert || label)
 
-    item.documentation = new vscode.MarkdownString(documentation.replace(/\n/g, '  \n'))
+    item.documentation = new MarkdownString(documentation.replace(/\n/g, '  \n'))
 
     if (label.startsWith('@')) {
         item.filterText = label.slice(1)

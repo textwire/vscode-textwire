@@ -1,19 +1,24 @@
-import * as vscode from 'vscode'
+import { commands, window, ExtensionContext } from 'vscode'
 import axios from 'axios'
 import { updateLSP } from '../lsp'
 import { showToast } from '../modules/toast'
 
-export function updateLSPToLatest(ctx: vscode.ExtensionContext): vscode.Disposable {
-    return vscode.commands.registerCommand('textwire.updateLSPToLatest', async () => {
-        try {
-            await processUpdate(ctx)
-        } catch (err) {
-            vscode.window.showErrorMessage(`Failed to check for LSP update: ${err}`)
-        }
-    })
+export function updateLSPToLatest(ctx: ExtensionContext): void {
+    const disposable = commands.registerCommand(
+        'textwire.updateLSPToLatest',
+        async () => {
+            try {
+                await processUpdate(ctx)
+            } catch (err) {
+                window.showErrorMessage(`Failed to check for LSP update: ${err}`)
+            }
+        },
+    )
+
+    ctx.subscriptions.push(disposable)
 }
 
-async function processUpdate(ctx: vscode.ExtensionContext): Promise<void> {
+async function processUpdate(ctx: ExtensionContext): Promise<void> {
     const release = await fetchLatestLspRelease()
     const latestVersion = release.tag_name.replace('v', '')
     const result = await updateLSP(ctx, latestVersion)

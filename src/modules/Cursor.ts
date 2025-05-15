@@ -1,10 +1,10 @@
-import * as vscode from 'vscode'
+import { Position, TextDocument, Range } from 'vscode'
 
 export class Cursor {
-    public constructor(private pos: vscode.Position, private doc: vscode.TextDocument) {}
+    public constructor(private pos: Position, private doc: TextDocument) {}
 
     public prevChar(): string {
-        return this.doc.getText(new vscode.Range(this.pos.translate(0, -1), this.pos))
+        return this.doc.getText(new Range(this.pos.translate(0, -1), this.pos))
     }
 
     public prevCharIs(char: string): boolean {
@@ -54,6 +54,6 @@ export class Cursor {
     }
 
     private textBefore(): string {
-        return this.doc.getText(new vscode.Range(new vscode.Position(0, 0), this.pos))
+        return this.doc.getText(new Range(new Position(0, 0), this.pos))
     }
 }

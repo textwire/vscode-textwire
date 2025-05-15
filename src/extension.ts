@@ -1,18 +1,25 @@
-import * as vscode from 'vscode'
+import { ExtensionContext } from 'vscode'
 import { startLSP, updateLSP } from './lsp'
 import { registerCompletionProvider } from './completions'
 import { updateLSPToLatest } from './commands/updateLSPToLatest'
 import { getExtension } from './modules/extension'
+import { LanguageClient } from 'vscode-languageclient/node'
 
-export async function activate(ctx: vscode.ExtensionContext) {
-    const ext = getExtension()
-    await updateLSP(ctx, ext.packageJSON.lspVersion)
+let client: LanguageClient
 
-    ctx.subscriptions.push(
-        await startLSP(ctx),
-        registerCompletionProvider(),
-        updateLSPToLatest(ctx),
-    )
+export async function activate(ctx: ExtensionContext) {
+    await updateLSP(ctx, getExtension().packageJSON.lspVersion)
+
+    client = await startLSP(ctx)
+
+    registerCompletionProvider(ctx)
+    updateLSPToLatest(ctx)
 }
 
-export function deactivate() {}
+export function deactivate(): Thenable<void> | undefined {
+    if (!client) {
+        return undefined
+    }
+
+    return client.stop()
+}

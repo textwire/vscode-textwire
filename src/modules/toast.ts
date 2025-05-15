@@ -1,17 +1,17 @@
-import * as vscode from 'vscode'
+import { window, ProgressLocation } from 'vscode'
 import type { ToastProgress } from '../types'
 
 export function showToast(msg: string): void {
-    vscode.window.showInformationMessage('Textwire. ' + msg)
+    window.showInformationMessage('Textwire. ' + msg)
 }
 
 export function showProgressToast(
     title: string,
     task: (progress: ToastProgress) => Thenable<void>,
 ) {
-    return vscode.window.withProgress(
+    return window.withProgress(
         {
-            location: vscode.ProgressLocation.Notification,
+            location: ProgressLocation.Notification,
             title,
             cancellable: false,
         },
