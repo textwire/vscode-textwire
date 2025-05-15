@@ -1,28 +1,34 @@
+import type { ToastProgress } from './types'
 import * as vscode from 'vscode'
 import * as tar from 'tar'
-import { getExtension } from './modules/extension'
 import { logger } from './modules/logger'
 import { execFile } from 'child_process'
 import { LanguageClient, ServerOptions, TransportKind } from 'vscode-languageclient/node'
+import { compare } from 'compare-versions'
+import { showToast, showProgressToast } from './modules/toast'
 import axios from 'axios'
 import fs from 'fs'
 import path from 'path'
 
-export async function updateLSP(ctx: vscode.ExtensionContext): Promise<void> {
-    const ext = getExtension()
-    const version = ext.packageJSON.lspVersion
-    const currentVersion = ctx.globalState.get<string>('lspVersion')
+export async function updateLSP(
+    ctx: vscode.ExtensionContext,
+    latestVersion: string,
+): Promise<void> {
+    const cachedVersion = ctx.globalState.get<string>('lspVersion') || '0.0.0'
 
-    if (version === currentVersion) {
-        logger.info('LSP is already up to date:', version)
+    logger.debug('Latest version: ', latestVersion)
+
+    if (compare(latestVersion, cachedVersion, '<=')) {
+        logger.info('LSP is already up to date:', latestVersion)
         return
     }
 
     try {
-        logger.info('Updating LSP to version:', version)
-        await handleUpdate(ctx, version)
-        await ctx.globalState.update('lspVersion', version)
-        logger.info('LSP updated successfully to version:', version)
+        showProgressToast(`Updating LSP to ${latestVersion}...`, async progress => {
+            await handleLSPUpdate(ctx, latestVersion, progress)
+            await ctx.globalState.update('lspVersion', latestVersion)
+            showToast(`LSP updated to version ${latestVersion}`)
+        })
     } catch (err) {
         logger.error(err)
     }
@@ -51,9 +57,10 @@ export async function startLSP(ctx: vscode.ExtensionContext): Promise<LanguageCl
     return client
 }
 
-async function handleUpdate(
+async function handleLSPUpdate(
     ctx: vscode.ExtensionContext,
     version: string,
+    progress: ToastProgress,
 ): Promise<void> {
     const arch = getArch()
     const platform = getPlatformName()
@@ -69,13 +76,20 @@ async function handleUpdate(
         : fs.mkdirSync(dest, { recursive: true, mode: 0o755 })
 
     try {
+        progress.report({ increment: 70, message: 'Downloading LSP binary...' })
         await downloadArchive(url, archivePath)
+
+        progress.report({ increment: 10, message: 'Extracting archive...' })
         await extractArchiveTo(archivePath, dest)
+
+        progress.report({ increment: 10, message: 'Making binary executable...' })
         await makeBinExecutable(path.join(dest, 'lsp'))
     } catch (err) {
+        progress.report({ increment: 90 })
         logger.error('Failed to install LSP:', err)
     }
 
+    progress.report({ increment: 10, message: 'Removing unused files...' })
     cleanupUnusedFiles(dest, archivePath)
 }
 
