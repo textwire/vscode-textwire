@@ -1,6 +1,7 @@
 import * as vscode from 'vscode'
 import axios from 'axios'
 import { updateLSP } from '../lsp'
+import { showToast } from '../modules/toast'
 
 export function updateLSPToLatest(ctx: vscode.ExtensionContext): vscode.Disposable {
     return vscode.commands.registerCommand('textwire.updateLSPToLatest', async () => {
@@ -15,7 +16,11 @@ export function updateLSPToLatest(ctx: vscode.ExtensionContext): vscode.Disposab
 async function processUpdate(ctx: vscode.ExtensionContext): Promise<void> {
     const release = await fetchLatestLspRelease()
     const latestVersion = release.tag_name.replace('v', '')
-    await updateLSP(ctx, latestVersion)
+    const result = await updateLSP(ctx, latestVersion)
+
+    if (result === 'up-to-date') {
+        showToast(`LSP is already up to date version ${latestVersion}`)
+    }
 }
 
 async function fetchLatestLspRelease() {

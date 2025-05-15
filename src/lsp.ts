@@ -13,14 +13,14 @@ import path from 'path'
 export async function updateLSP(
     ctx: vscode.ExtensionContext,
     latestVersion: string,
-): Promise<void> {
+): Promise<'up-to-date' | null> {
     const cachedVersion = ctx.globalState.get<string>('lspVersion') || '0.0.0'
 
     logger.debug('Latest version: ', latestVersion)
 
     if (compare(latestVersion, cachedVersion, '<=')) {
         logger.info('LSP is already up to date:', latestVersion)
-        return
+        return 'up-to-date'
     }
 
     try {
@@ -32,6 +32,8 @@ export async function updateLSP(
     } catch (err) {
         logger.error(err)
     }
+
+    return null
 }
 
 export async function startLSP(ctx: vscode.ExtensionContext): Promise<LanguageClient> {
