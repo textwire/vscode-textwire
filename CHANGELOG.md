@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.6.1] - 2025-05-16
+- Fixed wrong autocompletion when typing . character by updating LSP to the latest version
+
 ## [1.6.0] - 2025-05-16
 - Modified the LICENSE file to include my internet nickname
 - Added automatic LSP server installation. The new LSP will ship with each new extension version
