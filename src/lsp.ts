@@ -16,8 +16,6 @@ export async function updateLSP(
 ): Promise<'up-to-date' | null> {
     const cachedVersion = ctx.globalState.get<string>('lspVersion') || '0.0.0'
 
-    logger.debug('Latest version: ', latestVersion)
-
     if (compare(latestVersion, cachedVersion, '<=')) {
         logger.info('LSP is already up to date:', latestVersion)
         return 'up-to-date'
