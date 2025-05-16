@@ -1,7 +1,7 @@
 import { commands, window, ExtensionContext } from 'vscode'
 import axios from 'axios'
 import { updateLSP } from '../lsp'
-import { showToast } from '../modules/toast'
+import { toast } from '../modules/toast'
 
 export function updateLSPToLatest(ctx: ExtensionContext): void {
     const disposable = commands.registerCommand(
@@ -24,7 +24,7 @@ async function processUpdate(ctx: ExtensionContext): Promise<void> {
     const result = await updateLSP(ctx, latestVersion)
 
     if (result === 'up-to-date') {
-        showToast(`LSP is already up to date version ${latestVersion}`)
+        toast.info(`LSP is already up to date version ${latestVersion}`)
     }
 }
 

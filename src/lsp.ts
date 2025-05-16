@@ -5,7 +5,7 @@ import { logger } from './modules/logger'
 import { execFile } from 'child_process'
 import { LanguageClient, ServerOptions, TransportKind } from 'vscode-languageclient/node'
 import { compare } from 'compare-versions'
-import { showToast, showProgressToast } from './modules/toast'
+import { toast } from './modules/toast'
 import axios from 'axios'
 import fs from 'fs'
 import path from 'path'
@@ -24,10 +24,8 @@ export async function updateLSP(
     }
 
     try {
-        showProgressToast(`Updating LSP to ${latestVersion}...`, async progress => {
+        toast.progress(`Updating LSP to ${latestVersion}...`, async progress => {
             await handleLSPUpdate(ctx, latestVersion, progress)
-            await ctx.globalState.update('lspVersion', latestVersion)
-            showToast(`LSP updated to version ${latestVersion}`)
         })
     } catch (err) {
         logger.error(err)
@@ -87,9 +85,14 @@ async function handleLSPUpdate(
 
         progress.report({ increment: 10, message: 'Making binary executable...' })
         await makeBinExecutable(path.join(dest, 'lsp'))
+
+        ctx.globalState.update('lspVersion', version)
+
+        toast.info(`LSP updated to version ${version}`)
     } catch (err) {
         progress.report({ increment: 90 })
-        logger.error('Failed to install LSP:', err)
+        logger.error(`[Textwire]: ${err}`)
+        toast.error(`Sorry... Something went wrong`)
     }
 
     progress.report({ increment: 10, message: 'Removing unused files...' })
