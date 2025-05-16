@@ -3,7 +3,7 @@ import axios from 'axios'
 import { updateLSP } from '../lsp'
 import { toast } from '../modules/toast'
 
-export function updateLSPToLatest(ctx: ExtensionContext): void {
+export function updateLspToLatest(ctx: ExtensionContext): void {
     const disposable = commands.registerCommand(
         'textwire.updateLSPToLatest',
         async () => {

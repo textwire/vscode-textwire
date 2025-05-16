@@ -32,7 +32,7 @@ export async function updateLSP(
     return null
 }
 
-export async function startLSP(ctx: ExtensionContext): Promise<LanguageClient> {
+export async function startLsp(ctx: ExtensionContext): Promise<LanguageClient> {
     const serverOptions: ServerOptions = {
         command: path.join(ctx.globalStoragePath, 'lsp'),
         transport: TransportKind.stdio,
