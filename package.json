@@ -66,7 +66,6 @@
         "deploy": "npm run lsp-check && vsce publish",
         "compile": "tsc -p .",
         "watch": "tsc -w -p .",
-        "lsp-latest": "node ./cmd/lsp-latest.mjs",
         "lsp-check": "node ./cmd/lsp-check.mjs",
         "test": "npm run compile && FORCE_COLOR=1 node ./out/test/runTests.js"
     },
