@@ -75,10 +75,10 @@ async function handleLSPUpdate(
         : fs.mkdirSync(dest, { recursive: true, mode: 0o755 })
 
     try {
-        progress.report({ increment: 70, message: 'Downloading LSP binary...' })
+        progress.report({ increment: 60, message: 'Downloading LSP binary...' })
         await downloadArchive(url, archivePath)
 
-        progress.report({ increment: 10, message: 'Extracting archive...' })
+        progress.report({ increment: 20, message: 'Extracting archive...' })
         await extractArchiveTo(archivePath, dest)
 
         progress.report({ increment: 10, message: 'Making binary executable...' })
@@ -89,8 +89,8 @@ async function handleLSPUpdate(
         toast.info(`LSP updated to version ${version}`)
     } catch (err) {
         progress.report({ increment: 90 })
-        logger.error(`[Textwire]: ${err}`)
-        toast.error(`Sorry... Something went wrong`)
+        logger.error(err)
+        toast.error(`ERROR! ${err}`)
     }
 
     progress.report({ increment: 10, message: 'Removing unused files...' })
@@ -116,8 +116,13 @@ function cleanupUnusedFiles(dest: string, archivePath: string): void {
 
 async function downloadArchive(url: string, filePath: string): Promise<void> {
     logger.info('Downloading LSP from:', url)
+
     const writer = fs.createWriteStream(filePath)
     const resp = await axios.get(url, { responseType: 'stream' })
+
+    if (resp.status === 404) {
+        throw new Error('unknown LSP version')
+    }
 
     if (resp.status !== 200) {
         throw new Error(`Failed to download LSP: ${resp.statusText}`)
