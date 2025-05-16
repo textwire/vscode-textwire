@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.6.0] - 2025-05-15
+## [1.6.0] - 2025-05-16
 - Modified the LICENSE file to include my internet nickname
 - Added automatic LSP server installation. The new LSP will ship with each new extension version
 - Added command `Textwire: Update LSP to the latest version` which you can run to update LSP binary to the latest version
