@@ -3,7 +3,7 @@
     "version": "1.6.0",
     "name": "textwire",
     "displayName": "Textwire",
-    "main": "./out/extension.js",
+    "main": "./dist/extension.js",
     "description": "Textwire templating language support for VSCode",
     "homepage": "https://github.com/textwire/vscode-textwire/blob/main/README.md",
     "pricing": "Free",
@@ -63,7 +63,7 @@
     },
     "scripts": {
         "login": "vsce login SerhiiCho",
-        "deploy": "npm run lsp-check && vsce publish",
+        "deploy": "npm run lsp-check && npm run compile && vsce publish",
         "compile": "tsc -p .",
         "watch": "tsc -w -p .",
         "lsp-check": "node ./cmd/lsp-check.mjs",
