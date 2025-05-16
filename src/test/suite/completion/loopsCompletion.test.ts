@@ -1,5 +1,5 @@
 import * as assert from 'assert'
-import * as vscode from 'vscode'
+import { Position } from 'vscode'
 import { triggerCompletion } from '../utils/triggerCompletion'
 import { openTextDocument } from '../utils/openTextDocument'
 import { assertLength } from '../utils/assert/assertLength'
@@ -10,12 +10,12 @@ suite('Loops Completion', () => {
         {
             name: '@each',
             content: `@each(item in items){{ loop. }}@end`,
-            pos: new vscode.Position(0, 28),
+            pos: new Position(0, 28),
         },
         {
             name: '@for',
             content: `@for(i = 0; i < 5; i++){{ loop. }}@end`,
-            pos: new vscode.Position(0, 31),
+            pos: new Position(0, 31),
         },
     ]
 
@@ -48,12 +48,12 @@ suite('Loops Completion', () => {
         {
             name: '@each',
             content: `<div>{{ loop. }}</div>@each(item in items){{ item }}@end`,
-            pos: new vscode.Position(0, 13),
+            pos: new Position(0, 13),
         },
         {
             name: '@for',
             content: `<div>{{ loop. }}</div>@for(i = 0; i < 3; i++){{ i }}@end`,
-            pos: new vscode.Position(0, 13),
+            pos: new Position(0, 13),
         },
     ]
 

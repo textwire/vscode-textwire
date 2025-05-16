@@ -1,9 +1,23 @@
-import * as vscode from 'vscode'
-import loopObjCompletion from './completions/loopObjCompletion'
-import directiveCompletion from './completions/directiveCompletion'
+import { ExtensionContext } from 'vscode'
+import { startLSP, updateLSP } from './lsp'
+import { updateLSPToLatest } from './commands/updateLSPToLatest'
+import { getExtension } from './modules/extension'
+import { LanguageClient } from 'vscode-languageclient/node'
 
-export function activate(ctx: vscode.ExtensionContext) {
-    ctx.subscriptions.push(loopObjCompletion, directiveCompletion)
+let client: LanguageClient
+
+export async function activate(ctx: ExtensionContext) {
+    await updateLSP(ctx, getExtension().packageJSON.lspVersion)
+
+    client = await startLSP(ctx)
+
+    updateLSPToLatest(ctx)
 }
 
-export function deactivate() {}
+export function deactivate(): Thenable<void> | undefined {
+    if (!client) {
+        return undefined
+    }
+
+    return client.stop()
+}

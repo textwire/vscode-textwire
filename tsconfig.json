@@ -1,14 +1,15 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "target": "es2016",
+        "target": "es2020",
+        "moduleResolution": "node",
         "rootDir": "./src",
-        "outDir": "out",
+        "outDir": "dist",
         "strict": true,
         "removeComments": true,
         "esModuleInterop": true,
-        "types": ["node", "vscode", "mocha"]
+        "types": ["node", "mocha"]
     },
     "include": ["src/**/*.ts", "src/test/**/*.ts"],
-    "exclude": ["node_modules", "out", ".vscode-test"]
+    "exclude": ["node_modules", "dist", ".vscode-test"]
 }

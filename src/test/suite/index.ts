@@ -1,7 +1,7 @@
 import * as path from 'path'
-import * as vscode from 'vscode'
 import Mocha from 'mocha'
 import { glob } from 'glob'
+import { getExtension } from '../../modules/extension'
 
 export async function run(): Promise<void> {
     await activateExtension()
@@ -40,13 +40,9 @@ export async function run(): Promise<void> {
 }
 
 async function activateExtension(): Promise<void> {
-    const extension = vscode.extensions.getExtension('SerhiiCho.textwire')
-
-    if (!extension) {
-        throw new Error('Textwire extension not found.')
-    }
+    const ext = getExtension()
 
     console.log('⏳ Activating Textwire extension...')
-    await extension.activate()
+    await ext.activate()
     console.log('👍 Textwire extension activated successfully.')
 }

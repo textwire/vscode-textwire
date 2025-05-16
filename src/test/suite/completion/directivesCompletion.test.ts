@@ -1,5 +1,5 @@
 import * as assert from 'assert'
-import * as vscode from 'vscode'
+import { Position } from 'vscode'
 import { triggerCompletion } from '../utils/triggerCompletion'
 import { openTextDocument } from '../utils/openTextDocument'
 import { assertLength } from '../utils/assert/assertLength'
@@ -15,7 +15,7 @@ suite('Directives Completion', () => {
     test('suggests proper directives in HTML', async () => {
         const content = `<h2>@</h2>`
         const doc = await openTextDocument(content)
-        const pos = new vscode.Position(0, 5)
+        const pos = new Position(0, 5)
         const items = await triggerCompletion(pos, doc.uri)
 
         if (!items) {
@@ -32,12 +32,12 @@ suite('Directives Completion', () => {
         {
             name: '@each',
             content: `<div>@each(item in items) {{ item }} @ @end</div>`,
-            pos: new vscode.Position(0, 38),
+            pos: new Position(0, 38),
         },
         {
             name: '@for',
             content: `<div>@for(c = 1; c < items.length(); c++) {{ items[c] }} @ @end</div>`,
-            pos: new vscode.Position(0, 58),
+            pos: new Position(0, 58),
         },
     ]
 
@@ -62,7 +62,7 @@ suite('Directives Completion', () => {
     test('suggests proper directives inside @component', async () => {
         const content = `@component('name') @ @end`
         const doc = await openTextDocument(content)
-        const pos = new vscode.Position(0, 20)
+        const pos = new Position(0, 20)
         const items = await triggerCompletion(pos, doc.uri)
 
         if (!items) {
@@ -81,7 +81,7 @@ suite('Directives Completion', () => {
     test('suggests proper directives inside @each loop within @component', async () => {
         const content = `@component('name')@each(item in items) @ @end@end`
         const doc = await openTextDocument(content)
-        const pos = new vscode.Position(0, 40)
+        const pos = new Position(0, 40)
         const items = await triggerCompletion(pos, doc.uri)
 
         if (!items) {

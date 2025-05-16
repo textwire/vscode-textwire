@@ -1,13 +1,14 @@
 {
+    "lspVersion": "0.1.2",
+    "version": "1.6.0",
     "name": "textwire",
     "displayName": "Textwire",
-    "main": "./out/extension.js",
+    "main": "./dist/extension.js",
     "description": "Textwire templating language support for VSCode",
-    "version": "1.5.4",
     "homepage": "https://github.com/textwire/vscode-textwire/blob/main/README.md",
     "pricing": "Free",
     "engines": {
-        "vscode": "^1.8.0"
+        "vscode": "^1.100.0"
     },
     "categories": [
         "Programming Languages",
@@ -15,7 +16,6 @@
     ],
     "icon": "images/textwire.png",
     "activationEvents": [
-        "onLanguage:textwire",
         "onCommand:textwire.runTest"
     ],
     "repository": {
@@ -36,8 +36,7 @@
             {
                 "id": "textwire",
                 "aliases": [
-                    "Textwire",
-                    "textwire"
+                    "Textwire"
                 ],
                 "extensions": [
                     ".tw.html",
@@ -56,22 +55,35 @@
                 "path": "./syntaxes/textwire.tmLanguage.json",
                 "scopeName": "text.html.basic.tw"
             }
+        ],
+        "commands": [
+            {
+                "command": "textwire.updateLSPToLatest",
+                "title": "Textwire: Update LSP to the latest version"
+            }
         ]
     },
     "scripts": {
         "login": "vsce login SerhiiCho",
-        "deploy": "vsce publish",
+        "deploy": "npm run lsp-check && npm run compile && vsce publish",
         "compile": "tsc -p .",
         "watch": "tsc -w -p .",
+        "lsp-check": "node ./cmd/lsp-check.mjs",
         "test": "npm run compile && FORCE_COLOR=1 node ./out/test/runTests.js"
     },
     "devDependencies": {
         "@types/mocha": "^10.0.10",
         "@types/node": "^22.12.0",
+        "@types/vscode": "^1.100.0",
         "@vscode/test-cli": "^0.0.10",
         "@vscode/test-electron": "^2.4.1",
         "glob": "^11.0.1",
-        "typescript": "^5.7.3",
-        "vscode": "^1.1.37"
+        "typescript": "^5.8.3"
+    },
+    "dependencies": {
+        "axios": "^1.9.0",
+        "compare-versions": "^6.1.1",
+        "tar": "^7.4.3",
+        "vscode-languageclient": "^9.0.1"
     }
 }
