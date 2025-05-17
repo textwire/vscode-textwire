@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.6.2] - 2025-05-17
+- Fixed problem with LSP binary installation
+
 ## [1.6.1] - 2025-05-16
 - Fixed wrong autocompletion when typing . character by updating LSP to the latest version
 

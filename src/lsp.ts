@@ -163,14 +163,22 @@ async function makeBinExecutable(binPath: string): Promise<void> {
     }
 
     return new Promise((resolve, reject) => {
+        let stderr = ''
+
         const child = execFile(
             'xattr',
-            ['-rd', 'com.apple.quarantine', binPath],
-            (err, _, stderr) => {
+            ['-d', 'com.apple.quarantine', binPath],
+            (err, _, _stderr) => {
+                stderr += _stderr
+
                 if (err) {
-                    const msg = `Failed to remove Apple quarantine for LSP binary "${binPath}": ${
-                        stderr || err.message
-                    }`
+                    // Ignore error if quarantine attribute doesn't exist
+                    if (stderr.includes('No such xattr')) {
+                        logger.info(`No quarantine attribute found, skipping removal`)
+                        return resolve()
+                    }
+
+                    const msg = `Failed to remove Apple quarantine for LSP binary "${binPath}": ${stderr || err.message}`
                     return reject(new Error(msg))
                 }
 
@@ -179,7 +187,14 @@ async function makeBinExecutable(binPath: string): Promise<void> {
             },
         )
 
-        child.stderr?.on('data', data => logger.error(`stderr: ${data}`))
+        child.stderr?.on('data', data => {
+            stderr += data.toString()
+            logger.error(`xattr stderr: ${data}`)
+        })
+
+        child.on('error', err => {
+            reject(new Error(`xattr failed to start: ${err.message}`))
+        })
     })
 }
 
