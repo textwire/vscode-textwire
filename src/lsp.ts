@@ -86,7 +86,7 @@ async function handleLSPUpdate(
 
         ctx.globalState.update('lspVersion', version)
 
-        toast.info(`LSP updated to version ${version}`)
+        toast.info(`LSP updated to version ${version}. Reload the editor`)
     } catch (err) {
         progress.report({ increment: 90 })
         logger.error(err)

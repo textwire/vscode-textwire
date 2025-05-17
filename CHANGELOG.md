@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.6.3] - 2025-05-17
+- Updated LSP to the latest version v0.1.4
+
 ## [1.6.2] - 2025-05-17
 - Fixed problem with LSP binary installation
 
