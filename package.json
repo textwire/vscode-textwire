@@ -1,6 +1,6 @@
 {
     "lspVersion": "0.1.4",
-    "version": "1.6.3",
+    "version": "1.6.4",
     "name": "textwire",
     "displayName": "Textwire",
     "main": "./dist/extension.js",
@@ -67,6 +67,8 @@
         "login": "vsce login SerhiiCho",
         "deploy": "npm run lsp-check && npm run compile && vsce publish",
         "compile": "tsc -p .",
+        "build": "npm run compile",
+        "prod": "npm run compile",
         "watch": "tsc -w -p .",
         "lsp-check": "node ./cmd/lsp-check.mjs",
         "test": "npm run compile && FORCE_COLOR=1 node ./out/test/runTests.js"
