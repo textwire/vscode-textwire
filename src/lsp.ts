@@ -72,8 +72,9 @@ async function handleLSPUpdate(
     const arch = getArch()
     const platform = getPlatformName()
     const fileName = `lsp_${version}_${platform}_${arch}.tar.gz`
-    const dest = ctx.globalStoragePath
+    const dest = ctx.globalStorageUri.fsPath
     const url = `https://github.com/textwire/lsp/releases/download/v${version}/${fileName}`
+    const lspBin = path.join(dest, 'lsp')
 
     const archivePath = path.join(dest, fileName)
 
@@ -86,11 +87,13 @@ async function handleLSPUpdate(
         progress.report({ increment: 60, message: 'Downloading LSP binary...' })
         await downloadArchive(url, archivePath)
 
+        removeLspBinary(lspBin)
+
         progress.report({ increment: 20, message: 'Extracting archive...' })
         await extractArchiveTo(archivePath, dest)
 
         progress.report({ increment: 10, message: 'Making binary executable...' })
-        await makeBinExecutable(path.join(dest, 'lsp'))
+        await makeBinExecutable(lspBin)
 
         ctx.globalState.update('lspVersion', version)
 
@@ -103,6 +106,12 @@ async function handleLSPUpdate(
 
     progress.report({ increment: 10, message: 'Removing unused files...' })
     cleanupUnusedFiles(dest, archivePath)
+}
+
+function removeLspBinary(lspBin: string): void {
+    if (fs.existsSync(lspBin)) {
+        fs.unlinkSync(lspBin)
+    }
 }
 
 function cleanupUnusedFiles(dest: string, archivePath: string): void {
