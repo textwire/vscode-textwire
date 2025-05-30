@@ -1,5 +1,5 @@
 import type { ToastProgress } from './types'
-import { ExtensionContext } from 'vscode'
+import { ExtensionContext, ExtensionMode } from 'vscode'
 import * as tar from 'tar'
 import { logger } from './modules/logger'
 import { execFile } from 'child_process'
@@ -33,8 +33,16 @@ export async function updateLSP(
 }
 
 export async function startLsp(ctx: ExtensionContext): Promise<LanguageClient> {
+    const devLspPath = process.env.DEV_LSP_LOCAL_PATH
+    const isDev = ctx.extensionMode === ExtensionMode.Development
+    let command = path.join(ctx.globalStorageUri.fsPath, 'lsp')
+
+    if (isDev && devLspPath) {
+        command = devLspPath
+    }
+
     const serverOptions: ServerOptions = {
-        command: path.join(ctx.globalStoragePath, 'lsp'),
+        command,
         transport: TransportKind.stdio,
     }
 
@@ -178,7 +186,9 @@ async function makeBinExecutable(binPath: string): Promise<void> {
                         return resolve()
                     }
 
-                    const msg = `Failed to remove Apple quarantine for LSP binary "${binPath}": ${stderr || err.message}`
+                    const msg = `Failed to remove Apple quarantine for LSP binary "${binPath}": ${
+                        stderr || err.message
+                    }`
                     return reject(new Error(msg))
                 }
 

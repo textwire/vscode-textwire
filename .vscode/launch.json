@@ -9,7 +9,8 @@
             "name": "Extension",
             "type": "extensionHost",
             "request": "launch",
-            "args": ["--extensionDevelopmentPath=${workspaceFolder}"]
+            "args": ["--extensionDevelopmentPath=${workspaceFolder}"],
+            "envFile": "${workspaceFolder}/.env"
         },
         {
             "name": "Extension Tests",
@@ -22,6 +23,6 @@
                 "--extensionTestsPath=${workspaceFolder}/dist/test/suite/index"
             ],
             "outFiles": ["${workspaceFolder}/dist/test/**/*.js"]
-        }
+        },
     ]
 }
