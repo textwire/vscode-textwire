@@ -1,0 +1,11 @@
+name: vscode-textwire
+
+services:
+    app:
+        image: vscode-textwire
+        container_name: vscode-textwire
+        build:
+            context: .
+        volumes:
+            - .:/app
+            - /app/node_modules
