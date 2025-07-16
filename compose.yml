@@ -6,6 +6,7 @@ services:
         container_name: vscode-textwire
         build:
             context: .
+            dockerfile: Containerfile
         volumes:
-            - .:/app
+            - .:/app:z
             - /app/node_modules
