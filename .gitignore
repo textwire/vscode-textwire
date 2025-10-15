@@ -3,3 +3,5 @@ node_modules
 dist
 .vscode-test
 .env
+.DS_Store
+Session.vim
