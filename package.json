@@ -1,6 +1,6 @@
 {
     "lspVersion": "0.4.0",
-    "version": "1.7.0",
+    "version": "1.7.1",
     "name": "textwire",
     "displayName": "Textwire",
     "main": "./dist/extension.js",
@@ -15,6 +15,9 @@
         "Other"
     ],
     "icon": "images/textwire.png",
+    "activationEvents": [
+        "onCommand:textwire.runTest"
+    ],
     "repository": {
         "type": "git",
         "url": "https://github.com/textwire/vscode-textwire"
@@ -77,6 +80,7 @@
         "axios": "^1.9.0",
         "compare-versions": "^6.1.1",
         "tar": "^7.4.3",
+        "vsce": "^2.15.0",
         "vscode-languageclient": "^9.0.1"
     }
 }

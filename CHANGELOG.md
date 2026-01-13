@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.7.1] - 2026-01-14
+## [1.7.1] - 2026-01-13
 - Updated LSP to the latest version v0.4.0
 - Removed tests
 
