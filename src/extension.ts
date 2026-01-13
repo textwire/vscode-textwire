@@ -1,6 +1,6 @@
 import { ExtensionContext, ExtensionMode } from 'vscode'
 import { startLsp, updateLSP } from './lsp'
-import { updateLSPToLatest } from './commands/updateLSPToLatest'
+import { registerUpdateLspToLatest } from './commands/registerUpdateLspToLatest'
 import { getExtension } from './modules/extension'
 import { LanguageClient } from 'vscode-languageclient/node'
 import { isDev } from './modules/isDev'
@@ -20,7 +20,7 @@ export async function activate(ctx: ExtensionContext) {
 
     client = await startLsp(ctx)
 
-    updateLSPToLatest(ctx)
+    registerUpdateLspToLatest(ctx)
 }
 
 export function deactivate(): Thenable<void> | undefined {
