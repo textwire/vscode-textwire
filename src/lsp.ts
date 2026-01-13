@@ -1,11 +1,12 @@
 import type { ToastProgress } from './types'
-import { ExtensionContext, ExtensionMode } from 'vscode'
+import { ExtensionContext } from 'vscode'
 import * as tar from 'tar'
 import { logger } from './modules/logger'
 import { execFile } from 'child_process'
 import { LanguageClient, ServerOptions, TransportKind } from 'vscode-languageclient/node'
 import { compare } from 'compare-versions'
 import { toast } from './modules/toast'
+import { isDev } from './modules/isDev'
 import axios from 'axios'
 import fs from 'fs'
 import path from 'path'
@@ -22,7 +23,7 @@ export async function updateLSP(
     }
 
     try {
-        toast.progress(`Updating LSP to ${latestVersion}...`, async progress => {
+        await toast.progress(`Updating LSP to ${latestVersion}...`, async progress => {
             await handleLSPUpdate(ctx, latestVersion, progress)
         })
     } catch (err) {
@@ -34,10 +35,10 @@ export async function updateLSP(
 
 export async function startLsp(ctx: ExtensionContext): Promise<LanguageClient> {
     const devLspPath = process.env.DEV_LSP_LOCAL_PATH
-    const isDev = ctx.extensionMode === ExtensionMode.Development
+
     let command = path.join(ctx.globalStorageUri.fsPath, 'lsp')
 
-    if (isDev && devLspPath) {
+    if (isDev(ctx) && devLspPath) {
         command = devLspPath
     }
 
@@ -132,7 +133,7 @@ function cleanupUnusedFiles(dest: string, archivePath: string): void {
 }
 
 async function downloadArchive(url: string, filePath: string): Promise<void> {
-    logger.info('Downloading LSP from:', url)
+    logger.info(`Downloading LSP file ${filePath} from ${url}`)
 
     const writer = fs.createWriteStream(filePath)
     const resp = await axios.get(url, { responseType: 'stream' })

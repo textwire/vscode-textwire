@@ -1,6 +1,6 @@
 {
-    "lspVersion": "0.3.0",
-    "version": "1.7.0",
+    "lspVersion": "0.4.0",
+    "version": "1.7.1",
     "name": "textwire",
     "displayName": "Textwire",
     "main": "./dist/extension.js",
@@ -29,9 +29,6 @@
     "publisher": "SerhiiCho",
     "license": "MIT",
     "contributes": {
-        "testing": {
-            "testController": "vscode-test"
-        },
         "languages": [
             {
                 "id": "textwire",
@@ -70,15 +67,12 @@
         "build": "npm run compile",
         "prod": "npm run compile",
         "watch": "tsc -w -p .",
-        "lsp-check": "node ./cmd/lsp-check.mjs",
-        "test": "npm run compile && FORCE_COLOR=1 node ./dist/test/runTests.js"
+        "lsp-check": "node ./cmd/lsp-check.mjs"
     },
     "devDependencies": {
         "@types/mocha": "^10.0.10",
         "@types/node": "^22.12.0",
         "@types/vscode": "^1.100.0",
-        "@vscode/test-cli": "^0.0.10",
-        "@vscode/test-electron": "^2.4.1",
         "glob": "^11.0.1",
         "typescript": "^5.8.3"
     },
@@ -86,6 +80,7 @@
         "axios": "^1.9.0",
         "compare-versions": "^6.1.1",
         "tar": "^7.4.3",
+        "vsce": "^2.15.0",
         "vscode-languageclient": "^9.0.1"
     }
 }
