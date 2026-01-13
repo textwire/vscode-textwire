@@ -71,7 +71,7 @@
         "prod": "npm run compile",
         "watch": "tsc -w -p .",
         "lsp-check": "node ./cmd/lsp-check.mjs",
-        "test": "npm run compile && FORCE_COLOR=1 node ./out/test/runTests.js"
+        "test": "npm run compile && FORCE_COLOR=1 node ./dist/test/runTests.js"
     },
     "devDependencies": {
         "@types/mocha": "^10.0.10",
