@@ -1,7 +1,6 @@
 node_modules
 *.vsix
 dist
-.vscode-test
 .env
 .DS_Store
 Session.vim

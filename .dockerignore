@@ -1,7 +1,6 @@
 .git
 .github
 .gitignore
-.vscode-test
 dist
 node_modules
 .env
