@@ -14,6 +14,19 @@ With Docker:
 docker compose build
 ```
 
+### Install Dependencies
+Install `node_modules` inside the container and make them available on the host machine.
+
+With Podman:
+```bash
+podman-compose run --rm app npm i
+```
+
+With Docker:
+```bash
+docker compose run --rm app npm i
+```
+
 ### Run the container
 After the image is build, you can run a container from that image.
 
