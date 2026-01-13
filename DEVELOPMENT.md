@@ -1,9 +1,6 @@
 # Development
 
 ## With a Container Engine
-> [!NOTE]
-> If you use [🐳 Docker](https://app.docker.com/) instead of [🦦 Podman](https://podman.io/), just replace `podman-compose` with `docker compose`, and `podman` with `docker` in code examples below.
-
 ### Build the Image
 To build the image, run this command.
 
