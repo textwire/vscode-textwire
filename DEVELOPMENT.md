@@ -5,27 +5,55 @@
 > If you use [🐳 Docker](https://app.docker.com/) instead of [🦦 Podman](https://podman.io/), just replace `podman-compose` with `docker compose`, and `podman` with `docker` in code examples below.
 
 ### Build the Image
-To build the image, run this command:
+To build the image, run this command.
+
+With Podman:
 ```bash
 podman-compose build
 ```
 
+With Docker:
+```bash
+docker compose build
+```
+
 ### Run the container
-After the image is build, you can run a container from that image. Run this command:
+After the image is build, you can run a container from that image.
+
+With Podman:
 ```bash
 podman-compose up -d
 ```
 
+With Docker:
+```bash
+docker compose up -d
+```
+
 ### Enter the Container
-To enter inside the container, run this command:
+To enter inside the container:
+
+With Podman:
 ```bash
 podman-compose exec app sh
+```
+
+With Docker:
+```bash
+docker compose exec app sh
 ```
 
 After you enter the container, you can use NPM scripts defined in [package.json](package.json) such as `npm run build` or `npm run watch`.
 
 ### Destroy the Container
-You can destroy the container after you are done working by running this command:
+You can destroy the container after you are done working.
+
+With Podman:
 ```bash
 podman-compose down
+```
+
+With Docker:
+```bash
+docker compose down
 ```
