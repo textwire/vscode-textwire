@@ -80,6 +80,7 @@
         "@vscode/test-cli": "^0.0.10",
         "@vscode/test-electron": "^2.4.1",
         "glob": "^11.0.1",
+        "dotenv": "^17.2.3",
         "typescript": "^5.8.3"
     },
     "dependencies": {
