@@ -4,8 +4,6 @@ services:
     app:
         image: vscode-textwire
         container_name: vscode-textwire
-        build:
-            context: .
-            dockerfile: Containerfile
+        build: .
         volumes:
             - .:/app:z
