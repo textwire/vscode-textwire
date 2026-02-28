@@ -19,6 +19,5 @@ if (lspVersion === latestLspVersion) {
 }
 
 console.log(`⚠️ New LSP version ${latestLspVersion} available!`)
-console.log('Run npm run lsp-latest to update to the latest version!')
 
 process.exit(1)
