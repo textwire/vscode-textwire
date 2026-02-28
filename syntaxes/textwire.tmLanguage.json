@@ -47,7 +47,7 @@
         "directives": {
             "patterns": [
                 {
-                    "begin": "(?<![\\\\@])(@(if|elseif|for|use|each|breakIf|continueIf|insert|reserve|component|slot|dump)) ?(\\()",
+                    "begin": "(?<![\\\\@])(@(if|elseif|for|use|each|breakIf|continueIf|continueif|breakif|insert|reserve|component|slot|slotif|dump)) ?(\\()",
                     "beginCaptures": { "0": { "name": "entity.name.function.member.tw" } },
                     "end": "\\)",
                     "endCaptures": { "0": { "name": "entity.name.function.member.tw" } },

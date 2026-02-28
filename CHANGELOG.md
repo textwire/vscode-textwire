@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.8.0] - 2026-02-28
+- Added highlighting for `@slotif`, `@breakif`, `@continueif` directives
+
 ## [1.7.1] - 2026-01-13
 - Updated LSP to the latest version v0.4.0
 - Removed tests
