@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.8.2] - 2026-03-28
+- Added syntax highlighting for `@pass('name')` and `@passif(true, 'name')` directives that are coming in Textwire 4.
+
 ## [1.8.1] - 2026-03-01
 - Updated LSP to the latest version.
 
