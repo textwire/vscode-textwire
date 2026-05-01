@@ -11,6 +11,7 @@
             "patterns": [
                 { "include": "#comments" },
                 { "include": "#expression" },
+                { "include": "#raw" },
                 { "include": "#directives" }
             ]
         }
@@ -21,6 +22,14 @@
             "begin": "(?<![\\\\{]){{",
             "beginCaptures": { "0": { "name": "support.function.construct.begin.tw" } },
             "end": "}}",
+            "endCaptures": { "0": { "name": "support.function.construct.begin.tw" } },
+            "patterns": [ { "include": "#language" } ]
+        },
+        "raw": {
+            "name": "keyword.tw",
+            "begin": "(?<![\\\\{]){!!",
+            "beginCaptures": { "0": { "name": "support.function.construct.begin.tw" } },
+            "end": "!!}",
             "endCaptures": { "0": { "name": "support.function.construct.begin.tw" } },
             "patterns": [ { "include": "#language" } ]
         },

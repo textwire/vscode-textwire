@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.9.0] - 2026-05-01
+- Added syntax highlighting for expressions within `{!!` and `!!}`.
+
 ## [1.8.2] - 2026-03-28
 - Added syntax highlighting for `@pass('name')` and `@passif(true, 'name')` directives that are coming in Textwire 4.
 
