@@ -1,5 +1,4 @@
 .git
-.github
 .gitignore
 dist
 node_modules

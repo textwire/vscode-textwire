@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.9.1] - 2026-08-16
+- Moved source code from GitHub to Codeberg
+
 ## [1.9.0] - 2026-05-01
 - Added syntax highlighting for expressions within `{!!` and `!!}`.
 - Updated LSP to the latest 0.5.1 version.

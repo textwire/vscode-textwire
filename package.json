@@ -1,6 +1,6 @@
 {
-    "lspVersion": "0.5.1",
-    "version": "1.9.0",
+    "lspVersion": "0.5.2",
+    "version": "1.9.1",
     "name": "textwire",
     "displayName": "Textwire",
     "main": "./dist/extension.js",
