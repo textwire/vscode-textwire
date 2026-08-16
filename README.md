@@ -1,6 +1,6 @@
 # Textwire Official
 
-![Textwire Code](./images/banner.png)
+![Textwire Code](https://codeberg.org/textwire/vscode-textwire/raw/branch/master/images/banner.png)
 
 ## Overview
 The **Textwire VSCode Extension** is an open-source solution that enhances the development experience for the Textwire templating language. With features like syntax highlighting, custom file icons, and intelligent autocompletion, this extension makes working with Textwire files seamless and efficient.
