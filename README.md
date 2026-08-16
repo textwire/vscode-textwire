@@ -47,7 +47,7 @@ The extension also provides autocompletion for `loop` objects that are available
 Have suggestions or questions? Feel free to open an issue on the [Codeberg repository](https://codeberg.org/textwire/vscode-textwire) or reach out to us directly.
 
 ## Contribute
-To get started with contributing you can follow the [DEVELOPMENT.md](https://codeberg.org/textwire/vscode-textwire/raw/branch/master/DEVELOPMENT.md) file.
+To get started with contributing you can follow the [DEVELOPMENT.md](https://codeberg.org/textwire/vscode-textwire/src/branch/master/DEVELOPMENT.md) file.
 
 ## License
 This project is licensed under the [MIT License](https://codeberg.org/textwire/vscode-textwire/src/branch/master/LICENSE).
