@@ -74,7 +74,7 @@ async function handleLSPUpdate(
     const platform = getPlatformName()
     const fileName = `lsp_${version}_${platform}_${arch}.tar.gz`
     const dest = ctx.globalStorageUri.fsPath
-    const url = `https://github.com/textwire/lsp/releases/download/v${version}/${fileName}`
+    const url = `https://codeberg.org/textwire/lsp/releases/download/v${version}/${fileName}`
     const lspBin = path.join(dest, 'lsp')
 
     const archivePath = path.join(dest, fileName)
@@ -196,9 +196,8 @@ async function makeBinExecutable(binPath: string): Promise<void> {
                         return resolve()
                     }
 
-                    const msg = `Failed to remove Apple quarantine for LSP binary "${binPath}": ${
-                        stderr || err.message
-                    }`
+                    const msg = `Failed to remove Apple quarantine for LSP binary "${binPath}": ${stderr || err.message
+                        }`
                     return reject(new Error(msg))
                 }
 

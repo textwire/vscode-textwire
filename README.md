@@ -44,10 +44,10 @@ The extension also provides autocompletion for `loop` objects that are available
 4. Enjoy enhanced support for Textwire files in your projects.
 
 ## Feedback
-Have suggestions or questions? Feel free to open an issue on the [GitHub repository](https://github.com/textwire/vscode-textwire) or reach out to us directly.
+Have suggestions or questions? Feel free to open an issue on the [Codeberg repository](https://codeberg.org/textwire/vscode-textwire) or reach out to us directly.
 
 ## Contribute
 To get started with contributing you can follow the [DEVELOPMENT.md](DEVELOPMENT.md) file.
 
 ## License
-This project is licensed under the [MIT License](https://github.com/textwire/vscode-textwire/blob/master/LICENSE).
+This project is licensed under the [MIT License](https://codeberg.org/textwire/vscode-textwire/src/branch/master/LICENSE).

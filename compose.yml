@@ -1,9 +1,9 @@
 name: vscode-textwire
 
 services:
-    app:
-        image: vscode-textwire
-        container_name: vscode-textwire
-        build: .
-        volumes:
-            - .:/app:z
+  app:
+    image: vscode-textwire
+    container_name: vscode-textwire
+    build: .
+    volumes:
+      - .:/app:z

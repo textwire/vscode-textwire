@@ -5,7 +5,7 @@
     "displayName": "Textwire",
     "main": "./dist/extension.js",
     "description": "Textwire templating language support for VSCode",
-    "homepage": "https://github.com/textwire/vscode-textwire/blob/main/README.md",
+    "homepage": "https://codeberg.org/textwire/vscode-textwire/src/branch/master/README.md",
     "pricing": "Free",
     "engines": {
         "vscode": "^1.100.0"
@@ -20,10 +20,10 @@
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/textwire/vscode-textwire"
+        "url": "https://codeberg.org/textwire/vscode-textwire"
     },
     "bugs": {
-        "url": "https://github.com/textwire/vscode-textwire/issues",
+        "url": "https://codeberg.org/textwire/vscode-textwire/issues",
         "email": "serhiicho@proton.me"
     },
     "publisher": "SerhiiCho",
