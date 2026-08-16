@@ -20,22 +20,22 @@ Textwire files are visually enhanced with syntax highlighting for:
 
 This ensures better readability and reduces the chances of syntax errors.
 
-![Syntax Highlighting](./images/textwire-code.jpg)
+![Syntax Highlighting](https://codeberg.org/textwire/vscode-textwire/raw/branch/master/images/textwire-code.jpg)
 
 ### 2. Custom File Icons
 Quickly identify Textwire files in your VSCode file explorer with custom-designed icons. These icons provide a unique and recognizable appearance, improving project organization and file navigation.
 
-![Custom Icons](./images/custom-icons.jpg)
+![Custom Icons](https://codeberg.org/textwire/vscode-textwire/raw/branch/master/images/custom-icons.jpg)
 
 ### 3. Directives Autocompletion
 Speed up your development process with intelligent autocompletion for Textwire directives. As you type, the extension suggests available directives with clear description, making it easier to write code and reducing the chances of typos.
 
-![Directives Autocompletion](./images/directives-suggest.jpg)
+![Directives Autocompletion](https://codeberg.org/textwire/vscode-textwire/raw/branch/master/images/directives-suggest.jpg)
 
 ### 4. Loop Object Autocompletion
 The extension also provides autocompletion for `loop` objects that are available in any Textwire loop. As you type, the extension suggests available loop properties with clear description.
 
-![Loop Object Autocompletion](./images/loop-suggest.jpg)
+![Loop Object Autocompletion](https://codeberg.org/textwire/vscode-textwire/raw/branch/master/images/loop-suggest.jpg)
 
 ## Installation
 1. Open the **Extensions Marketplace** in VSCode.
