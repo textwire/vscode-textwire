@@ -19,7 +19,8 @@ export function registerUpdateLspToLatest(ctx: ExtensionContext): void {
 }
 
 async function processUpdate(ctx: ExtensionContext): Promise<void> {
-    const latestVersion = await fetchLatestLspVersion()
+    const release = await fetchLatestLspRelease()
+    const latestVersion = release.tag_name.replace('v', '')
     const result = await updateLSP(ctx, latestVersion)
 
     if (result === 'up-to-date') {
@@ -27,23 +28,14 @@ async function processUpdate(ctx: ExtensionContext): Promise<void> {
     }
 }
 
-type CodebergTag = {
-    name: string
-    message: string
-    id: string
-}
+async function fetchLatestLspRelease() {
+    const URL = 'https://api.github.com/repos/textwire/lsp/releases/latest'
 
-async function fetchLatestLspVersion() {
-    const URL = 'https://codeberg.org/api/v1/repos/textwire/lsp/tags?limit=1'
-    const resp = await axios.get<CodebergTag[]>(URL)
+    const resp = await axios.get(URL)
 
     if (resp.status !== 200) {
-        throw new Error(`Failed to fetch latest LSP tag: ${resp.statusText}`)
+        throw new Error(`Failed to fetch latest LSP release: ${resp.statusText}`)
     }
 
-    if (resp.data.length === 0) {
-        throw new Error(`Response contains 0 tags, cannot proceeed`)
-    }
-
-    return resp.data[0].name.replace('v', '')
+    return resp.data
 }

@@ -1,15 +1,22 @@
 # Textwire Official
 
-![Textwire Code](https://codeberg.org/textwire/vscode-textwire/raw/branch/master/images/banner.png)
+![Textwire Code](https://raw.githubusercontent.com/textwire/vscode-textwire/refs/heads/master/images/banner.png)
 
 ## Overview
 The **Textwire VSCode Extension** is an open-source solution that enhances the development experience for the Textwire templating language. With features like syntax highlighting, custom file icons, and intelligent autocompletion, this extension makes working with Textwire files seamless and efficient.
 
 ## Features
-1. [Syntax Highlighting](#1-syntax-highlighting)
-2. [Custom File Icons](#2-custom-file-icons)
-3. [Directives Autocompletion](#3-directives-autocompletion)
-4. [Loop Object Autocompletion](#4-loop-object-autocompletion)
+- [Textwire Official](#textwire-official)
+  - [Overview](#overview)
+  - [Features](#features)
+    - [1. Syntax Highlighting](#1-syntax-highlighting)
+    - [2. Custom File Icons](#2-custom-file-icons)
+    - [3. Directives Autocompletion](#3-directives-autocompletion)
+    - [4. Loop Object Autocompletion](#4-loop-object-autocompletion)
+  - [Installation](#installation)
+  - [Feedback](#feedback)
+  - [Contribute](#contribute)
+  - [License](#license)
 
 ### 1. Syntax Highlighting
 Textwire files are visually enhanced with syntax highlighting for:
@@ -20,22 +27,22 @@ Textwire files are visually enhanced with syntax highlighting for:
 
 This ensures better readability and reduces the chances of syntax errors.
 
-![Syntax Highlighting](https://codeberg.org/textwire/vscode-textwire/raw/branch/master/images/textwire-code.jpg)
+![Syntax Highlighting](https://raw.githubusercontent.com/textwire/vscode-textwire/refs/heads/master/images/textwire-code.jpg)
 
 ### 2. Custom File Icons
 Quickly identify Textwire files in your VSCode file explorer with custom-designed icons. These icons provide a unique and recognizable appearance, improving project organization and file navigation.
 
-![Custom Icons](https://codeberg.org/textwire/vscode-textwire/raw/branch/master/images/custom-icons.jpg)
+![Custom Icons](https://raw.githubusercontent.com/textwire/vscode-textwire/refs/heads/master/images/custom-icons.jpg)
 
 ### 3. Directives Autocompletion
 Speed up your development process with intelligent autocompletion for Textwire directives. As you type, the extension suggests available directives with clear description, making it easier to write code and reducing the chances of typos.
 
-![Directives Autocompletion](https://codeberg.org/textwire/vscode-textwire/raw/branch/master/images/directives-suggest.jpg)
+![Directives Autocompletion](https://raw.githubusercontent.com/textwire/vscode-textwire/refs/heads/master/images/directives-suggest.jpg)
 
 ### 4. Loop Object Autocompletion
 The extension also provides autocompletion for `loop` objects that are available in any Textwire loop. As you type, the extension suggests available loop properties with clear description.
 
-![Loop Object Autocompletion](https://codeberg.org/textwire/vscode-textwire/raw/branch/master/images/loop-suggest.jpg)
+![Loop Object Autocompletion](https://raw.githubusercontent.com/textwire/vscode-textwire/refs/heads/master/images/loop-suggest.jpg)
 
 ## Installation
 1. Open the **Extensions Marketplace** in VSCode.
@@ -44,10 +51,10 @@ The extension also provides autocompletion for `loop` objects that are available
 4. Enjoy enhanced support for Textwire files in your projects.
 
 ## Feedback
-Have suggestions or questions? Feel free to open an issue on the [Codeberg repository](https://codeberg.org/textwire/vscode-textwire) or reach out to us directly.
+Have suggestions or questions? Feel free to open an issue on the [GitHub repository](https://github.org/textwire/vscode-textwire) or reach out to us directly.
 
 ## Contribute
-To get started with contributing you can follow the [DEVELOPMENT.md](https://codeberg.org/textwire/vscode-textwire/src/branch/master/DEVELOPMENT.md) file.
+To get started with contributing you can follow the [DEVELOPMENT.md](https://github.com/textwire/vscode-textwire/blob/master/DEVELOPMENT.md) file.
 
 ## License
-This project is licensed under the [MIT License](https://codeberg.org/textwire/vscode-textwire/src/branch/master/LICENSE).
+This project is licensed under the [MIT License](https://github.com/textwire/vscode-textwire/blob/master/LICENSE).

@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.9.2] - 2026-10-28
+- Moved source code from Codeberg to GitHub
+
 ## [1.9.1] - 2026-08-16
 - Moved source code from GitHub to Codeberg
 
