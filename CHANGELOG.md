@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.10.0] - 2026-11-26
+- Updated LSP to the latest 0.6.0 version.
+- Fixed LSP version cache writes not being awaited, which could cause stale version checks and incorrect update behavior.
+
 ## [1.9.2] - 2026-10-28
 - Moved source code from Codeberg to GitHub
 
