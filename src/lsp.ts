@@ -96,7 +96,7 @@ async function handleLSPUpdate(
         progress.report({ increment: 10, message: 'Making binary executable...' })
         await makeBinExecutable(lspBin)
 
-        ctx.globalState.update('lspVersion', version)
+        await ctx.globalState.update('lspVersion', version)
 
         toast.info(`LSP updated to version ${version}. Reload the editor`)
     } catch (err) {

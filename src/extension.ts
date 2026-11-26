@@ -13,7 +13,7 @@ export async function activate(ctx: ExtensionContext) {
 
     if (isDev(ctx)) {
         toast.info('Textwire is running in development mode')
-        ctx.globalState.update('lspVersion', lspVersion)
+        await ctx.globalState.update('lspVersion', lspVersion)
     } else {
         await updateLSP(ctx, lspVersion)
     }
